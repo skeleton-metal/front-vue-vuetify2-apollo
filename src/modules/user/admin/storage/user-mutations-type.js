@@ -1,0 +1,13 @@
+export const SET_USERS = "SET_USERS"
+export const SET_LOADING_USERS = "SET_LOADING_USERS"
+
+
+export const SET_ROLES = "SET_ROLES"
+export const SET_LOADING_ROLES = "SET_LOADING_ROLES"
+
+export const SET_FLASH_MESSAGE = "SET_FLASH_MESSAGE"
+export const ADD_USER = "ADD_USER"
+export const UPDATE_USER = "UPDATE_USER"
+export const SET_INPUT_ERROR_USER = "SET_INPUT_ERROR_USER"
+
+export const SET_CHANGE_PASSWORD = "SET_CHANGE_PASSWORD"

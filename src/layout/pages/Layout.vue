@@ -28,7 +28,7 @@
 
 <script>
     import MenuList from '../components/MenuList'
-    import Toolbar from '../components/Toolbar'
+    import Toolbar from '../components/AppBar'
 
     export default {
         components: {MenuList, Toolbar},

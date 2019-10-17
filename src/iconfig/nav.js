@@ -1,14 +1,14 @@
 export default [
     {
-        icon: 'home',
+        icon: 'mdi-home',
         text: 'Home',
         link: {name: "home"},
         panel: false
     },
     {
-        icon: 'home',
-        text: 'Home 2',
-        link: {name: "home"},
+        icon: 'mdi-contact-phone',
+        text: 'contact',
+        link: {name: "contact"},
         panel: false
     },
 
