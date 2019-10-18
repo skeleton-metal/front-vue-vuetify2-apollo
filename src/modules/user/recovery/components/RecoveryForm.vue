@@ -1,7 +1,7 @@
 <template>
     <v-card class="elevation-12">
 
-        <v-toolbar dark color="cyan darken-4">
+        <v-toolbar dark color="primary">
             <v-toolbar-title>Recuperar Contraseña</v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
@@ -24,9 +24,9 @@
 
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn round
+            <v-btn rounded
                    :loading="loading"
-                   color="cyan darken-4"
+                   color="primary darken-1"
                    dark
                    @click="submit">Enviar
             </v-btn>

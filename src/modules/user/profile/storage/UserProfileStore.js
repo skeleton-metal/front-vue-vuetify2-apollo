@@ -19,6 +19,7 @@ export default {
                 commit('LOADING_USER_PROFILE_OFF')
             }).catch((error) => {
                 //Todo handleErrors
+                console.error(error)
             })
         },
         changePassword({commit}, {password, passwordVerify}) {
@@ -29,6 +30,7 @@ export default {
                 commit('LOADING_USER_PROFILE_OFF')
             }).catch((error) => {
                 //Todo handleErrors
+                console.error(error)
             })
         },
     },

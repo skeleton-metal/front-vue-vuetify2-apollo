@@ -8,9 +8,8 @@
         <v-card-text>
             <v-form ref="form" autocomplete="off">
 
-                <v-row row wrap>
-
-                    <v-col xs12 md6>
+                <v-row>
+                    <v-col cols="12" md="6">
                         <v-text-field
                                 prepend-icon="account_box"
                                 name="name"
@@ -25,7 +24,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col xs12 md6>
+                    <v-col cols="12" md="6">
                         <v-text-field prepend-icon="person"
                                       name="username"
                                       label="Usuario"
@@ -41,7 +40,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col xs12 md6>
+                    <v-col cols="12" md="6">
                         <v-text-field prepend-icon="email"
                                       name="email"
                                       label="Email"
@@ -56,7 +55,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col xs12 md6>
+                    <v-col cols="12" md="6">
                         <v-text-field prepend-icon="phone"
                                       name="phone"
                                       label="Telefono"
@@ -73,7 +72,7 @@
                     </v-col>
 
 
-                    <v-col xs12 md6>
+                    <v-col cols="12" md="6">
                         <v-text-field id="password"
                                       prepend-icon="lock"
                                       name="password"
@@ -91,7 +90,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col xs12 md6>
+                    <v-col cols="12" md="6">
                         <v-text-field
                                 id="password_verify"
                                 prepend-icon="lock"
@@ -109,7 +108,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col xs12 md6>
+                    <v-col cols="12" md="6">
                         <v-select
                                 prepend-icon="account_box"
                                 class="pa-3"
@@ -126,7 +125,7 @@
                         ></v-select>
                     </v-col>
 
-                    <v-col xs12 md6 class="pl-4">
+                    <v-col cols="12" md="6" class="pl-4">
                         Activo
                         <v-switch input-value="0" v-model="form.active"></v-switch>
                     </v-col>

@@ -1,8 +1,8 @@
 <template>
     <v-container fluid fill-height class="grey lighten-3">
 
-        <v-row align-center justify-center>
-            <v-col xs12 sm8 md4>
+        <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="4">
                 <v-card class="elevation-12">
                     <v-toolbar dark color="primary">
                         <v-toolbar-title>Inicio de Sesión</v-toolbar-title>
@@ -15,7 +15,7 @@
                         <v-alert
                                 :value="userInvalid"
                                 type="error"
-                                outline
+                                outlined
 
                                 class="mb-3"
                         >
@@ -52,7 +52,7 @@
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn round
+                        <v-btn rounded
                                :loading="loading"
                                color="grey"
                                dark

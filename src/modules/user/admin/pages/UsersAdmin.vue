@@ -1,13 +1,9 @@
 <template>
     <v-container>
-        <v-row row wrap>
-
-            <v-col xs12 class="pa-3">
-
+        <v-row>
+            <v-col cols="12" class="pa-3">
                 <user-list></user-list>
-
             </v-col>
-
         </v-row>
     </v-container>
 </template>

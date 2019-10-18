@@ -3,8 +3,8 @@
 
     <v-container fluid fill-height class="grey lighten-3">
 
-        <v-row align-center justify-center>
-            <v-col xs12 sm8 md6>
+        <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="6">
                 <v-card class="elevation-12">
                     <v-toolbar dark color="secondary">
                         <v-toolbar-title>Crear Cuenta</v-toolbar-title>
