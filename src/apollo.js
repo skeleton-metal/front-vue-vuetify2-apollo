@@ -1,8 +1,24 @@
 import {ApolloClient} from 'apollo-client'
 import {createUploadLink} from 'apollo-upload-client'
 import {InMemoryCache} from 'apollo-cache-inmemory'
-import {ApolloLink, concat} from 'apollo-link'
+import {ApolloLink} from 'apollo-link'
 import store from './store'
+
+import {onError} from "apollo-link-error";
+
+const errorLink = onError(({graphQLErrors, networkError}) => {
+    if (graphQLErrors)
+        graphQLErrors.map(({message, locations, path}) =>
+            console.log(
+                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+            ),
+        );
+
+    if (networkError) {
+        console.log(`[Network error]: ${networkError}`);
+        store.dispatch('generalError', networkError.toString())
+    }
+});
 
 const uploadLink = createUploadLink({
     // You should use an absolute URL here
@@ -10,8 +26,8 @@ const uploadLink = createUploadLink({
 })
 
 //Middleware for Authorization
-const authMiddleware = new ApolloLink((operation, forward) => {
-    if(store.getters.getToken) {
+const authLink = new ApolloLink((operation, forward) => {
+    if (store.getters.getToken) {
         operation.setContext({
             headers: {
                 Authorization: 'bearer ' + store.getters.getToken
@@ -21,13 +37,21 @@ const authMiddleware = new ApolloLink((operation, forward) => {
     return forward(operation);
 })
 
+
+const link = ApolloLink.from([
+    errorLink,
+    authLink,
+    uploadLink
+]);
+
 // Cache implementation
 const cache = new InMemoryCache()
 
 // Create the apollo client
 const apolloClient = new ApolloClient({
-    link: concat(authMiddleware, uploadLink),
+    link: link,
     cache,
 })
+
 
 export default apolloClient

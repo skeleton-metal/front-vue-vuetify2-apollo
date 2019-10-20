@@ -3,7 +3,7 @@ export default {
         msg: "message",
     },
     getters: {
-        getMsg({state}) {
+        getMsg: (state) => {
             return state.msg
         }
     },

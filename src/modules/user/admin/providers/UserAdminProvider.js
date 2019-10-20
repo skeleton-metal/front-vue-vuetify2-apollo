@@ -78,36 +78,29 @@ class UserAdminProvider {
 
 
     updateUser(id, name, username, email, phone, role, active) {
-        return graphqlClient.mutate({
-            mutation: gql`
-                mutation ( $id: ID!, $name:String!,$username: String!, $email: String!, $phone: String!, $role: Int!, $active: Boolean!){
-                    updateUser(id: $id, name:$name, username: $username, email:$email, phone:$phone, role: $role, active: $active)
-                    {
-                        user
-                        {
-                            id
-                            name
-                            username
-                            email
-                            phone
-                            avatarurl
-                            active
-                            role{
-                                id
-                                name
-                            }
-                        }
+        return new Promise((resolve, reject) => {
+                graphqlClient.mutate({
+                    mutation: require('./gql/updateUser.graphql'),
+                    variables: {
+                        id,
+                        name,
+                        username,
+                        email,
+                        phone,
+                        role,
+                        active
                     }
-                }`, variables: {
-                id: id,
-                name: name,
-                username:username,
-                email: email,
-                phone: phone,
-                role: role,
-                active: active
+                }).then( data => {
+                    resolve(data)
+                }).catch( error => {
+                    if(error.networkError){
+                        console.log("Provider NetworkError:"+error.networkError)
+                    }
+                    console.log("Provider Error:"+error)
+                    reject(error)
+                })
             }
-        })
+        )
     }
 
     password(id, password, password_verify) {

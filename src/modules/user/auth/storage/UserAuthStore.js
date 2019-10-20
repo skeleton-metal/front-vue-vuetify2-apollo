@@ -2,6 +2,7 @@ import router from '../../../../routes'
 import graphqlClient from "../../../../apollo";
 import AuthProvider from '../providers/AuthProvider'
 import jwt_decode from 'jwt-decode'
+import Vue from 'vue'
 
 import {
     SET_TOKEN,

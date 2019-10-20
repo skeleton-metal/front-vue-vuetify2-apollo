@@ -139,13 +139,13 @@
 
         <v-card-actions>
 
-            <v-btn round color="grey" flat @click="$emit('closeDialog')">
+            <v-btn rounded color="grey" text @click="$emit('closeDialog')">
                 Cerrar
             </v-btn>
 
             <v-spacer></v-spacer>
 
-            <v-btn round color="primary" @click="saveUser" :loading="loadingUsers">
+            <v-btn rounded color="primary" @click="saveUser" :loading="loadingUsers">
                 Crear
             </v-btn>
 

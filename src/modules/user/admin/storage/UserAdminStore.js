@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 import {
     SET_USERS,
     SET_LOADING_USERS,
@@ -16,7 +17,6 @@ import {
 } from './user-mutations-type'
 
 import UserAdminProvider from "../providers/UserAdminProvider";
-
 
 
 export default {
@@ -81,7 +81,7 @@ export default {
                 data.name,
                 data.email,
                 data.phone,
-                parseInt(data.role),
+                data.role,
                 data.active
             ).then((response) => {
                 if (response.data.createUser.user) {
@@ -91,7 +91,7 @@ export default {
                 commit(SET_LOADING_USERS, false)
                 return true
             }).catch((error) => {
-                if (error.graphQLErrors && error.graphQLErrors[0].code == "BAD_USER_INPUT" && error.graphQLErrors[0].inputErrors) {
+                if (error.graphQLErrors && error.graphQLErrors[0].code != undefined && error.graphQLErrors[0].code == "BAD_USER_INPUT" && error.graphQLErrors[0].inputErrors) {
                     commit(SET_INPUT_ERROR_USER, error.graphQLErrors[0].inputErrors)
                 } else {
                     //@TODO Handle GENERAL Errors
@@ -116,10 +116,10 @@ export default {
                 data.username,
                 data.email,
                 data.phone,
-                parseInt(data.role),
+                data.role,
                 data.active
             ).then((response) => {
-               // console.log(response.data.updateUser.user)
+                // console.log(response.data.updateUser.user)
                 if (response.data.updateUser.user) {
                     commit(UPDATE_USER, response.data.updateUser.user)
                     commit(SET_FLASH_MESSAGE, "Se edito correctamente el Usuario")
@@ -127,12 +127,8 @@ export default {
                 commit(SET_LOADING_USERS, false)
                 return true
             }).catch((error) => {
-                if (error.graphQLErrors && error.graphQLErrors[0].code == "BAD_USER_INPUT" && error.graphQLErrors[0].inputErrors) {
-                    commit(SET_INPUT_ERROR_USER, error.graphQLErrors[0].inputErrors)
-                } else {
-                    //@TODO Handle GENERAL Errors
-                    console.log(error)
-                }
+
+                console.log("Vuex Error: " + error)
                 commit(SET_LOADING_USERS, false)
                 return false
             })

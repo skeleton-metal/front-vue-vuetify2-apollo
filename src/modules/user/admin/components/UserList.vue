@@ -26,15 +26,17 @@
                         :headers="headers"
                         :items="users"
                         :search="search"
-                        :expand="expand"
+                        :single-expand="false"
+                        :expanded.sync="expanded"
+                        show-expand
                         :loading="loadingUsers">
 
                     <template slot="no-data">
 
                         <div
-                             color="info"
-                             outline
-                             class="text-xs-center">
+                                color="info"
+                                outline
+                                class="text-xs-center">
                             Cargando usuarios
                         </div>
 
@@ -51,7 +53,7 @@
 
                             <td>
                                 <v-avatar size="36px">
-                                    <img v-if="props.item.avatarurl" :src="props.item.avatarurl" />
+                                    <img v-if="props.item.avatarurl" :src="props.item.avatarurl"/>
                                     <img v-else src="@/assets/user.png">
                                 </v-avatar>
                             </td>
@@ -68,32 +70,31 @@
                             <td>{{ props.item.role.name}}</td>
 
                             <!--ACTIVE-->
-                            <td v-if="props.item.active == 1">
+                            <td v-if="props.item.active">
                                 <v-icon color="success">check_circle</v-icon>
                             </td>
                             <td v-else>
                                 <v-icon color="error">highlight_off</v-icon>
                             </td>
 
-                            <!--ACTIONS-->
-                            <td class="text-xs-center">
-                                <v-icon small class="mr-2" @click="openEdit(props.item)">edit</v-icon>
-                            </td>
 
                         </tr>
                     </template>
 
+                    <template v-slot:item.action="{ item }">
+                        <v-icon
+                                small
+                                class="mr-2"
+                                @click="openEdit(item)"
+                        >
+                            edit
+                        </v-icon>
+                    </template>
 
-                    <template v-slot:expand="props">
-                        <v-card flat>
-                            <v-card-text>
-                                <v-row row wrap>
-                                    <v-col xs12 class="text-xs-center">
-                                        <span><b>Telefono: </b>{{ props.item.phone }} </span>
-                                    </v-col>
-                                </v-row>
-                            </v-card-text>
-                        </v-card>
+
+                    <template v-slot:expanded-item="props">
+                        <td :colspan="headers.length"><b>Telefono: </b>{{ props.item.phone }}</td>
+
                     </template>
 
                 </v-data-table>
@@ -146,11 +147,14 @@
                     {text: 'Email', value: 'email'},
                     {text: 'Rol', value: 'role.name'},
                     {text: 'Activo', value: 'active'},
-                    {text: 'Aciones', value: 'acciones', sortable: false},
+                    {text: 'Aciones', value: 'action', sortable: false},
+                    {text: '', value: 'data-table-expand'},
+
                 ],
+                expanded: [],
                 search: '',
                 dialog: false,
-                creating:false,
+                creating: false,
                 updating: false,
                 userToEdit: null,
                 expand: false,
@@ -171,7 +175,7 @@
                 this.creating = true
                 this.dialog = true
             },
-            openEdit(user){
+            openEdit(user) {
                 this.updating = true
                 this.userToEdit = user
             }
