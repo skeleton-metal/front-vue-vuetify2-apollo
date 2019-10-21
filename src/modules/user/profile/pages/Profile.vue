@@ -1,11 +1,9 @@
 <template>
 
     <v-container v-if="isAuth" fluid fill-height class="grey lighten-3">
-        <v-row align-center justify-center>
-            <v-col xs12 sm8 md4>
-                <v-card class="elevation-12">
+                <v-card class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-xs-12 offset-xs-0 elevation-12" width="100%">
 
-                    <v-card-text class="text-xs-center">
+                    <v-card-text class="text-center">
                         <profile-image :me="me"/>
                     </v-card-text>
 
@@ -15,15 +13,13 @@
                         <profile-view :me="me"/>
                     </v-card-text>
 
-                    <v-card-text class="text-xs-center pt-0 pb-3">
-                        <v-btn round @click="openDialog">
+                    <v-card-text class="text-center pt-0 pb-3">
+                        <v-btn rounded @click="openDialog">
                             <v-icon left>lock</v-icon>
                             Cambiar Contraseña
                         </v-btn>
                     </v-card-text>
                 </v-card>
-            </v-col>
-        </v-row>
 
         <profile-password :openDialog="dialog" :id="me.id" @closeDialog="dialog = false"/>
 

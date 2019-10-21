@@ -10,9 +10,11 @@
             v-on:click="$emit('avatarClick')"
 
     >
-        <img style="position: absolute" :src="getSrc">
+        <img style="position: absolute" v-if="me.avatarurl" :src="me.avatarurl"/>
+        <img style="position: absolute" v-else src="@/assets/user.png">
 
-        <img v-show="hover || loading" style="position: absolute" :src="getSrc">
+        <img v-show="hover || loading" style="position: absolute" v-if="me.avatarurl" :src="me.avatarurl"/>
+        <img v-show="hover || loading" style="position: absolute" v-else src="@/assets/user.png">
 
         <v-progress-circular
                 v-if="loading"
