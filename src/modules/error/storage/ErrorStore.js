@@ -11,6 +11,10 @@ export default {
         }
     },
     mutations: {
+        clearGeneralError(state) {
+            state.generalError = false
+            state.generalErrorText = ""
+        },
         setGeneralError(state, error) {
             state.generalError = true
             state.generalErrorText = error

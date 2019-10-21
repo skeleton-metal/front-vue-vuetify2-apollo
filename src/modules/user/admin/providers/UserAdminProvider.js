@@ -90,13 +90,18 @@ class UserAdminProvider {
                         role,
                         active
                     }
-                }).then( data => {
+                }).then(data => {
                     resolve(data)
-                }).catch( error => {
-                    if(error.networkError){
-                        console.log("Provider NetworkError:"+error.networkError)
+                }).catch((error) => {
+                    if (error.networkError) {
+                        console.warn("Provider NetworkError:" + error.networkError)
                     }
-                    console.log("Provider Error:"+error)
+                    if (error.graphQLErrors === []) {
+                        console.warn("Provider GraphQlError:" + error.graphQLErrors)
+                        console.log(error.graphQLErrors)
+
+                    }
+                    console.log(error)
                     reject(error)
                 })
             }

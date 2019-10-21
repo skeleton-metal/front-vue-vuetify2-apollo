@@ -1,5 +1,5 @@
 <template>
-    <v-snackbar v-model="generalError">
+    <v-snackbar v-model="error">
         {{generalErrorText}}
     </v-snackbar>
 </template>
@@ -14,6 +14,14 @@
             }
         },
         computed: {
+            error: {
+                get: function() {
+                    return this.generalError
+                },
+                set: function() {
+                    this.$store.commit('clearGeneralError')
+                },
+            },
             ...mapState({
                 generalError: state => state.error.generalError,
                 generalErrorText: state => state.error.generalErrorText,
