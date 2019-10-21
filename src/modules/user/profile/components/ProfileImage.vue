@@ -5,7 +5,7 @@
         <v-form ref="form" autocomplete="off" v-model="valid">
             <input type="file" style="display: none" ref="img" accept="image/*" @change="onFilePicked"/>
 
-            <v-alert :value="errors.img.length?true:false" color="error" icon="warning" outline>
+            <v-alert :value="errors.img.length?true:false" color="error" icon="warning" outlined>
                 <ul>
                     <li v-for="(error,i) in errors.img" :key="i">
                         {{error}}

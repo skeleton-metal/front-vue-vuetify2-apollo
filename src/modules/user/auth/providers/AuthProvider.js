@@ -17,8 +17,8 @@ class AuthProvider {
                         phone
                         avatarurl
                     }
-                    }
-                }`,
+                }
+            }`,
             variables: {
                 username: username,
                 password: password,
@@ -48,24 +48,24 @@ class AuthProvider {
 
 
     me(){
-       return graphqlClient.query({
+        return graphqlClient.query({
             query: gql`
                 query{
-                me{
-                    id
-                    firstName
-                    username
-                    lastName
-                    email
-                    groups{
+                    me{
                         id
-                        name
+                        firstName
+                        username
+                        lastName
+                        email
+                        groups{
+                            id
+                            name
+                        }
+                        avatar{
+                            image
+                        }
+
                     }
-                    avatar{
-                        image
-                    }  
-                
-                }
                 }`
         })
     }

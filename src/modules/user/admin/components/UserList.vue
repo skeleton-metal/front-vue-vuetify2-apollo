@@ -48,37 +48,19 @@
 
                     </template>
 
-                    <template slot="items" slot-scope="props">
-                        <tr @click="props.expanded = !props.expanded">
-
-                            <td>
-                                <v-avatar size="36px">
-                                    <img v-if="props.item.avatarurl" :src="props.item.avatarurl"/>
-                                    <img v-else src="@/assets/user.png">
-                                </v-avatar>
-                            </td>
-
-                            <!--NAME-->
-                            <td>{{ props.item.name }}</td>
-
-                            <!--USERNAME-->
-                            <td>{{ props.item.username}}</td>
-
-                            <!--EMAIL-->
-                            <td>{{ props.item.email}}</td>
-
-                            <td>{{ props.item.role.name}}</td>
-
-                            <!--ACTIVE-->
-                            <td v-if="props.item.active">
-                                <v-icon color="success">check_circle</v-icon>
-                            </td>
-                            <td v-else>
-                                <v-icon color="error">highlight_off</v-icon>
-                            </td>
-
-
-                        </tr>
+                    <template v-slot:item.img="{ item }">
+                        <v-avatar size="36px">
+                            <img v-if="item.avatarurl" :src="item.avatarurl"/>
+                            <img v-else src="@/assets/user.png">
+                        </v-avatar>
+                    </template>
+                    <template v-slot:item.active="{ item }">
+                        <div v-if="item.active">
+                            <v-icon color="success">check_circle</v-icon>
+                        </div>
+                        <div v-else>
+                            <v-icon color="error">highlight_off</v-icon>
+                        </div>
                     </template>
 
                     <template v-slot:item.action="{ item }">
