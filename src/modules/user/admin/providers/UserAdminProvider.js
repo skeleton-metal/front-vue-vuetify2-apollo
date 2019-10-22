@@ -6,73 +6,17 @@ class UserAdminProvider {
 
 
     users() {
-        return graphqlClient.query({
-            query: gql`query{
-                users{
-                    id
-                    name
-                    username
-                    email
-                    phone
-                    active
-                    avatarurl
-                    role{
-                        id
-                        name
-                    }
-                }
-            }`
-        })
+        return graphqlClient.query({query: require('./gql/getUsers.graphql')})
     }
-
 
     roles() {
-        return graphqlClient.query({
-            query: gql`
-                query{
-                    roles{
-                        id
-                        name
-                    }
-                }`
-        })
+        return graphqlClient.query({query: require('./gql/getRoles.graphql')})
     }
-
 
     createUser(username, password, name, email, phone, role, active) {
         return graphqlClient.mutate({
-            mutation: gql`
-                mutation ($username: String!,$password: String!, $name:String!,
-                    $email: String!, $phone: String!, $role: Int!, $active: Boolean!)
-                {
-                    createUser(username:$username ,password:$password, name:$name,
-                        email:$email, phone:$phone, role: $role, active: $active)
-                    {
-                        user
-                        {
-                            id
-                            name
-                            username
-                            email
-                            phone
-                            avatarurl
-                            active
-                            role{
-                                id
-                                name
-                            }
-                        }
-                    }
-                }`,
-            variables: {
-                username: username,
-                password: password,
-                name: name,
-                email: email,
-                phone: phone,
-                role: role,
-                active: active
-            }
+            mutation:  require('./gql/createUser.graphql'),
+            variables: {username, password, name, email, phone, role, active}
         })
     }
 
@@ -81,15 +25,7 @@ class UserAdminProvider {
         return new Promise((resolve, reject) => {
                 graphqlClient.mutate({
                     mutation: require('./gql/updateUser.graphql'),
-                    variables: {
-                        id,
-                        name,
-                        username,
-                        email,
-                        phone,
-                        role,
-                        active
-                    }
+                    variables: {id, name, username, email, phone, role, active}
                 }).then(data => {
                     resolve(data)
                 }).catch((error) => {

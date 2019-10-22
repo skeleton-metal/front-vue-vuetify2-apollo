@@ -1,0 +1,15 @@
+query users{
+    users{
+        id
+        name
+        username
+        email
+        phone
+        active
+        avatarurl
+        role{
+            id
+            name
+        }
+    }
+}
