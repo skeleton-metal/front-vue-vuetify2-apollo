@@ -7,7 +7,7 @@
         {{message}}
         <v-btn
                 dark
-                flat
+                text
                 @click="snackbar = false"
         >
             <v-icon>close</v-icon>
