@@ -29,7 +29,7 @@
                               placeholder="Repetir Nueva Contraseña"
                               autocomplete="new-password"
                               :error="errors.passwordVerify.length?true:false"
-                              :error-messages="errors.passwordVerify"
+                              :error-messages="passwordMatchError"
                               required
                 />
             </v-form>
@@ -38,11 +38,11 @@
         <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn round color="grey darken-1" flat="flat" @click="$emit('close')">
+            <v-btn rounded color="grey darken-1" @click="$emit('close')">
                 Cancelar
             </v-btn>
 
-            <v-btn round :loading="loading" color="primary" dark @click="submit">
+            <v-btn rounded :loading="loading" color="primary" dark @click="submit" :disabled="!valid">
                 Cambiar Contraseña
             </v-btn>
 
@@ -87,7 +87,10 @@
             ...mapState({
                 loading: s => s.profile.loadingUserProfile,
                 status: s => s.profile.changePasswordStatus
-            })
+            }),
+            passwordMatchError() {
+                return (this.form.password === this.form.passwordVerify) ? '' : 'Contraseña no coincide'
+            },
         },
         methods: {
             ...mapActions(['changePassword']),
@@ -99,9 +102,12 @@
                 }
             },
             submit() {
-                this.resetValidation()
-                this.form.id = this.me.id
-                this.changePassword(this.form)
+                if (this.$refs.form.validate()) {
+
+                    this.resetValidation()
+                    this.form.id = this.me.id
+                    this.changePassword(this.form)
+                }
             },
         }
     }

@@ -1,14 +1,17 @@
 <template>
 
     <v-card>
-        <v-card-text>
-            <v-alert :value="true" color="success" icon="check_circle" outline>
+        <v-card-title>
+
+        </v-card-title>
+        <v-card-text class="ma-0">
+            <v-alert :value="true" color="success" class="ma-0" icon="check_circle" outlined>
                 Su contraseña ha sido modificada con exito.
             </v-alert>
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="success" flat="flat" @click="$emit('close')">
+            <v-btn color="success" @click="$emit('close')">
                 Cerrar
             </v-btn>
         </v-card-actions>
