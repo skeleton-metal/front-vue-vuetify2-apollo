@@ -11,7 +11,7 @@
                                 :value="true"
                                 color="success"
                                 icon="check_circle"
-                                outline
+                                outlined
                         >
                             {{message}}
                         </v-alert>

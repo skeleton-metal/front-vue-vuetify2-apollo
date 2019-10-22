@@ -7,8 +7,7 @@ export default {
         recoveryStatus: null,
         recoveryMessage: ""
     },
-    getters: {
-    },
+    getters: {},
     actions: {
 
         recoveryPassword({commit}, email) {
@@ -18,10 +17,12 @@ export default {
                 commit('SET_RECOVERY_RESULT', response.data.recoveryPassword)
                 commit('LOADING_USERPROFILE_OFF')
             }).catch((error) => {
-                console.error(error)
+                if (error.message.search("encontro") != -1) {
+                    commit('SET_RECOVERY_RESULT', {status: false, message: "No se encontro el usuario"})
+                }
             })
         },
-        resetRecovery({commit}){
+        resetRecovery({commit}) {
             commit('SET_RECOVERY_RESULT', {status: null, message: ""})
         }
 
