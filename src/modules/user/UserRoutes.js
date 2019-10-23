@@ -3,6 +3,7 @@ import Recovery from './recovery/pages/Recovery.vue'
 import Register from './register/pages/Register.vue'
 import Me from './profile/pages/Profile.vue'
 import UserAdmin from './admin/pages/UsersAdmin.vue'
+import PasswordChange from "./recovery/pages/PasswordChange";
 
 export const userRoutes = [
 
@@ -38,6 +39,14 @@ export const userRoutes = [
             requiresAuth: true,
             role: "administrator"
         }
-    }
+    },
+    {
+        name: "recoveryPassword",
+        path: '/reset-password/:token',
+        component: PasswordChange,
+        meta: {
+            requiresAuth: false
+        }
+    },
 
 ]
