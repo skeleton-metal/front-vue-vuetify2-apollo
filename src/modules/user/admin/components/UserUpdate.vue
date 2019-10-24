@@ -145,14 +145,18 @@
             }
         },
         created() {
+            let role = ""
             this.fetchRoles()
+            if (this.user.role) {
+                role = this.user.role.id
+            }
             this.form = {
                 id: this.user.id,
                 username: this.user.username,
                 name: this.user.name,
                 email: this.user.email,
                 phone: this.user.phone,
-                role: this.user.role.id,
+                role,
                 active: this.user.active
             };
         },

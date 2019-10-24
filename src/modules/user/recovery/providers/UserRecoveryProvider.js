@@ -8,11 +8,11 @@ class UserProvider {
         return graphqlClient.mutate({
             mutation: gql`
                 mutation ( $email: String!){
-                recoveryPassword(email: $email){
-                    status
-                    message
-                }
-            }`,
+                    recoveryPassword(email: $email){
+                        status
+                        message
+                    }
+                }`,
             variables: {
                 email: email
             },
@@ -38,8 +38,20 @@ class UserProvider {
         })
     }
 
-
-
+    changePassword(password, passwordVerify) {
+        return graphqlClient.mutate({
+            mutation: gql`mutation ($password: String!, $passwordVerify: String!){
+                changePassword( password: $password, passwordVerify: $passwordVerify){
+                    status
+                    message
+                }
+            }`,
+            variables: {
+                password: password,
+                passwordVerify: passwordVerify
+            },
+        })
+    }
 
 
 }
