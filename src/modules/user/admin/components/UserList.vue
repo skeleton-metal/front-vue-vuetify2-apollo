@@ -160,7 +160,6 @@
             openEdit(user) {
                 this.updating = true
                 this.userToEdit = user
-                console.log(user)
             }
         },
 
