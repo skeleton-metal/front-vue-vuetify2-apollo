@@ -16,6 +16,9 @@ class AuthProvider {
                         email
                         phone
                         avatarurl
+                        role{
+                            name
+                        }
                     }
                 }
             }`,

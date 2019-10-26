@@ -41,15 +41,8 @@ export default {
         isAuth: (state) => {
             return (state.access_token) ? true : false
         },
-        hasRole: (state) => (groups) => {
-            let value = false
-            groups.forEach(function (group) {
-                if (state.me && state.me.groups && state.me.groups.some(value => value.name == group)) {
-                    value = true
-                }
-            })
-
-            return value
+        hasRole: (state) => (role) => {
+            return state.me.role.name == role
         },
     },
     actions: {
@@ -112,6 +105,7 @@ export default {
                 if (payload.exp) {
                     let dateNow = new Date();
                     let dateToken = new Date(payload.exp * 1000)
+                    console.log(dateToken)
                     if (dateNow > dateToken) {
                         console.log("Token expire. Logout.")
                         dispatch('logout')

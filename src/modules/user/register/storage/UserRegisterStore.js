@@ -4,6 +4,7 @@ import {
     LOADING_USER_REGISTER_ON, SET_ACCOUNT_CREATED, SET_CONFIRMATION_EMAIL,
     SET_INPUT_ERROR_REGISTER, SET_REGISTER_FLASH_MESSAGE
 } from "./user-register-mutations-type";
+import ClientError from "../../errors/ClientError";
 
 
 export default {
@@ -18,11 +19,14 @@ export default {
     },
     getters: {
         hasFieldInRegisterErrors: (state) => (field) => {
-            return state.inputErrorRegister.some(item => item.field == field)
+            return state.inputErrorRegister[field] != undefined
         },
         getMessagesInRegisterErrors: (state) => (field) => {
-            let i = state.inputErrorRegister.find(item => item.field == field)
-            return i ? i.messages : []
+            if (state.inputErrorRegister[field] != undefined) {
+                let message = state.inputErrorRegister[field].message
+                return [message]
+            }
+            return []
         },
     },
     actions: {
@@ -48,12 +52,10 @@ export default {
                 }
                 commit(LOADING_USER_REGISTER_OFF)
 
-            }).catch((error) => {
-                if (error.graphQLErrors && error.graphQLErrors[0].code == "BAD_USER_INPUT" && error.graphQLErrors[0].inputErrors) {
-                    commit(SET_INPUT_ERROR_REGISTER, error.graphQLErrors[0].inputErrors)
-                } else {
-                    //@TODO Handle GENERAL Errors
-                    console.log(error)
+            }).catch((clientError) => {
+                if (clientError instanceof ClientError) {
+                    commit(SET_INPUT_ERROR_REGISTER, clientError.inputErrors)
+                    commit(SET_REGISTER_FLASH_MESSAGE, clientError.showMessage)
                 }
                 commit(LOADING_USER_REGISTER_OFF)
                 return false
@@ -67,7 +69,7 @@ export default {
             state.loadingUserRegister = true
         },
         [LOADING_USER_REGISTER_OFF](state) {
-            state.loadingUserRegister = true
+            state.loadingUserRegister = false
         },
         [SET_INPUT_ERROR_REGISTER](state, values) {
             state.inputErrorRegister = values

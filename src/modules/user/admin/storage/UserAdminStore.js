@@ -17,6 +17,7 @@ import {
 } from './user-mutations-type'
 
 import UserAdminProvider from "../providers/UserAdminProvider";
+import ClientError from "../../errors/ClientError";
 
 
 export default {
@@ -36,11 +37,15 @@ export default {
     },
     getters: {
         hasFieldInUserErrors: (state) => (field) => {
-            return state.inputErrorUser.some(item => item.field == field)
+            return state.inputErrorUser[field] != undefined
         },
         getMessagesInUserErrors: (state) => (field) => {
-            let i = state.inputErrorUser.find(item => item.field == field)
-            return i ? i.messages : []
+            if (state.inputErrorUser[field] != undefined) {
+                let message = state.inputErrorUser[field].message
+                return [message]
+            }
+            return []
+
         },
     },
     actions: {
@@ -90,12 +95,10 @@ export default {
                 }
                 commit(SET_LOADING_USERS, false)
                 return true
-            }).catch((error) => {
-                if (error.graphQLErrors && error.graphQLErrors[0].code != undefined && error.graphQLErrors[0].code == "BAD_USER_INPUT" && error.graphQLErrors[0].inputErrors) {
-                    commit(SET_INPUT_ERROR_USER, error.graphQLErrors[0].inputErrors)
-                } else {
-                    //@TODO Handle GENERAL Errors
-                    console.error(error)
+            }).catch((clientError) => {
+                if (clientError instanceof ClientError) {
+                    commit(SET_INPUT_ERROR_USER, clientError.inputErrors)
+                    commit(SET_FLASH_MESSAGE, clientError.showMessage)
                 }
                 commit(SET_LOADING_USERS, false)
                 return false
@@ -126,9 +129,11 @@ export default {
                 }
                 commit(SET_LOADING_USERS, false)
                 return true
-            }).catch((error) => {
-
-                console.log("Vuex Error: " + error)
+            }).catch((clientError) => {
+                if (clientError instanceof ClientError) {
+                    commit(SET_INPUT_ERROR_USER, clientError.inputErrors)
+                    commit(SET_FLASH_MESSAGE, clientError.showMessage)
+                }
                 commit(SET_LOADING_USERS, false)
                 return false
             })
@@ -142,8 +147,11 @@ export default {
                 console.log(response)
                 commit(SET_LOADING_USERS, false)
                 commit(SET_CHANGE_PASSWORD, true)
-            }).catch((error) => {
-                console.log(error)
+            }).catch((clientError) => {
+                if (clientError instanceof ClientError) {
+                    commit(SET_INPUT_ERROR_USER, clientError.inputErrors)
+                    commit(SET_FLASH_MESSAGE, clientError.showMessage)
+                }
                 commit(SET_LOADING_USERS, false)
                 commit(SET_CHANGE_PASSWORD, false)
             })

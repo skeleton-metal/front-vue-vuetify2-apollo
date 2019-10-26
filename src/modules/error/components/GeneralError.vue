@@ -1,5 +1,5 @@
 <template>
-    <v-snackbar v-model="error">
+    <v-snackbar v-model="error" >
         {{generalErrorText}}
     </v-snackbar>
 </template>

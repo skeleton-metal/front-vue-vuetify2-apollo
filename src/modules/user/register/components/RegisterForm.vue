@@ -12,10 +12,15 @@
 
 
                     </v-toolbar>
+
+                    <v-card-text>
+                        <v-alert v-if="flashMessage" type="error" dense text>{{flashMessage}}</v-alert>
+                    </v-card-text>
+
                     <v-card-text>
                         <v-form ref="form" autocomplete="off" v-model="valid">
                             <v-row>
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" sm="6">
                                     <v-text-field
 
                                             prepend-icon="account_box"
@@ -32,7 +37,7 @@
                                             required
                                     />
                                 </v-col>
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" sm="6">
                                     <v-text-field
                                             xs6
                                             prepend-icon="person"
@@ -52,7 +57,7 @@
                                     />
                                 </v-col>
 
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" sm="6">
                                     <v-text-field prepend-icon="email"
                                                   name="email"
                                                   label="Email"
@@ -68,7 +73,7 @@
                                     />
                                 </v-col>
 
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" sm="6">
                                     <v-text-field prepend-icon="email"
                                                   name="email_verify"
                                                   label="Repetir Email"
@@ -87,7 +92,7 @@
                                 </v-col>
 
 
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" sm="6">
                                     <v-text-field id="password"
                                                   prepend-icon="lock"
                                                   name="password"
@@ -106,7 +111,7 @@
                                     />
                                 </v-col>
 
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" sm="6">
                                     <v-text-field id="password_verify"
                                                   prepend-icon="lock"
                                                   name="password_verify"
@@ -122,7 +127,7 @@
                                     />
                                 </v-col>
 
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" sm="6">
                                     <v-text-field prepend-icon="phone"
                                                   name="phone"
                                                   label="Telefono"
@@ -200,6 +205,7 @@
         computed: {
             ...mapState({
                 loading: state => state.register.loadingUserRegister,
+                flashMessage: state => state.register.flashMessageRegister
             }),
             ...mapGetters([
                 'hasFieldInRegisterErrors',

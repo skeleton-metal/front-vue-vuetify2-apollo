@@ -4,6 +4,7 @@ import Register from './register/pages/Register.vue'
 import Me from './profile/pages/Profile.vue'
 import UserAdmin from './admin/pages/UsersAdmin.vue'
 import PasswordChange from "./recovery/pages/PasswordChange";
+import Logout from "./auth/pages/Logout";
 
 export const userRoutes = [
 
@@ -12,6 +13,11 @@ export const userRoutes = [
         name: "login",
         path: '/login',
         component: Login
+    },
+    {
+        name: "logout",
+        path: '/logout',
+        component: Logout
     },
     {
         name: "recovery",
@@ -37,7 +43,7 @@ export const userRoutes = [
         component: UserAdmin,
         meta: {
             requiresAuth: true,
-            role: "administrator"
+            role: "admin"
         }
     },
     {
