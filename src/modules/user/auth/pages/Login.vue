@@ -3,14 +3,16 @@
 
         <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
-                <v-card class="elevation-12">
-                    <v-toolbar dark color="primary">
-                        <v-toolbar-title>Inicio de Sesión</v-toolbar-title>
-                        <v-spacer></v-spacer>
+                <v-card class="elevation-12 ">
 
+                    <v-card-text class="pt-6 px-8 my-0 pb-0 text-center">
+                        <v-btn fab dark color="primary">
+                            <v-icon>lock</v-icon>
+                        </v-btn>
+                        <h2 class="mt-5">Iniciar Sesión</h2>
+                    </v-card-text>
 
-                    </v-toolbar>
-                    <v-card-text class="pb-0">
+                    <v-card-text class="pt-6 px-8 pb-0">
 
                         <v-alert
                                 :value="userInvalid"
@@ -32,17 +34,19 @@
                                           type="text"
                                           v-model="loginForm.username"
                                           placeholder="Usuario"
+                                          outlined
                             >
 
                             </v-text-field>
 
                             <v-text-field id="password"
-                                          prepend-icon="lock"
+                                          prepend-icon="vpn_key"
                                           name="password"
                                           label="Contraseña"
                                           type="password"
                                           v-model="loginForm.password"
                                           placeholder="Contraseña"
+                                          outlined
                             >
 
                             </v-text-field>
@@ -50,18 +54,18 @@
                         </v-form>
                     </v-card-text>
 
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn rounded
-                               :loading="loading"
-                               color="grey"
-                               dark
-                               @click="loginUser">
+                    <v-card-actions class="px-8">
+                        <v-btn
+                                :loading="loading"
+                                color="primary"
+                                min-width="100%"
+                                dark
+                                @click="loginUser">
                             Iniciar Sesión
                         </v-btn>
                     </v-card-actions>
 
-                    <v-card-text class="text-xs-left pt-0 mt-0">
+                    <v-card-text class="text-xs-left pt-3 pl-8 mt-0">
                         <router-link to="recovery">Olvido su contraseña?</router-link>
                     </v-card-text>
                 </v-card>
@@ -90,9 +94,9 @@
                 }
             }
         },
-        created(){
-            if(this.isAuth){
-                this.$router.push({name:"home"})
+        created() {
+            if (this.isAuth) {
+                this.$router.push({name: "home"})
             }
         },
         computed: {
