@@ -4,6 +4,7 @@ import {ApolloError} from "apollo-client";
 const MESSAGE_NETWORK_ERROR = "Problemas con el servidor. Contactese con el administrador.";
 const MESSAGE_VALIDATION = "Problemas de validación. Revise los datos ingresados";
 const MESSAGE_FORBIDEN = "No Autorizado"
+const MESSAGE_UNAUTHENTICATED = "Requiere login"
 
 export default class ClientError extends Error {
     constructor(error) {
@@ -27,6 +28,11 @@ export default class ClientError extends Error {
                         if (gqlError.extensions.code == "FORBIDDEN") {
                             this.showMessage = MESSAGE_FORBIDEN
                         }
+
+                        if (gqlError.extensions.code == "UNAUTHENTICATED") {
+                            this.showMessage = MESSAGE_UNAUTHENTICATED
+                        }
+
                     })
 
                 }

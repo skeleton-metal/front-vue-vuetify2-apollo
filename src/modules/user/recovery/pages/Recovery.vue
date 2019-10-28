@@ -24,10 +24,6 @@
 
     <v-container v-else fluid fill-height class="grey lighten-3">
 
-        <v-alert v-if="status === false">
-            {{message}}
-        </v-alert>
-
         <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
                 <recovery-form/>
