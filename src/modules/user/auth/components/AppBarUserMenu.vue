@@ -1,42 +1,45 @@
 <template>
 
     <v-menu offset-y left>
-        <v-toolbar-items slot="activator">
+        <template v-slot:activator="{on}">
+            <v-toolbar-items>
 
-            <v-btn icon large>
-                <v-avatar
-                        :tile="tile"
-                        :size="avatarSize"
-                        color="grey lighten-4"
-                >
-                    <img :src="getSrc">
-                </v-avatar>
+                <v-btn icon large v-on="on">
+                    <v-avatar
+                            :tile="tile"
+                            :size="avatarSize"
+                            color="grey lighten-4"
 
-            </v-btn>
+                    >
+                        <img :src="getSrc">
+                    </v-avatar>
 
-        </v-toolbar-items>
+                </v-btn>
+
+            </v-toolbar-items>
+        </template>
         <v-list subheader>
 
-            <v-list-tile avatar>
+            <v-list-item>
 
-                <v-list-tile-content>
-                    <v-list-tile-title>{{getUsername}}</v-list-tile-title>
-                    <v-list-tile-sub-title>{{getEmail}}</v-list-tile-sub-title>
-                </v-list-tile-content>
+                <v-list-item-content>
+                    <v-list-item-title>{{getUsername}}</v-list-item-title>
+                    <v-list-item-subtitle>{{getEmail}}</v-list-item-subtitle>
+                </v-list-item-content>
 
 
-            </v-list-tile>
+            </v-list-item>
 
 
             <v-divider></v-divider>
 
-            <v-list-tile to="me">
-                <v-list-tile-title>Perfil</v-list-tile-title>
-            </v-list-tile>
+            <v-list-item to="me">
+                <v-list-item-title>Perfil</v-list-item-title>
+            </v-list-item>
 
-            <v-list-tile @click="logout">
-                <v-list-tile-title>Cerrar Sesión</v-list-tile-title>
-            </v-list-tile>
+            <v-list-item @click="logout">
+                <v-list-item-title>Cerrar Sesión</v-list-item-title>
+            </v-list-item>
 
         </v-list>
 
@@ -49,7 +52,7 @@
     import {mapState, mapActions} from 'vuex'
 
     export default {
-        name: "ToolbarProfileMenu",
+        name: "AppBarUserMenu",
         data: () => ({
             src: '/assets/user.jpg',
             avatarSize: 45,

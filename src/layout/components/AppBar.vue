@@ -14,7 +14,7 @@
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
-
+        <app-bar-user></app-bar-user>
         <slot name="toolbar"></slot>
 
     </v-app-bar>
@@ -23,11 +23,13 @@
 
 <script>
     import AppBarLogo from './AppBarLogo'
+    import AppBarUser from './../../modules/user/auth/components/AppBarUser'
 
     export default {
         name: "Toolbar",
         components: {
-            AppBarLogo
+            AppBarLogo,
+            AppBarUser
         },
         props: {
             drawer: Boolean,
