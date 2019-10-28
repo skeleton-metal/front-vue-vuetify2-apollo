@@ -6,11 +6,15 @@
         </v-card-title>
 
         <v-card-text>
+            <v-alert v-if="errorMessage" type="error" dense text>{{errorMessage}}</v-alert>
+        </v-card-text>
+
+        <v-card-text>
             <v-form ref="form" autocomplete="off">
 
                 <v-row row wrap>
 
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" sm="6">
                         <v-text-field
                                 prepend-icon="account_box"
                                 name="name"
@@ -25,7 +29,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="person"
                                       name="username"
                                       label="Usuario"
@@ -41,7 +45,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="email"
                                       name="email"
                                       label="Email"
@@ -56,7 +60,7 @@
                         ></v-text-field>
                     </v-col>
 
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="phone"
                                       name="phone"
                                       label="Telefono"
@@ -73,7 +77,7 @@
                     </v-col>
 
 
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" sm="6">
                         <v-select
                                 prepend-icon="account_box"
                                 class="pa-3"
@@ -90,7 +94,7 @@
                         ></v-select>
                     </v-col>
 
-                    <v-col cols="12" md="6" class="pl-4">
+                    <v-col cols="12" sm="6" class="pl-4">
                         Activo
                         <v-switch input-value="0" v-model="form.active"></v-switch>
                     </v-col>
@@ -145,6 +149,7 @@
             }
         },
         created() {
+            this.clearErrorMessageAdmin()
             let role = ""
             this.fetchRoles()
             if (this.user.role) {
@@ -159,9 +164,11 @@
                 role,
                 active: this.user.active
             };
+
         },
         computed: {
             ...mapState({
+                errorMessage: state => state.admin.errorMessageAdmin,
                 roles: state => state.admin.roles,
                 loadingUsers: state => state.admin.loadingUsers,
                 loadingRoles: state => state.admin.loadingRoles,
@@ -169,7 +176,7 @@
             ...mapGetters(['hasFieldInUserErrors', 'getMessagesInUserErrors']),
         },
         methods: {
-            ...mapActions(['updateUser', 'fetchRoles']),
+            ...mapActions(['updateUser', 'fetchRoles', 'clearErrorMessageAdmin']),
             saveUser() {
                 if (this.$refs.form.validate()) {
                     this.updateUser(this.form).then(r => {

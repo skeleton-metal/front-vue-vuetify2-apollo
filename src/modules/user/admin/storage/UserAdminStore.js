@@ -12,6 +12,7 @@ import {
     SET_INPUT_ERROR_USER,
 
     SET_CHANGE_PASSWORD,
+    SET_ERROR_MESSAGE_ADMIN,
 
 
 } from './user-mutations-type'
@@ -30,6 +31,8 @@ export default {
         loadingRoles: false,
 
         flashMessage: null,
+
+        errorMessageAdmin: null,
         inputErrorUser: [],
 
         changePassword: false,
@@ -49,6 +52,11 @@ export default {
         },
     },
     actions: {
+
+        clearErrorMessageAdmin({commit}) {
+            commit(SET_ERROR_MESSAGE_ADMIN, "")
+        },
+
         fetchUsers({commit}) {
             commit(SET_LOADING_USERS, true)
             UserAdminProvider.users().then((response) => {
@@ -77,6 +85,7 @@ export default {
         createUser({commit}, data) {
             commit(SET_LOADING_USERS, true)
             commit(SET_FLASH_MESSAGE, "")
+            commit(SET_ERROR_MESSAGE_ADMIN, "")
             commit(SET_INPUT_ERROR_USER, [])
 
 
@@ -98,7 +107,7 @@ export default {
             }).catch((clientError) => {
                 if (clientError instanceof ClientError) {
                     commit(SET_INPUT_ERROR_USER, clientError.inputErrors)
-                    commit(SET_FLASH_MESSAGE, clientError.showMessage)
+                    commit(SET_ERROR_MESSAGE_ADMIN, clientError.showMessage)
                 }
                 commit(SET_LOADING_USERS, false)
                 return false
@@ -111,6 +120,7 @@ export default {
         updateUser({commit}, data) {
             commit(SET_LOADING_USERS, true)
             commit(SET_FLASH_MESSAGE, "")
+            commit(SET_ERROR_MESSAGE_ADMIN, "")
             commit(SET_INPUT_ERROR_USER, [])
 
             return UserAdminProvider.updateUser(
@@ -132,7 +142,7 @@ export default {
             }).catch((clientError) => {
                 if (clientError instanceof ClientError) {
                     commit(SET_INPUT_ERROR_USER, clientError.inputErrors)
-                    commit(SET_FLASH_MESSAGE, clientError.showMessage)
+                    commit(SET_ERROR_MESSAGE_ADMIN, clientError.showMessage)
                 }
                 commit(SET_LOADING_USERS, false)
                 return false
@@ -187,12 +197,14 @@ export default {
             state.inputErrorUser = data
         },
 
-
         [SET_CHANGE_PASSWORD](state, data) {
             state.changePassword = data
         },
         [SET_FLASH_MESSAGE](state, data) {
             state.flashMessage = data
+        },
+        [SET_ERROR_MESSAGE_ADMIN](state, data) {
+            state.errorMessageAdmin = data
         }
     }
 }
