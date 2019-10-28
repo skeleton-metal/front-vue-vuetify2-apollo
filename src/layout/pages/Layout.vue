@@ -3,10 +3,11 @@
         <v-navigation-drawer
                 v-model="drawer"
                 disable-route-watcher
-                :fixed="fixed"
                 app
+                temporary
                 :mini-variant="miniVariant"
                 :clipped="clipped"
+                :fixed="fixed"
         >
 
             <menu-list :nav="nav" v-on:closeDrawer="drawer = false"></menu-list>
@@ -20,18 +21,16 @@
                 <slot></slot>
             </v-content>
 
-            <v-footer color="primary" app>
-                <span class="white--text"> &copy; 2019</span>
-            </v-footer>
+          <Footer></Footer>
     </v-app>
 </template>
 
 <script>
     import MenuList from '../components/MenuList'
     import Toolbar from '../components/AppBar'
-
+    import Footer from '../components/Footer'
     export default {
-        components: {MenuList, Toolbar},
+        components: {MenuList, Toolbar,Footer},
         props: {
             nav: {type: Array, default: null},
             title: {type: String, default: "title"},

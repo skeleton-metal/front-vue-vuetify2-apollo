@@ -40,7 +40,7 @@
         name: "ProfileAvatar",
         data: () => ({
             src: '/assets/user.jpg',
-            avatarSize: 130,
+            avatarSize: 120,
             tile: false,
             hover: false
         }),

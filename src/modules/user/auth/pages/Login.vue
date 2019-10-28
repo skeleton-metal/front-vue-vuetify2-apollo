@@ -2,17 +2,17 @@
     <v-container fluid fill-height class="grey lighten-3">
 
         <v-row align="center" justify="center">
-            <v-col cols="12" sm="8" md="4">
+            <v-col cols="12" sm="7" md="5" lg="4">
                 <v-card class="elevation-12 ">
 
-                    <v-card-text class="pt-6 px-8 my-0 pb-0 text-center">
+                    <v-card-text class="pt-4 px-8 my-0 pb-0 text-center">
                         <v-btn fab dark color="primary">
                             <v-icon>lock</v-icon>
                         </v-btn>
-                        <h2 class="mt-5">Iniciar Sesión</h2>
+                        <h2 class="mt-2">Iniciar Sesión</h2>
                     </v-card-text>
 
-                    <v-card-text class="pt-6 px-8 pb-0">
+                    <v-card-text class="pt-5 px-8 pb-0">
 
                         <v-alert
                                 :value="userInvalid"
@@ -54,7 +54,7 @@
                         </v-form>
                     </v-card-text>
 
-                    <v-card-actions class="px-8">
+                    <v-card-actions class="px-8 pt-0">
                         <v-btn
                                 :loading="loading"
                                 color="primary"
@@ -65,12 +65,12 @@
                         </v-btn>
                     </v-card-actions>
 
-                    <v-card-text class="text-xs-left pt-3 pl-8 mt-0">
+                    <v-card-text class="text-xs-left pt-2 pl-8 mt-0">
                         <router-link to="recovery">Olvido su contraseña?</router-link>
                     </v-card-text>
                 </v-card>
 
-                <v-card class="elevation-12 mt-3">
+                <v-card class="elevation-12 mt-2">
                     <v-card-text class="text-xs-center">
                         Aun no tienes cuenta?
                         <router-link to="register" class="font-weight-black">CREAR CUENTA</router-link>

@@ -1,8 +1,9 @@
 <template>
-    <div>
-    <h1>{{title}}</h1>
-        <v-icon>mdi-home</v-icon>
-    </div>
+    <v-container fill-height>
+        <v-row justify="center" align="center">
+            <h1>{{title}}</h1>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -13,7 +14,7 @@
         props: {},
         data() {
             return {
-                title: "MAIN",
+                title: "HOME",
             }
         }
     }
