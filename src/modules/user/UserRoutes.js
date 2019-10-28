@@ -5,6 +5,7 @@ import Me from './profile/pages/Profile.vue'
 import UserAdmin from './admin/pages/UsersAdmin.vue'
 import PasswordChange from "./recovery/pages/PasswordChange";
 import Logout from "./auth/pages/Logout";
+import Activation from "./register/pages/Activation";
 
 export const userRoutes = [
 
@@ -50,6 +51,14 @@ export const userRoutes = [
         name: "recoveryPassword",
         path: '/reset-password/:token',
         component: PasswordChange,
+        meta: {
+            requiresAuth: false
+        }
+    },
+    {
+        name: "activationUser",
+        path: '/activation-user/:token',
+        component: Activation,
         meta: {
             requiresAuth: false
         }

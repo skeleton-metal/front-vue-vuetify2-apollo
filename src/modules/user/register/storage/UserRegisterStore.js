@@ -2,9 +2,11 @@ import RegisterProvider from '../providers/UserRegisterProvider'
 import {
     LOADING_USER_REGISTER_OFF,
     LOADING_USER_REGISTER_ON, SET_ACCOUNT_CREATED, SET_CONFIRMATION_EMAIL,
-    SET_INPUT_ERROR_REGISTER, SET_REGISTER_FLASH_MESSAGE
+    SET_INPUT_ERROR_REGISTER, SET_REGISTER_FLASH_MESSAGE, SET_EXPIRE_TOKEN_ACTIVATION,
+    SET_INVALID_TOKEN_ACTIVATION, SET_STATUS_ACTIVATION, SET_MESSAGE_ACTIVATION
 } from "./user-register-mutations-type";
 import ClientError from "../../errors/ClientError";
+import jwt_decode from "jwt-decode";
 
 
 export default {
@@ -16,6 +18,11 @@ export default {
 
         accountCreated: false,
         confirmationEmail: null,
+
+        expireTokenMessageActivation: "",
+        invalidTokenActivation: false,
+        statusActivation: false,
+        messageActivation: ""
     },
     getters: {
         hasFieldInRegisterErrors: (state) => (field) => {
@@ -28,6 +35,21 @@ export default {
             }
             return []
         },
+        getInvalidTokenActivation(state) {
+            return state.invalidTokenActivation
+        },
+        getExpireTokenMessageActivation(state) {
+            return state.expireTokenMessageActivation
+        },
+        getLoadingUserRegister(state) {
+            return state.loadingUserRegister
+        },
+        getStatusActivation(state) {
+            return state.statusActivation
+        },
+        getMessageActivation(state) {
+            return state.messageActivation
+        }
     },
     actions: {
 
@@ -60,9 +82,42 @@ export default {
                 commit(LOADING_USER_REGISTER_OFF)
                 return false
             })
-
-
         },
+
+        checkTokenActivation: ({commit, dispatch}, token) => {
+            commit(SET_EXPIRE_TOKEN_ACTIVATION, "")
+            commit(SET_INVALID_TOKEN_ACTIVATION, false)
+            if (token) {
+                try {
+                    let payload = jwt_decode(token)
+                    if (payload.exp && payload != undefined) {
+                        let dateNow = new Date();
+                        let dateToken = new Date(payload.exp * 1000)
+                        if (dateNow > dateToken) {
+                            commit(SET_EXPIRE_TOKEN_ACTIVATION, "El token ya expiro, contacte un adminitrador para dar de alto tu usuario")
+                        } else {
+                            commit('SET_TOKEN', token)
+                            dispatch('activation', payload.id)
+                        }
+                    } else {
+                        commit(SET_INVALID_TOKEN_ACTIVATION, true)
+                    }
+                } catch (e) {
+                    commit(SET_INVALID_TOKEN_ACTIVATION, true)
+                }
+            }
+        },
+
+        activation: ({commit}, id) => {
+            commit(LOADING_USER_REGISTER_ON)
+            RegisterProvider.activation(id).then((response) => {
+                commit(SET_STATUS_ACTIVATION, response.data.activationUser.status)
+                commit(SET_MESSAGE_ACTIVATION, response.data.activationUser.message)
+                commit('SET_TOKEN', '')
+                commit(LOADING_USER_REGISTER_OFF)
+            })
+
+        }
     },
     mutations: {
         [LOADING_USER_REGISTER_ON](state) {
@@ -83,6 +138,18 @@ export default {
         [SET_ACCOUNT_CREATED](state, value) {
             state.accountCreated = value
         },
+        [SET_EXPIRE_TOKEN_ACTIVATION](state, data) {
+            state.expireTokenMessage = data
+        },
+        [SET_INVALID_TOKEN_ACTIVATION](state, data) {
+            state.invalidTokenActivation = data
+        },
+        [SET_MESSAGE_ACTIVATION](state, data) {
+            state.messageActivation = data
+        },
+        [SET_STATUS_ACTIVATION](state, data) {
+            state.statusActivation = data
+        }
 
     }
 }

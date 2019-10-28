@@ -35,6 +35,29 @@ class UserRegisterProvider {
             })
         })
     }
+
+    activation(id) {
+        return new Promise((resolve, reject) => {
+            graphqlClient.mutate({
+                mutation: gql`
+                    mutation activation($id:ID!){
+                        activationUser(id:$id){
+                            status
+                            message
+                        }
+                    }
+                `,
+                variables: {
+                    id: id
+                }
+            }).then(data => {
+                resolve(data)
+            }).catch((apolloError) => {
+                let clientError = new ClientError(apolloError)
+                reject(clientError)
+            })
+        })
+    }
 }
 
 export default new UserRegisterProvider()

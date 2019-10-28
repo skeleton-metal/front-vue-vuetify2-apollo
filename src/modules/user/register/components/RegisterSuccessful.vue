@@ -9,7 +9,7 @@
                                 :value="true"
                                 color="success"
                                 icon="check_circle"
-                                outline
+                                outlined
                         >
                             Hemos enviado un correo a <strong>{{email}}</strong> para validar y finalizar la creación de su cuenta.
                         </v-alert>
