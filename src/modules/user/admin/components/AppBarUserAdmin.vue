@@ -4,7 +4,7 @@
            to="admin"
            class="mr-3"
     >
-        <v-icon>supervised_user_circle</v-icon>
+        <v-icon>security</v-icon>
     </v-btn>
 </template>
 
