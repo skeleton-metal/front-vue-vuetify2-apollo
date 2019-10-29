@@ -1,8 +1,8 @@
 <template>
     <v-container  fluid fill-height class="grey lighten-3">
 
-        <v-row align-center justify-center>
-            <v-col xs12 sm8 md4>
+        <v-row align="center" justify="center">
+            <v-col xs="12" sm="8" md="5">
                 <v-card class="elevation-12">
                     <v-card-text>
                         <v-alert

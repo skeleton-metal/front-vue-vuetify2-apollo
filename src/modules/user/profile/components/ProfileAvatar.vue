@@ -39,7 +39,7 @@
     export default {
         name: "ProfileAvatar",
         data: () => ({
-            src: '/assets/user.jpg',
+            src: '@/assets/user.png',
             avatarSize: 120,
             tile: false,
             hover: false

@@ -11,7 +11,8 @@
                             color="grey lighten-4"
 
                     >
-                        <img :src="getSrc">
+                        <img  v-if="me.avatarurl" :src="me.avatarurl"/>
+                        <img  v-else src="@/assets/user.png">
                     </v-avatar>
 
                 </v-btn>
@@ -54,7 +55,7 @@
     export default {
         name: "AppBarUserMenu",
         data: () => ({
-            src: '/assets/user.jpg',
+            src: '@/assets/user.png',
             avatarSize: 45,
             tile: false
         }),
