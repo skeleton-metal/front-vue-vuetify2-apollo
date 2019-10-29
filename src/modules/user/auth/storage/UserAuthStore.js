@@ -42,6 +42,7 @@ export default {
             return (state.access_token) ? true : false
         },
         hasRole: (state) => (role) => {
+            if(!state.me || !state.me.role)return false
             return state.me.role.name == role
         },
     },

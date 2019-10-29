@@ -4,7 +4,7 @@
 
             <v-card-title>
                 <v-row>
-                    <v-col class="text-xs-center"><h2>Usuarios</h2></v-col>
+                    <v-col class="text-xs-center"><h2>Administración de Usuarios</h2></v-col>
                 </v-row>
             </v-card-title>
 
