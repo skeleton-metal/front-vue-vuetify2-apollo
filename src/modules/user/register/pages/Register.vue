@@ -1,5 +1,4 @@
 <template>
-
     <register-manager></register-manager>
 </template>
 
@@ -12,7 +11,7 @@
         components: {RegisterManager},
         created() {
             if (this.isAuth) {
-            //    this.$router.push({name: "home"})
+                this.$router.push({name: "home"})
             }
         },
         computed: {
