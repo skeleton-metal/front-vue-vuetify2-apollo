@@ -71,6 +71,13 @@
                         >
                             edit
                         </v-icon>
+                        <v-icon
+                                small
+                                class="mr-2"
+                                @click="openChangePassword(item)"
+                        >
+                            lock
+                        </v-icon>
                     </template>
 
 
@@ -93,6 +100,10 @@
             <user-update v-if="updating" :user="userToEdit" v-on:closeDialog="updating=false"></user-update>
         </v-dialog>
 
+        <v-dialog :value="changePassword" width="800" persistent>
+            <user-change-password v-if="changePassword" :user="userToEdit" v-on:closeDialog="changePassword=false"></user-change-password>
+        </v-dialog>
+
 
         <snackbar :message="flashMessage"/>
 
@@ -105,15 +116,17 @@
 
 <script>
     import {mapActions, mapState} from 'vuex'
-    import Snackbar from "./Snackbar";
-    import UserCreate from "./UserCreate";
+    import Snackbar from "./Snackbar"
+    import UserCreate from "./UserCreate"
     import UserUpdate from './UserUpdate'
+    import UserChangePassword from './UserChangePassword'
 
     export default {
         name: "UserCrud",
         components: {
             UserCreate,
             UserUpdate,
+            UserChangePassword,
             Snackbar
         },
         mounted: function () {
@@ -138,6 +151,7 @@
                 dialog: false,
                 creating: false,
                 updating: false,
+                changePassword: false,
                 userToEdit: null,
                 expand: false,
                 username: false
@@ -159,6 +173,10 @@
             },
             openEdit(user) {
                 this.updating = true
+                this.userToEdit = user
+            },
+            openChangePassword(user) {
+                this.changePassword = true
                 this.userToEdit = user
             }
         },

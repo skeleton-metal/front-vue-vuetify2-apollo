@@ -12,6 +12,8 @@ import {
     SET_INPUT_ERROR_USER,
 
     SET_CHANGE_PASSWORD,
+    SET_CHANGE_PASSWORD_MESSAGE,
+
     SET_ERROR_MESSAGE_ADMIN,
 
 
@@ -36,7 +38,7 @@ export default {
         inputErrorUser: [],
 
         changePassword: false,
-
+        changePasswordMessage: ""
     },
     getters: {
         hasFieldInUserErrors: (state) => (field) => {
@@ -100,7 +102,7 @@ export default {
             ).then((response) => {
                 if (response.data.createUser.user) {
                     commit(ADD_USER, response.data.createUser.user)
-                    commit(SET_FLASH_MESSAGE, "Se creo correctamente el Usuario")
+                    commit(SET_FLASH_MESSAGE, "Se creo el usuario con exito")
                 }
                 commit(SET_LOADING_USERS, false)
                 return true
@@ -132,10 +134,9 @@ export default {
                 data.role,
                 data.active
             ).then((response) => {
-                // console.log(response.data.updateUser.user)
                 if (response.data.updateUser.user) {
                     commit(UPDATE_USER, response.data.updateUser.user)
-                    commit(SET_FLASH_MESSAGE, "Se edito correctamente el Usuario")
+                    commit(SET_FLASH_MESSAGE, "Se modifico el usuario con exito")
                 }
                 commit(SET_LOADING_USERS, false)
                 return true
@@ -150,13 +151,16 @@ export default {
 
         },
 
-        passwordChange({commit}, data) {
+        adminChangePassword({commit}, data) {
             commit(SET_LOADING_USERS, true)
             commit(SET_CHANGE_PASSWORD, false)
-            UserAdminProvider.password(data.id, data.password, data.password_verify).then((response) => {
-                console.log(response)
-                commit(SET_LOADING_USERS, false)
-                commit(SET_CHANGE_PASSWORD, true)
+            return UserAdminProvider.adminChangePassword(data.id, data.password, data.passwordVerify).then((response) => {
+                if (response.data.adminChangePassword.status) {
+                    commit(SET_LOADING_USERS, false)
+                    commit(SET_CHANGE_PASSWORD, true)
+                    commit(SET_FLASH_MESSAGE, "Se modifico la password del usuario con exito")
+                }
+                return true
             }).catch((clientError) => {
                 if (clientError instanceof ClientError) {
                     commit(SET_INPUT_ERROR_USER, clientError.inputErrors)
@@ -164,6 +168,7 @@ export default {
                 }
                 commit(SET_LOADING_USERS, false)
                 commit(SET_CHANGE_PASSWORD, false)
+                return false
             })
         },
 
@@ -199,6 +204,9 @@ export default {
 
         [SET_CHANGE_PASSWORD](state, data) {
             state.changePassword = data
+        },
+        [SET_CHANGE_PASSWORD_MESSAGE](state, data) {
+            state.changePasswordMessage = data
         },
         [SET_FLASH_MESSAGE](state, data) {
             state.flashMessage = data

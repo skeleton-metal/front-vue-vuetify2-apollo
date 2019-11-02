@@ -38,7 +38,7 @@
         <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn rounded color="grey darken-1" @click="$emit('close')">
+            <v-btn rounded color="grey darken-1" text @click="$emit('closeDialog')">
                 Cancelar
             </v-btn>
 
@@ -56,7 +56,10 @@
     import {mapGetters, mapActions, mapState} from 'vuex'
 
     export default {
-        name: "ProfilePasswordForm",
+        name: "UserChangePassword",
+        props: {
+          user: Object
+        },
         data: () => ({
                 valid: true,
                 form: {
@@ -93,7 +96,7 @@
             },
         },
         methods: {
-            ...mapActions(['changePassword']),
+            ...mapActions(['adminChangePassword']),
 
             resetValidation: function () {
                 this.errors = {
@@ -105,8 +108,13 @@
                 if (this.$refs.form.validate()) {
 
                     this.resetValidation()
-                    this.form.id = this.me.id
-                    this.changePassword(this.form)
+                    this.form.id = this.user.id || null
+                    this.adminChangePassword(this.form).then(r => {
+                            if (r) {
+                                this.$emit('closeDialog')
+                            }
+                        }
+                    )
                 }
             },
         }

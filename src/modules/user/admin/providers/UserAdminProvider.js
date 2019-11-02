@@ -1,5 +1,4 @@
 import graphqlClient from "../../../../apollo";
-import gql from "graphql-tag";
 import ClientError from "../../errors/ClientError";
 
 
@@ -46,24 +45,12 @@ class UserAdminProvider {
         )
     }
 
-    password(id, password, password_verify) {
+    adminChangePassword(id, password, passwordVerify) {
         return new Promise((resolve, reject) => {
 
             graphqlClient.mutate({
-                mutation: gql`
-                    mutation($id: Int!, $password:String!, $password2:String!){
-                        changePassword(id:$id, password:$password, password2:$password2){
-                            status{
-                                status
-                                message
-                            }
-                        }
-                    }`,
-                variables: {
-                    id: id,
-                    password: password,
-                    password2: password_verify
-                }
+                mutation: require('./gql/adminChangePassword.graphql'),
+                variables: {id: id, password: password, passwordVerify: passwordVerify}
             }).then(data => {
                 resolve(data)
             }).catch((apolloError) => {
