@@ -6,13 +6,16 @@
                     <v-card
                             class="mx-auto elevation-8"
                     >
-                        <v-toolbar dark color="primary">
-                            <v-toolbar-title>Recuperacion de contraseña</v-toolbar-title>
-                            <v-spacer></v-spacer>
 
-                        </v-toolbar>
+                        <v-card-text class="pt-4 px-8 my-0 pb-0 text-center">
+                            <v-btn fab dark color="primary">
+                                <v-icon>lock</v-icon>
+                            </v-btn>
+                            <h2 class="mt-3">Recuperar Contraseña</h2>
+                        </v-card-text>
+
                         <v-card-text class="pb-1">
-                            <h4>Ingrese su nueva contaseña</h4>
+
                             <v-form
                                     ref="form"
                                     v-model="valid"
@@ -43,16 +46,18 @@
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                    color="success"
-                                    rounded
-                                    :disabled="!valid"
-                                    @click="save"
-                                    :loading="loading"
-                            >
-                                Actualizar
-                            </v-btn>
+                           <v-row justify="center">
+                               <v-btn
+                                       color="primary"
+                                       rounded
+                                       :disabled="!valid"
+                                       @click="save"
+                                       :loading="loading"
+                               >
+                                   Confirmar
+                               </v-btn>
+                           </v-row>
+
                         </v-card-actions>
                     </v-card>
                 </div>
