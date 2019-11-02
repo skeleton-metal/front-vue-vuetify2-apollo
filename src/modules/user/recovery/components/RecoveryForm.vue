@@ -1,10 +1,13 @@
 <template>
-    <v-card class="elevation-12">
 
-        <v-toolbar dark color="primary">
-            <v-toolbar-title>Recuperar Contraseña</v-toolbar-title>
-            <v-spacer></v-spacer>
-        </v-toolbar>
+    <v-card class="elevation-12 ">
+
+        <v-card-text class="pt-4 px-8 my-0 pb-0 text-center">
+            <v-btn fab dark color="primary">
+                <v-icon>lock</v-icon>
+            </v-btn>
+            <h2 class="mt-3">Recuperar Contraseña</h2>
+        </v-card-text>
 
         <v-card-text>
             <v-form ref="form" autocomplete="off" v-model="valid" @submit.prevent="submit">
@@ -15,6 +18,7 @@
                               v-model="form.email"
                               :rules="validations.email"
                               placeholder="Email"
+                              description="asd"
                               :error="status"
                               :error-messages="message"
                               required
@@ -23,19 +27,24 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn rounded
-                   :loading="loading"
-                   color="primary darken-1"
-                   dark
-                   @click="submit">Enviar
-            </v-btn>
+            <v-row justify="center">
+                <v-btn rounded
+                       :loading="loading"
+                       color="primary darken-1"
+
+                       dark
+                       @click="submit">Enviar Solicitud
+                </v-btn>
+            </v-row>
+
         </v-card-actions>
     </v-card>
+
 </template>
 
 <script>
     import {mapActions, mapState} from 'vuex'
+
     export default {
         name: "recoveryForm",
         data: () => ({
