@@ -42,7 +42,7 @@ export default {
             return (state.access_token) ? true : false
         },
         hasRole: (state) => (role) => {
-            if(!state.me || !state.me.role)return false
+            if (!state.me || !state.me.role) return false
             return state.me.role.name == role
         },
     },
@@ -61,9 +61,21 @@ export default {
                 router.push('/')
 
             }).catch((error) => {
-                commit(SET_GENERAL_ERROR, error.message)
+
+                //Backend no responde
+                if (error.networkError) {
+                    commit(SET_GENERAL_ERROR, "Imposible conectar con el servidor")
+                //Autenticacion fallida
+                } else if(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED') {
+                    commit(SET_GENERAL_ERROR, error.graphQLErrors[0].message)
+                //Otros errores
+                }else{
+                    commit(SET_GENERAL_ERROR, error.message)
+                }
+
                 commit(SET_AUTH_LOADING, false)
                 commit(SET_USER_INVALID, true)
+
             })
 
 

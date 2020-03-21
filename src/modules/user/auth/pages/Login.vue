@@ -12,17 +12,20 @@
                         <h2 class="mt-2">Iniciar Sesión</h2>
                     </v-card-text>
 
-                    <v-card-text class="pt-5 px-8 pb-0">
-
+                    <v-card-text class="pt-5 pb-0 px-8">
                         <v-alert
                                 :value="userInvalid"
                                 type="error"
-                                outlined
 
-                                class="mb-3"
+                                class="mb-3 pa-3"
                         >
-                            Usuario o Contraseña invalida
+                            {{generalError}}
                         </v-alert>
+                    </v-card-text>
+
+                    <v-card-text class="pt-5 px-8 pb-0">
+
+
 
 
                         <v-form @keyup.enter.native="loginUser">
@@ -102,7 +105,8 @@
         computed: {
             ...mapState({
                 loading: state => state.auth.loadingAuth,
-                userInvalid: state => state.auth.userInvalid
+                userInvalid: state => state.auth.userInvalid,
+                generalError: state => state.auth.generalError
             }),
             ...mapGetters(['isAuth'])
         },
