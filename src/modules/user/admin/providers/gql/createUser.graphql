@@ -3,19 +3,18 @@ mutation createUser($username: String!,$password: String!, $name:String!,
 {
     createUser( input: {username:$username ,password:$password, name:$name, email:$email, phone:$phone, role: $role, active: $active})
     {
-        user
-        {
+
+        id
+        name
+        username
+        email
+        phone
+        avatarurl
+        active
+        role{
             id
             name
-            username
-            email
-            phone
-            avatarurl
-            active
-            role{
-                id
-                name
-            }
         }
+
     }
 }

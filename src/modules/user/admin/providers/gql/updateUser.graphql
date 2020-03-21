@@ -1,20 +1,17 @@
 mutation updateUser( $id: ID!, $name:String!,$username: String!, $email: String!, $phone: String, $role: String!, $active: Boolean!){
     updateUser(id: $id, input: {name:$name, username: $username, email:$email, phone:$phone, role: $role, active: $active})
     {
-        user
-        {
+
+        id
+        name
+        username
+        email
+        phone
+        avatarurl
+        active
+        role{
             id
             name
-            username
-            email
-            phone
-            avatarurl
-            active
-            role{
-                id
-                name
-            }
         }
-
     }
 }

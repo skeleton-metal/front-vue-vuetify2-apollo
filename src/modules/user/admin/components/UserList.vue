@@ -14,7 +14,7 @@
                         <v-text-field
                                 v-model="search"
                                 append-icon="search"
-                                label="Search"
+                                label="Buscar"
                                 single-line
                                 hide-details
                                 class="pa-0 px-2"
@@ -28,7 +28,6 @@
                         :search="search"
                         :single-expand="false"
                         :expanded.sync="expanded"
-                        show-expand
                         :loading="loadingUsers">
 
                     <template slot="no-data">
@@ -54,8 +53,9 @@
                             <img v-else src="@/assets/user.png">
                         </v-avatar>
                     </template>
+
                     <template v-slot:item.active="{ item }">
-                        <div v-if="item.active">
+                        <div v-if="item.active" >
                             <v-icon color="success">check_circle</v-icon>
                         </div>
                         <div v-else>
@@ -91,23 +91,23 @@
         </v-card>
 
 
-        <v-dialog :value="creating" width="800" persistent>
+        <v-dialog :value="creating" width="850" persistent fullscreen>
             <user-create v-if="creating" v-on:closeDialog="creating=false"></user-create>
         </v-dialog>
 
 
-        <v-dialog :value="updating" width="800" persistent>
+        <v-dialog :value="updating" width="850" persistent>
             <user-update v-if="updating" :user="userToEdit" v-on:closeDialog="updating=false"></user-update>
         </v-dialog>
 
-        <v-dialog :value="changePassword" width="800" persistent>
+        <v-dialog :value="changePassword" width="500" persistent>
             <user-change-password v-if="changePassword" :user="userToEdit" v-on:closeDialog="changePassword=false"></user-change-password>
         </v-dialog>
 
 
         <snackbar :message="flashMessage"/>
 
-        <v-btn class="elevation-8" color="#D81B60" fab fixed bottom right dark @click="openCreate">
+        <v-btn class="elevation-8" color="primary" fab fixed bottom right dark @click="openCreate">
             <v-icon>add</v-icon>
         </v-btn>
     </div>

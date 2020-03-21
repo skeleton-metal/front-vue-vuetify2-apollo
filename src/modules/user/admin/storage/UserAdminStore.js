@@ -100,8 +100,8 @@ export default {
                 data.role,
                 data.active
             ).then((response) => {
-                if (response.data.createUser.user) {
-                    commit(ADD_USER, response.data.createUser.user)
+                if (response.data.createUser) {
+                    commit(ADD_USER, response.data.createUser)
                     commit(SET_FLASH_MESSAGE, "Se creo el usuario con exito")
                 }
                 commit(SET_LOADING_USERS, false)
@@ -134,8 +134,8 @@ export default {
                 data.role,
                 data.active
             ).then((response) => {
-                if (response.data.updateUser.user) {
-                    commit(UPDATE_USER, response.data.updateUser.user)
+                if (response.data.updateUser) {
+                    commit(UPDATE_USER, response.data.updateUser)
                     commit(SET_FLASH_MESSAGE, "Se modifico el usuario con exito")
                 }
                 commit(SET_LOADING_USERS, false)
