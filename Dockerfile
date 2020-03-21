@@ -1,24 +1,21 @@
-FROM node:12 AS build
+FROM node:12.16.1-alpine3.9
 
-  # Create app directory
-WORKDIR /var/www/app
+RUN apk add bash
 
-  # Install app dependencies
-  # A wildcard is used to ensure both package.json AND package-lock.json are copied
-  # where available (npm@5+)
-COPY . /var/www/app
+#Target Directory
+WORKDIR /www
+COPY . /www
+
+#NPM Dependencies and BUILD
 RUN npm install
-  # If you are building your code for production
-  # RUN npm ci --only=production
 RUN npm run build
 
-FROM nginx:1.17 as production-stage
+#NGINX
+RUN apk update
+RUN apk add nginx
+RUN mkdir -p /run/nginx
+RUN mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
-COPY --from=build  /var/www/app/dist /usr/share/nginx/html
-
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d
-
-EXPOSE 80
-
+#RUN Daemon
 CMD ["nginx", "-g", "daemon off;"]

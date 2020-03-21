@@ -1,7 +1,10 @@
 version: "3"
 services:
-  web:
-    container_name: web_vue
+  skeleton-web:
+    container_name: skeleton-web
     build: .
     ports:
-      - "8080:80"
+      - "8000:80"
+    volumes:
+    - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+    - ./.env.production:/www/.env.production
