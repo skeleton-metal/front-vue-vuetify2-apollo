@@ -9,17 +9,6 @@ class AuthProvider {
             mutation: gql`mutation ( $username: String!, $password: String!){
                 auth(username: $username, password: $password){
                     token
-                    user{
-                        id
-                        username
-                        name
-                        email
-                        phone
-                        avatarurl
-                        role{
-                            name
-                        }
-                    }
                 }
             }`,
             variables: {
