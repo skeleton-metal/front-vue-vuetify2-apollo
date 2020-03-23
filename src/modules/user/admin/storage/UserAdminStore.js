@@ -14,7 +14,7 @@ import {
     SET_CHANGE_PASSWORD,
     SET_CHANGE_PASSWORD_MESSAGE,
 
-    SET_ERROR_MESSAGE_ADMIN, DELETE_USER,
+    SET_ERROR_MESSAGE_ADMIN, DELETE_USER, SET_TOTAL_ITEMS,
 
 
 } from './user-mutations-type'
@@ -38,7 +38,15 @@ export default {
         inputErrorUser: [],
 
         changePassword: false,
-        changePasswordMessage: ""
+        changePasswordMessage: "",
+
+        //Pagination
+        totalItems: null,
+        currentPage: 1,
+        limit: 5,
+        next: null,
+        nextPage: null,
+        prevPage: null
     },
     getters: {
         hasFieldInUserErrors: (state) => (field) => {
@@ -52,11 +60,29 @@ export default {
             return []
 
         },
+        getLimit: state => {
+          return state.limit
+        }
     },
     actions: {
 
         clearErrorMessageAdmin({commit}) {
             commit(SET_ERROR_MESSAGE_ADMIN, "")
+        },
+
+        paginateUsers({commit,getters}, {pageNumber, search}) {
+            commit(SET_LOADING_USERS, true)
+
+            UserAdminProvider.paginateUsers(getters.getLimit , pageNumber, search).then((response) => {
+                commit(SET_TOTAL_ITEMS, response.data.paginateUsers.totalItems)
+                commit(SET_USERS, response.data.paginateUsers.users)
+                commit(SET_LOADING_USERS, false)
+            }).catch((error) => {
+                //@TODO Handle Errors
+                console.error(error)
+                commit(SET_LOADING_USERS, false)
+            })
+
         },
 
         fetchUsers({commit}) {
@@ -207,6 +233,11 @@ export default {
         [SET_USERS](state, data) {
             state.users = data
         },
+
+        [SET_TOTAL_ITEMS](state, data) {
+            state.totalItems = data
+        },
+
         [SET_LOADING_USERS](state, data) {
             state.loadingUsers = data
         },

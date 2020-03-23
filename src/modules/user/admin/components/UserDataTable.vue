@@ -18,6 +18,7 @@
                                 single-line
                                 hide-details
                                 class="pa-0 px-2"
+                                v-on:keyup.native.enter="updatePage"
                         ></v-text-field>
                     </v-col>
                 </v-row>
@@ -28,7 +29,12 @@
                         :search="search"
                         :single-expand="false"
                         :expanded.sync="expanded"
-                        :loading="loadingUsers">
+                        :server-items-length="totalItems"
+                        :items-per-page="limit"
+                        :loading="loadingUsers"
+                        :page.sync="pageNumber"
+                        @update:page="updatePage"
+                >
 
                     <template slot="no-data">
 
@@ -55,7 +61,7 @@
                     </template>
 
                     <template v-slot:item.active="{ item }">
-                        <div v-if="item.active" >
+                        <div v-if="item.active">
                             <v-icon color="success">check_circle</v-icon>
                         </div>
                         <div v-else>
@@ -128,7 +134,8 @@
         </v-dialog>
 
         <v-dialog :value="changePassword" width="500" persistent>
-            <user-change-password v-if="changePassword" :user="userToEdit" v-on:closeDialog="changePassword=false"></user-change-password>
+            <user-change-password v-if="changePassword" :user="userToEdit"
+                                  v-on:closeDialog="changePassword=false"></user-change-password>
         </v-dialog>
 
 
@@ -161,7 +168,7 @@
             Snackbar
         },
         mounted: function () {
-            this.fetchUsers()
+            this.paginateUsers(1)
         },
         data() {
             return {
@@ -171,6 +178,7 @@
                     {text: 'Nombre', value: 'name'},
                     {text: 'Usuario', value: 'username'},
                     {text: 'Email', value: 'email'},
+                    {text: 'Telefono', value: 'phone'},
                     {text: 'Rol', value: 'role.name'},
                     {text: 'Activo', value: 'active'},
                     {text: 'Aciones', value: 'action', sortable: false},
@@ -189,6 +197,7 @@
                 userToDelete: null,
                 userToShow: null,
                 expand: false,
+                pageNumber: 1,
                 username: false
             }
         },
@@ -198,10 +207,13 @@
                 loadingUsers: state => state.admin.loadingUsers,
                 loadingRoles: state => state.admin.loadingRoles,
                 users: state => state.admin.users,
+                //Pagination
+                totalItems: state => state.admin.totalItems,
+                limit: state => state.admin.limit
             }),
         },
         methods: {
-            ...mapActions(['fetchUsers']),
+            ...mapActions(['fetchUsers', 'paginateUsers']),
             openCreate() {
                 this.creating = true
                 this.dialog = true
@@ -221,6 +233,9 @@
             openChangePassword(user) {
                 this.changePassword = true
                 this.userToEdit = user
+            },
+            updatePage() {
+                this.paginateUsers({pageNumber: this.pageNumber, search: this.search})
             }
         },
 

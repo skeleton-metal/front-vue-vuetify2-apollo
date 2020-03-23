@@ -5,6 +5,13 @@ import ClientError from "../../errors/ClientError";
 class UserAdminProvider {
 
 
+    paginateUsers(limit, pageNumber, search = null) {
+        return graphqlClient.query({
+            query: require('./gql/paginateUsers.graphql'),
+            variables: {limit, pageNumber, search}
+        })
+    }
+
     users() {
         return graphqlClient.query({query: require('./gql/getUsers.graphql')})
     }

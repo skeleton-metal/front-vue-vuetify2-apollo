@@ -1,4 +1,5 @@
 export const SET_USERS = "SET_USERS"
+export const SET_TOTAL_ITEMS = "SET_TOTAL_ITEMS"
 export const SET_LOADING_USERS = "SET_LOADING_USERS"
 
 

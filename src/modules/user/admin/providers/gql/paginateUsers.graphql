@@ -1,0 +1,20 @@
+query paginateUsers($limit:Int!, $pageNumber: Int, $search: String){
+    paginateUsers(limit: $limit, pageNumber: $pageNumber, search: $search){
+        totalItems
+        page
+        users{
+            id
+            name
+            username
+            email
+            phone
+            active
+            avatarurl
+            role{
+                id
+                name
+            }
+        }
+
+    }
+}
