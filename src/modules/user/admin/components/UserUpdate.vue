@@ -185,10 +185,8 @@
             ...mapActions(['updateUser', 'fetchRoles', 'clearErrorMessageAdmin']),
             saveUser() {
                 if (this.$refs.form.validate()) {
-                    this.updateUser(this.form).then(r => {
-                            if (r) {
+                    this.updateUser(this.form).then(() => {
                                 this.$emit('closeDialog')
-                            }
                         }
                     )
                 }

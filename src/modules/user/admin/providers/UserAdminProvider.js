@@ -45,6 +45,21 @@ class UserAdminProvider {
         )
     }
 
+    deleteUser(id) {
+        return new Promise((resolve, reject) => {
+                graphqlClient.mutate({
+                    mutation: require('./gql/deleteUser.graphql'),
+                    variables: {id}
+                }).then(data => {
+                    resolve(data)
+                }).catch((apolloError) => {
+                    let clientError = new ClientError(apolloError)
+                    reject(clientError)
+                })
+            }
+        )
+    }
+
     adminChangePassword(id, password, passwordVerify) {
         return new Promise((resolve, reject) => {
 

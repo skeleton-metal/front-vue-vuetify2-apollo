@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import UserList from '../components/UserList'
+    import UserList from '../components/UserDataTable'
 
     export default {
         name: "Users",

@@ -66,17 +66,28 @@
                     <template v-slot:item.action="{ item }">
                         <v-icon
                                 small
+                                color="primary"
                                 class="mr-2"
                                 @click="openEdit(item)"
                         >
                             edit
                         </v-icon>
+
                         <v-icon
                                 small
+                                color="purple"
                                 class="mr-2"
                                 @click="openChangePassword(item)"
                         >
                             lock
+                        </v-icon>
+                        <v-icon
+                                color="red"
+                                small
+                                class="mr-2"
+                                @click="openDelete(item)"
+                        >
+                            delete
                         </v-icon>
                     </template>
 
@@ -100,6 +111,10 @@
             <user-update v-if="updating" :user="userToEdit" v-on:closeDialog="updating=false"></user-update>
         </v-dialog>
 
+        <v-dialog :value="deleting" width="350" persistent>
+            <user-delete v-if="deleting" :user="userToDelete" v-on:closeDialog="deleting=false"></user-delete>
+        </v-dialog>
+
         <v-dialog :value="changePassword" width="500" persistent>
             <user-change-password v-if="changePassword" :user="userToEdit" v-on:closeDialog="changePassword=false"></user-change-password>
         </v-dialog>
@@ -120,10 +135,12 @@
     import UserCreate from "./UserCreate"
     import UserUpdate from './UserUpdate'
     import UserChangePassword from './UserChangePassword'
+    import UserDelete from "./UserDelete";
 
     export default {
         name: "UserCrud",
         components: {
+            UserDelete,
             UserCreate,
             UserUpdate,
             UserChangePassword,
@@ -151,8 +168,10 @@
                 dialog: false,
                 creating: false,
                 updating: false,
+                deleting: false,
                 changePassword: false,
                 userToEdit: null,
+                userToDelete: null,
                 expand: false,
                 username: false
             }
@@ -174,6 +193,10 @@
             openEdit(user) {
                 this.updating = true
                 this.userToEdit = user
+            },
+            openDelete(user) {
+                this.deleting = true
+                this.userToDelete = user
             },
             openChangePassword(user) {
                 this.changePassword = true

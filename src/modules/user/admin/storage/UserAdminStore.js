@@ -14,7 +14,7 @@ import {
     SET_CHANGE_PASSWORD,
     SET_CHANGE_PASSWORD_MESSAGE,
 
-    SET_ERROR_MESSAGE_ADMIN,
+    SET_ERROR_MESSAGE_ADMIN, DELETE_USER,
 
 
 } from './user-mutations-type'
@@ -151,6 +151,34 @@ export default {
 
         },
 
+
+        deleteUser({commit}, id) {
+            commit(SET_LOADING_USERS, true)
+            commit(SET_FLASH_MESSAGE, "")
+            commit(SET_ERROR_MESSAGE_ADMIN, "")
+            commit(SET_INPUT_ERROR_USER, [])
+
+            return UserAdminProvider.deleteUser(
+                id
+            ).then((response) => {
+                console.log(response.data)
+                if (response.data.deleteUser) {
+                    commit(DELETE_USER, response.data.deleteUser)
+                    commit(SET_FLASH_MESSAGE, "Se elimino el usuario con exito")
+                }
+                commit(SET_LOADING_USERS, false)
+                return true
+            }).catch((clientError) => {
+                if (clientError instanceof ClientError) {
+                    commit(SET_INPUT_ERROR_USER, clientError.inputErrors)
+                    commit(SET_ERROR_MESSAGE_ADMIN, clientError.showMessage)
+                }
+                commit(SET_LOADING_USERS, false)
+                return false
+            })
+
+        },
+
         adminChangePassword({commit}, data) {
             commit(SET_LOADING_USERS, true)
             commit(SET_CHANGE_PASSWORD, false)
@@ -196,6 +224,11 @@ export default {
         [UPDATE_USER](state, data) {
             let index = state.users.findIndex(user => user.id == data.id)
             Vue.set(state.users, index, data)
+        },
+        [DELETE_USER](state, data) {
+            console.log(data)
+            let index = state.users.findIndex(user => user.id == data.id)
+            state.users.splice(index, 1)
         },
 
         [SET_INPUT_ERROR_USER](state, data) {
