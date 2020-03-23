@@ -68,6 +68,14 @@
                                 small
                                 color="primary"
                                 class="mr-2"
+                                @click="openShow(item)"
+                        >
+                            search
+                        </v-icon>
+                        <v-icon
+                                small
+                                color="primary"
+                                class="mr-2"
                                 @click="openEdit(item)"
                         >
                             edit
@@ -111,8 +119,12 @@
             <user-update v-if="updating" :user="userToEdit" v-on:closeDialog="updating=false"></user-update>
         </v-dialog>
 
-        <v-dialog :value="deleting" width="350" persistent>
+        <v-dialog :value="deleting" width="850" persistent>
             <user-delete v-if="deleting" :user="userToDelete" v-on:closeDialog="deleting=false"></user-delete>
+        </v-dialog>
+
+        <v-dialog :value="showing" width="850" persistent>
+            <user-show v-if="showing" :item="userToShow" v-on:closeDialog="showing=false"></user-show>
         </v-dialog>
 
         <v-dialog :value="changePassword" width="500" persistent>
@@ -136,10 +148,12 @@
     import UserUpdate from './UserUpdate'
     import UserChangePassword from './UserChangePassword'
     import UserDelete from "./UserDelete";
+    import UserShow from "./UserShow";
 
     export default {
         name: "UserCrud",
         components: {
+            UserShow,
             UserDelete,
             UserCreate,
             UserUpdate,
@@ -169,9 +183,11 @@
                 creating: false,
                 updating: false,
                 deleting: false,
+                showing: false,
                 changePassword: false,
                 userToEdit: null,
                 userToDelete: null,
+                userToShow: null,
                 expand: false,
                 username: false
             }
@@ -193,6 +209,10 @@
             openEdit(user) {
                 this.updating = true
                 this.userToEdit = user
+            },
+            openShow(user) {
+                this.showing = true
+                this.userToShow = user
             },
             openDelete(user) {
                 this.deleting = true

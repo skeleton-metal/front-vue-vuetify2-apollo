@@ -12,31 +12,28 @@
         </v-toolbar>
 
         <v-card-text>
+        <user-show-data :item="user" ></user-show-data>
+        </v-card-text>
+
+        <v-card-text>
             <v-alert v-if="errorMessage" type="error" dense text>{{errorMessage}}</v-alert>
         </v-card-text>
 
         <v-card-text>
-
-
             <v-row justify="center">
-                <span>{{areYouSure}}</span>
+                <span class="title">{{areYouSure}}</span>
             </v-row>
-
         </v-card-text>
 
 
         <v-card-actions>
-
             <v-btn color="grey" tile outlined @click="$emit('closeDialog')">
                 Cerrar
             </v-btn>
-
             <v-spacer></v-spacer>
-
             <v-btn color="primary" @click="remove" :loading="loading">
                 Confirmar
             </v-btn>
-
         </v-card-actions>
 
     </v-card>
@@ -44,9 +41,11 @@
 
 <script>
     import {mapActions, mapGetters} from 'vuex'
+    import UserShowData from "./UserShowData";
 
     export default {
         name: "UserDelete",
+        components: {UserShowData},
         props: {
             user: Object
         },
