@@ -12,7 +12,7 @@
         </v-toolbar>
 
         <v-card-text>
-        <user-show-data :item="user" />
+          <group-show-data :item="item" />
         </v-card-text>
 
         <v-card-text>
@@ -40,31 +40,35 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex'
-    import UserShowData from "./UserShowData";
-
+    import GroupShowData from "./GroupShowData";
+     import GroupProvider from "../providers/GroupProvider";
+     
     export default {
-        name: "UserDelete",
-        components: {UserShowData},
+        name: "GroupDelete",
+        components: {GroupShowData},
         props: {
-            user: Object
+            item: Object
         },
         data() {
             return {
                 modal: false,
-                title: "Borrando usuario",
+                title: "Borrando Group",
                 areYouSure: "¿Esta seguro que desea borrar este registro?",
                 errorMessage: '',
                 loading: false,
             }
         },
         methods: {
-            ...mapActions(['deleteUser']),
             remove() {
-                this.deleteUser(this.user.id).then( () => {
-                    this.$emit('deleteConfirmed')
-                    this.$emit('closeDialog')
-                }).catch(err =>{
+                GroupProvider.deleteGroup(this.item.id).then(result => {
+                            if (result.data.groupDelete.deleteSuccess) {
+                                this.$emit('itemDelete',result.data.groupDelete)
+                                this.$emit('closeDialog')
+                            }else{
+                                this.errorMessage = 'Error on Delete'
+                            }
+                        }
+                    ).catch(err =>{
                     this.errorMessage = err.message
                 })
             },
@@ -72,7 +76,4 @@
     }
 </script>
 
-<style scoped>
-
-</style>
 

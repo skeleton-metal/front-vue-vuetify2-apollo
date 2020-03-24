@@ -1,0 +1,10 @@
+query groupsPaginate($limit:Int!, $pageNumber: Int, $search: String){
+    groupsPaginate(limit: $limit, pageNumber: $pageNumber, search: $search){
+        totalItems
+        page
+        items{
+          id
+          name
+        }
+    }
+}

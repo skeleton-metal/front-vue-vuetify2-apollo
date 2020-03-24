@@ -1,0 +1,6 @@
+query group($id:ID!){
+    group(id:$id){
+        id
+        name
+    }
+}

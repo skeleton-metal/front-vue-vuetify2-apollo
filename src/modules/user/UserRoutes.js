@@ -7,6 +7,8 @@ import PasswordChange from "./recovery/pages/PasswordChange";
 import Logout from "./auth/pages/Logout";
 import Activation from "./register/pages/Activation";
 
+import GroupCrud from './groups/pages/GroupCrud.vue'
+
 export const userRoutes = [
 
     //USERS
@@ -42,6 +44,15 @@ export const userRoutes = [
         name: "usersAdmin",
         path: '/admin',
         component: UserAdmin,
+        meta: {
+            requiresAuth: true,
+            role: "admin"
+        }
+    },
+    {
+        name: "groupCrud",
+        path: '/groups',
+        component: GroupCrud,
         meta: {
             requiresAuth: true,
             role: "admin"

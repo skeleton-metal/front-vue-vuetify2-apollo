@@ -1,0 +1,7 @@
+mutation groupUpdate($id: ID!, $name:String!){
+    groupUpdate(id: $id, input: {name: $name }){
+        id
+        name
+    }
+}
+

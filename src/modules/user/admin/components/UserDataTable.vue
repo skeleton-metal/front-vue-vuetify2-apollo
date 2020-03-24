@@ -126,7 +126,7 @@
         </v-dialog>
 
         <v-dialog :value="deleting" width="850" persistent>
-            <user-delete v-if="deleting" :user="userToDelete" v-on:closeDialog="deleting=false"></user-delete>
+            <user-delete v-if="deleting" :user="userToDelete" v-on:closeDialog="deleting=false" v-on:deleteConfirmed="updatePage"></user-delete>
         </v-dialog>
 
         <v-dialog :value="showing" width="850" persistent>
