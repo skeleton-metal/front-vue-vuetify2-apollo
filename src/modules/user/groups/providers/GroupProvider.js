@@ -7,10 +7,10 @@ class GroupProvider {
         return graphqlClient.query({query: require('./gql/groups.graphql')})
     }
     
-    paginateGroups(limit, pageNumber, search = null) {
+    paginateGroups(limit, pageNumber, search = null, orderBy = null, orderDesc = false) {
         return graphqlClient.query({
             query: require('./gql/groupsPaginate.graphql'),
-            variables: {limit, pageNumber, search},
+            variables: {limit, pageNumber, search, orderBy, orderDesc},
             fetchPolicy: "network-only"
         })
     }

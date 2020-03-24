@@ -70,10 +70,13 @@ export default {
             commit(SET_ERROR_MESSAGE_ADMIN, "")
         },
 
-        paginateUsers({commit,getters}, {pageNumber, search}) {
+        paginateUsers({commit,getters}, {pageNumber, search, orderBy, orderDesc}) {
+            if(Array.isArray(orderBy)) orderBy = orderBy[0]
+            if(Array.isArray(orderDesc)) orderDesc = orderDesc[0]
+
             commit(SET_LOADING_USERS, true)
 
-            UserAdminProvider.paginateUsers(getters.getLimit , pageNumber, search).then((response) => {
+            UserAdminProvider.paginateUsers(getters.getLimit , pageNumber, search, orderBy, orderDesc).then((response) => {
                 commit(SET_TOTAL_ITEMS, response.data.paginateUsers.totalItems)
                 commit(SET_USERS, response.data.paginateUsers.users)
                 commit(SET_LOADING_USERS, false)

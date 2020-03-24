@@ -33,7 +33,11 @@
                         :items-per-page="limit"
                         :loading="loadingUsers"
                         :page.sync="pageNumber"
+                        :sort-by.sync="orderBy"
+                        :sort-desc.sync="orderDesc"
                         @update:page="updatePage"
+                        @update:sort-by="updatePage"
+                        @update:sort-desc="updatePage"
                 >
 
                     <template slot="no-data">
@@ -198,7 +202,8 @@
                 userToShow: null,
                 expand: false,
                 pageNumber: 1,
-                username: false
+                orderBy: null,
+                orderDesc: false
             }
         },
         computed: {
@@ -235,7 +240,7 @@
                 this.userToEdit = user
             },
             updatePage() {
-                this.paginateUsers({pageNumber: this.pageNumber, search: this.search})
+                this.paginateUsers({pageNumber: this.pageNumber, search: this.search, orderBy: this.orderBy, orderDesc: this.orderDesc})
             }
         },
 
