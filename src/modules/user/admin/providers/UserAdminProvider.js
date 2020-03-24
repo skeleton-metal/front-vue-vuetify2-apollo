@@ -1,5 +1,8 @@
 import graphqlClient from "../../../../apollo";
-import ClientError from "../../errors/ClientError";
+
+import {ClientError} from 'front-module-commons';
+
+
 
 
 class UserAdminProvider {

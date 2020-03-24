@@ -5,8 +5,9 @@ import {
     SET_INPUT_ERROR_REGISTER, SET_REGISTER_FLASH_MESSAGE, SET_EXPIRE_TOKEN_ACTIVATION,
     SET_INVALID_TOKEN_ACTIVATION, SET_STATUS_ACTIVATION, SET_MESSAGE_ACTIVATION
 } from "./user-register-mutations-type";
-import ClientError from "../../errors/ClientError";
 import jwt_decode from "jwt-decode";
+
+import {ClientError} from 'front-module-commons';
 
 
 export default {

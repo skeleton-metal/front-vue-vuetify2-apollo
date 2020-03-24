@@ -20,7 +20,8 @@ import {
 } from './user-mutations-type'
 
 import UserAdminProvider from "../providers/UserAdminProvider";
-import ClientError from "../../errors/ClientError";
+
+import {ClientError} from 'front-module-commons';
 
 
 export default {

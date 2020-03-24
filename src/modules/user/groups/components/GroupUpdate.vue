@@ -11,7 +11,7 @@
             </v-toolbar-items>
         </v-toolbar>
         
-        <v-card-text>
+        <v-card-text class="pt-3">
             <v-alert v-if="errorMessage" type="error" dense text>{{errorMessage}}</v-alert>
         </v-card-text>
 
@@ -64,7 +64,8 @@
 
 <script>
     import GroupProvider from "../providers/GroupProvider";
-    
+    import {ClientError} from 'front-module-commons';
+  
     //Relations
     
     
@@ -81,7 +82,7 @@
                 modal: false,
                 title: "Modificando Group",
                 errorMessage: '',
-                inputError: [],
+                inputErrors: {},
                 loading: false,
                 form: {
                      id: this.item.id,
@@ -97,16 +98,17 @@
          
         },
         computed: {
-            hasErrors: (state) => (field) => {
-                return state.inputError[field] != undefined
+            hasErrors() {
+                return field => this.inputErrors[field] != undefined
             },
-            getMessageErrors: (state) => (field) => {
-                if (state.inputError[field] != undefined) {
-                    let message = state.inputError[field].message
-                    return [message]
+            getMessageErrors() {
+                return field => {
+                    if (this.inputErrors[field] != undefined) {
+                        let message = this.inputErrors[field].message
+                        return [message]
+                    }
+                    return []
                 }
-                return []
-
             },
         },
         methods: {
@@ -119,7 +121,11 @@
                                 this.$emit('closeDialog')
                             }
                         }
-                    )
+                    ).catch(error => {
+                         let clientError = new ClientError(error)
+                         this.inputErrors = clientError.inputErrors
+                         this.errorMessage = clientError.showMessage
+                    })
                 }
 
             },

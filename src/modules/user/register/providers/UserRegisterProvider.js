@@ -1,7 +1,6 @@
 import graphqlClient from "../../../../apollo";
 import gql from "graphql-tag";
-import ClientError from "../../errors/ClientError";
-
+import {ClientError} from 'front-module-commons';
 
 class UserRegisterProvider {
 
