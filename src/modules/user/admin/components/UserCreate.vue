@@ -136,7 +136,8 @@
                     </v-col>
 
                     <v-col cols="12" sm="6" class="pl-8">
-                        <v-switch :label="form.active?'Activo':'Inactivo'" input-value="0" v-model="form.active"></v-switch>
+                        <v-switch :label="form.active?'Activo':'Inactivo'" input-value="0"
+                                  v-model="form.active"></v-switch>
                     </v-col>
 
                 </v-row>
@@ -148,13 +149,13 @@
 
         <v-card-actions>
 
-            <v-btn tile outlined color="grey"  @click="$emit('closeDialog')">
+            <v-btn tile outlined color="grey" @click="$emit('closeDialog')">
                 Cerrar
             </v-btn>
 
             <v-spacer></v-spacer>
 
-            <v-btn  color="primary" @click="saveUser" :loading="loadingUsers">
+            <v-btn color="primary" @click="saveUser" :loading="loadingUsers">
                 Crear
             </v-btn>
 
@@ -203,11 +204,11 @@
             },
         },
         methods: {
-            ...mapActions(['createUser', 'fetchRoles','clearErrorMessageAdmin']),
+            ...mapActions(['createUser', 'fetchRoles', 'clearErrorMessageAdmin']),
             saveUser() {
                 if (this.$refs.form.validate()) {
-                    this.createUser(this.form).then(r => {
-                            if (r) {
+                    this.createUser(this.form).then(result => {
+                            if (result) {
                                 this.$emit('closeDialog')
                             }
                         }

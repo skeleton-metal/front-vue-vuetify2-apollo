@@ -120,7 +120,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn  color="primary" @click="saveUser" :loading="loadingUsers">
+            <v-btn color="primary" @click="saveUser" :loading="loadingUsers">
                 Actualizar
             </v-btn>
 
@@ -185,8 +185,10 @@
             ...mapActions(['updateUser', 'fetchRoles', 'clearErrorMessageAdmin']),
             saveUser() {
                 if (this.$refs.form.validate()) {
-                    this.updateUser(this.form).then(() => {
+                    this.updateUser(this.form).then((result) => {
+                            if (result) {
                                 this.$emit('closeDialog')
+                            }
                         }
                     )
                 }
