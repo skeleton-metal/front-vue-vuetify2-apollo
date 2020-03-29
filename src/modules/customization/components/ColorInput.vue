@@ -58,7 +58,7 @@
                 },
                 set(val){
                     this.$vuetify.theme.themes.light[this.color] = val.substring(0,7)
-                  this.$emit('input',val)
+                  this.$emit('input',val.substring(0,7))
                 }
             },
             getStyleColor() {

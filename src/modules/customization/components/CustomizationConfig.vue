@@ -103,10 +103,10 @@
                     onSecondary: false,
                 },
                 form: {
-                    primary: '',
-                    onPrimary: '',
-                    secondary: '',
-                    onSecondary: '',
+                    primary: this.$vuetify.theme.themes.light.primary,
+                    onPrimary: this.$vuetify.theme.themes.light.onPrimary,
+                    secondary: this.$vuetify.theme.themes.light.secondary,
+                    onSecondary: this.$vuetify.theme.themes.light.onSecondary,
                     logo: '',
                     language: ''
                 },
