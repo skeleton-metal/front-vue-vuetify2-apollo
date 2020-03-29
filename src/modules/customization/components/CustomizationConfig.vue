@@ -1,17 +1,19 @@
 <template>
-    <div>
-        <v-form ref="form" autocomplete="off" @submit.prevent="save">
-            <v-card shaped class="my-3">
-                <v-card-title>
-                    <div>Colores</div><br>
-                </v-card-title>
-                <v-card-subtitle>
-                    Configurar preferencia de colores
-                </v-card-subtitle>
-                <v-card-text class="pb-0 ">
+    <div v-if="!loading">
+        <v-card shaped class="my-3">
+            <v-card-title>
+                <div>Colores</div>
+                <br>
+            </v-card-title>
+            <v-card-subtitle>
+                Configurar preferencia de colores
+            </v-card-subtitle>
+            <v-card-text class="pb-0 ">
+                <v-form ref="colorsForm" autocomplete="off" @submit.prevent="saveColors">
+
                     <v-row>
                         <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="form.primary" label="Primary" color="primary"
+                            <color-input v-model="formColors.primary" label="Primary" color="primary"
                                          :get-message-errors="getMessageErrors('primary')"
                                          :has-errors="hasErrors('primary')"
                                          :rules="[rules.required]"
@@ -20,7 +22,7 @@
 
 
                         <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="form.onPrimary" label="OnPrimary" color="onPrimary"
+                            <color-input v-model="formColors.onPrimary" label="OnPrimary" color="onPrimary"
                                          :get-message-errors="getMessageErrors('onPrimary')"
                                          :has-errors="hasErrors('onPrimary')"
                                          :rules="[rules.required]"
@@ -28,7 +30,7 @@
                         </v-col>
 
                         <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="form.secondary" label="Secondary" color="secondary"
+                            <color-input v-model="formColors.secondary" label="Secondary" color="secondary"
                                          :get-message-errors="getMessageErrors('secondary')"
                                          :has-errors="hasErrors('secondary')"
                                          :rules="[rules.required]"
@@ -36,7 +38,7 @@
                         </v-col>
 
                         <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="form.onSecondary" label="OnSecondary" color="onSecondary"
+                            <color-input v-model="formColors.onSecondary" label="OnSecondary" color="onSecondary"
                                          :get-message-errors="getMessageErrors('onSecondary')"
                                          :has-errors="hasErrors('onSecondary')"
                                          :rules="[rules.required]"
@@ -44,51 +46,66 @@
                         </v-col>
 
                     </v-row>
-                </v-card-text>
+                </v-form>
 
-                <v-card-text class="pt-0 ">
-                    <v-row justify="center" align-content="center">
-                            <div class="colorBox mr-1" style="display: inline-block"
-                                 :style="getStyleColor('primary','onPrimary')">
-                                PRIMARY COLOR
-                            </div>
-                            <div class="colorBox ml-1" style="display: inline-block"
-                                 :style="getStyleColor('secondary','onSecondary')">
-                                SECONDARY COLOR
-                            </div>
-                    </v-row>
-                </v-card-text>
-            </v-card>
+            </v-card-text>
 
-            <v-card shaped class="my-3">
-                <v-card-title>
-                    Logo
-                </v-card-title>
-                <v-card-subtitle>
-                    Subi el logo
-                </v-card-subtitle>
-            </v-card>
+            <v-card-text class="pt-0 ">
+                <v-row justify="center" align-content="center">
+                    <div class="colorBox mr-1" style="display: inline-block"
+                         :style="getStyleColor('primary','onPrimary')">
+                        PRIMARY COLOR
+                    </div>
+                    <div class="colorBox ml-1" style="display: inline-block"
+                         :style="getStyleColor('secondary','onSecondary')">
+                        SECONDARY COLOR
+                    </div>
+                </v-row>
+            </v-card-text>
+            <v-card-text class="pt-0 ">
+                <v-btn @click="saveColors">Apply</v-btn>
+            </v-card-text>
+        </v-card>
+
+        <v-card shaped class="my-3">
+            <v-card-title>
+                Logo
+            </v-card-title>
+            <v-card-subtitle>
+                Subi el logo
+            </v-card-subtitle>
+        </v-card>
 
 
-            <v-card shaped class="my-3">
-                <v-card-title>
-                    Idioma
-                </v-card-title>
-                <v-card-subtitle>
-                    Selecciona el idioma por defecto de la plataforma
-                </v-card-subtitle>
-            </v-card>
+        <v-card shaped class="my-3">
+            <v-card-title>
+                Idioma
+            </v-card-title>
+            <v-card-subtitle>
+                Selecciona el idioma por defecto de la plataforma
+            </v-card-subtitle>
+        </v-card>
 
-        </v-form>
     </div>
 </template>
 
 <script>
+    import CustomizationProvider from "../providers/CustomizationProvider";
+    import {ClientError} from 'front-module-commons';
     import ColorInput from "./ColorInput";
 
     export default {
         name: "CustomizationConfig",
         components: {ColorInput},
+        created() {
+            this.loading = true
+            CustomizationProvider.customization().then(r => {
+                this.formColors.primary = r.data.customization.primary
+                this.formColors.onPrimary = r.data.customization.onPrimary
+                this.formColors.secondary = r.data.customization.secondary
+                this.formColors.onSecondary = r.data.customization.onSecondary
+            }).finally(() => this.loading = false)
+        },
         data() {
             return {
                 modal: false,
@@ -102,11 +119,13 @@
                     secondary: false,
                     onSecondary: false,
                 },
+                formColors: {
+                    primary: null,
+                    onPrimary: null,
+                    secondary: null,
+                    onSecondary: null,
+                },
                 form: {
-                    primary: this.$vuetify.theme.themes.light.primary,
-                    onPrimary: this.$vuetify.theme.themes.light.onPrimary,
-                    secondary: this.$vuetify.theme.themes.light.secondary,
-                    onSecondary: this.$vuetify.theme.themes.light.onSecondary,
                     logo: '',
                     language: ''
                 },
@@ -118,7 +137,7 @@
         },
         computed: {
             getStyleColor() {
-                return (color, onColor) => "background-color: " + this.form[color] + "; color: " + this.form[onColor]
+                return (color, onColor) => "background-color: " + this.formColors[color] + "; color: " + this.formColors[onColor]
             },
             hasErrors() {
                 return field => this.inputErrors[field] != undefined
@@ -132,6 +151,25 @@
                     return []
                 }
             },
+        },
+        methods: {
+            saveColors() {
+                if (this.$refs.colorsForm.validate()) {
+                    CustomizationProvider.updateColors(this.formColors).then(r => {
+
+                            this.$vuetify.theme.themes.light.primary = r.data.colorsUpdate.primary
+                            this.$vuetify.theme.themes.light.onPrimary = r.data.colorsUpdate.onPrimary
+                            this.$vuetify.theme.themes.light.secondary = r.data.colorsUpdate.secondary
+                            this.$vuetify.theme.themes.light.onSecondary = r.data.colorsUpdate.onSecondary
+                        }
+                    ).catch(error => {
+                        let clientError = new ClientError(error)
+                        this.inputErrors = clientError.inputErrors
+                        this.errorMessage = clientError.showMessage
+                    })
+                }
+            },
+
         },
     }
 </script>

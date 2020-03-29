@@ -4,10 +4,9 @@ class CustomizationProvider {
 
 
 
-    customization(id) {
+    customization() {
         return graphqlClient.query({
-            query: require('./gql/customization.graphql'),
-            variables: {id:id}
+            query: require('./gql/customization.graphql')
         })
     }
     
@@ -19,7 +18,13 @@ class CustomizationProvider {
             variables: form
         })
     }
-    
+
+    updateColors(form) {
+        return graphqlClient.mutate({
+            mutation: require('./gql/colorsUpdate.graphql'),
+            variables: form
+        })
+    }
 
 }
 

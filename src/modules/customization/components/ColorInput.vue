@@ -57,7 +57,6 @@
                     return this.value
                 },
                 set(val){
-                    this.$vuetify.theme.themes.light[this.color] = val.substring(0,7)
                   this.$emit('input',val.substring(0,7))
                 }
             },
