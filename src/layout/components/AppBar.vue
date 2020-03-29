@@ -2,7 +2,7 @@
 
     <v-app-bar
             app
-            color="indigo"
+            color="primary"
             dark
             :clipped-left="clipped"
     >
@@ -10,7 +10,7 @@
 
         <v-toolbar-title>
             <app-bar-logo v-if="logo"/>
-            <span v-else>{{title}}</span>
+            <span v-else class="onPrimary--text">{{title}}</span>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>

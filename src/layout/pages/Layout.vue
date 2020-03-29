@@ -15,7 +15,7 @@
 
         </v-navigation-drawer>
 
-        <Toolbar @drawer="setDrawer" :drawer="drawer" />
+        <app-bar @drawer="setDrawer" :drawer="drawer" title="TITLE" />
 
             <v-content class="grey lighten-3">
                 <slot></slot>
@@ -27,10 +27,10 @@
 
 <script>
     import MenuList from '../components/MenuList'
-    import Toolbar from '../components/AppBar'
+    import AppBar from '../components/AppBar'
     import Footer from '../components/Footer'
     export default {
-        components: {MenuList, Toolbar,Footer},
+        components: {MenuList, AppBar,Footer},
         props: {
             nav: {type: Array, default: null},
             title: {type: String, default: "title"},

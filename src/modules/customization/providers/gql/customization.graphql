@@ -1,0 +1,11 @@
+query customization($id:ID!){
+    customization(id:$id){
+        id
+        primary
+        onPrimary
+        secondary
+        onSecondary
+        logo
+        language
+    }
+}

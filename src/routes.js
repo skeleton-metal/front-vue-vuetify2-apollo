@@ -4,10 +4,12 @@ Vue.use(VueRouter)
 import store from './store'
 import {userRoutes} from './modules/user/UserRoutes'
 import {appRoutes} from './modules/app/AppRoutes'
+import {customizationRoutes} from './modules/customization/CustomizationRoutes'
 
 const routes = [
     ...appRoutes,
-    ...userRoutes
+    ...userRoutes,
+    ...customizationRoutes
 ]
 
 const router = new VueRouter({
