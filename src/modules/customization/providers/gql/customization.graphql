@@ -1,10 +1,16 @@
 query customization{
     customization{
-        primary
-        onPrimary
-        secondary
-        onSecondary
-        logo
+        colors{
+            primary
+            onPrimary
+            secondary
+            onSecondary
+        }
+        logo{
+            mode
+            filename
+            url
+        }
         language
     }
 }

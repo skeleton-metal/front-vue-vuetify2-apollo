@@ -72,8 +72,39 @@
                 Logo
             </v-card-title>
             <v-card-subtitle>
-                Subi el logo
+                Personalización del logo y titulo de la plataforma
             </v-card-subtitle>
+
+            <v-card-text>
+                <v-form ref="logoForm" autocomplete="off" @submit.prevent="saveLogo">
+
+                    <v-row>
+                        <v-col cols="12" md="3" lg="3">
+                            <v-select
+                                    prepend-icon="account_box"
+                                    class="pa-3"
+                                    :items="logoModes"
+                                    :item-text="'name'"
+                                    :item-value="'id'"
+                                    v-model="formLogo.mode"
+                                    label="Modo del Logo"
+                                    required
+                            ></v-select>
+                        </v-col>
+
+                        <v-col cols="12" md="3" lg="3" class="text-center">
+                            <v-btn v-on:click="pickFile" class="mt-3">Subir Logo</v-btn>
+                            <input type="file" style="display: none" ref="img" accept="image/*" @change="onFilePicked"/>
+                        </v-col>
+
+                        <v-col cols="12" md="3" lg="3">
+                            <LogoView :mode="formLogo.mode" :src="formLogo.src" />
+
+                        </v-col>
+                    </v-row>
+                </v-form>
+            </v-card-text>
+
         </v-card>
 
 
@@ -91,19 +122,21 @@
 
 <script>
     import CustomizationProvider from "../providers/CustomizationProvider";
+    import {LOGO_MODE_SQUARE, LOGO_MODE_ROUND, LOGO_MODE_RECTANGLE} from '../CustomizationConstants'
     import {ClientError} from 'front-module-commons';
     import ColorInput from "./ColorInput";
+    import LogoView from "./LogoView";
 
     export default {
         name: "CustomizationConfig",
-        components: {ColorInput},
+        components: {LogoView, ColorInput},
         created() {
             this.loading = true
             CustomizationProvider.customization().then(r => {
-                this.formColors.primary = r.data.customization.primary
-                this.formColors.onPrimary = r.data.customization.onPrimary
-                this.formColors.secondary = r.data.customization.secondary
-                this.formColors.onSecondary = r.data.customization.onSecondary
+                this.formColors.primary = r.data.customization.colors.primary
+                this.formColors.onPrimary = r.data.customization.colors.onPrimary
+                this.formColors.secondary = r.data.customization.colors.secondary
+                this.formColors.onSecondary = r.data.customization.colors.onSecondary
             }).finally(() => this.loading = false)
         },
         data() {
@@ -118,6 +151,15 @@
                     onPrimary: false,
                     secondary: false,
                     onSecondary: false,
+                },
+                logoModes: [
+                    {id: LOGO_MODE_ROUND, name: "Redondo"},
+                    {id: LOGO_MODE_SQUARE, name: "Cuadrado"},
+                    {id: LOGO_MODE_RECTANGLE, name: "Rectangular"}
+                ],
+                formLogo: {
+                    mode: LOGO_MODE_ROUND,
+                    src: null
                 },
                 formColors: {
                     primary: null,
@@ -163,6 +205,21 @@
                             this.$vuetify.theme.themes.light.onSecondary = r.data.colorsUpdate.onSecondary
                         }
                     ).catch(error => {
+                        let clientError = new ClientError(error)
+                        this.inputErrors = clientError.inputErrors
+                        this.errorMessage = clientError.showMessage
+                    })
+                }
+            },
+            pickFile() {
+                this.$refs.img.click()
+            },
+            onFilePicked: function (e) {
+                let img = e.target.files[0]
+                if (this.$refs.logoForm.validate()) {
+                    CustomizationProvider.logoUpload(img).then(r => {
+                        this.formLogo.src = r.data.logoUpload.url
+                    }).catch(error => {
                         let clientError = new ClientError(error)
                         this.inputErrors = clientError.inputErrors
                         this.errorMessage = clientError.showMessage

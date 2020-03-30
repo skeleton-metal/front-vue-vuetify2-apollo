@@ -12,10 +12,10 @@ const colors = {
 const localCustom = JSON.parse(localStorage.getItem('custom'))
 
 if (localCustom) {
-    colors.primary = localCustom.primary
-    colors.onPrimary = localCustom.onPrimary
-    colors.secondary = localCustom.secondary
-    colors.onSecondary = localCustom.onSecondary
+    colors.primary = localCustom.colors.primary
+    colors.onPrimary = localCustom.colors.onPrimary
+    colors.secondary = localCustom.colors.secondary
+    colors.onSecondary = localCustom.colors.onSecondary
 }
 
 
@@ -41,20 +41,20 @@ CustomizationProvider.customization().then(r => {
 
     localStorage.setItem('custom', JSON.stringify(r.data.customization))
 
-    if (r.data.customization.primary !== vuetify.framework.theme.themes.light.primary) {
-        vuetify.framework.theme.themes.light.primary = r.data.customization.primary
+    if (r.data.customization.colors.primary !== vuetify.framework.theme.themes.light.primary) {
+        vuetify.framework.theme.themes.light.primary = r.data.customization.colors.primary
     }
 
-    if (r.data.customization.onPrimary !== vuetify.framework.theme.themes.light.onPrimary) {
-        vuetify.framework.theme.themes.light.onPrimary = r.data.customization.onPrimary
+    if (r.data.customization.colors.onPrimary !== vuetify.framework.theme.themes.light.onPrimary) {
+        vuetify.framework.theme.themes.light.onPrimary = r.data.customization.colors.onPrimary
     }
 
-    if (r.data.customization.secondary !== vuetify.framework.theme.themes.light.secondary) {
-        vuetify.framework.theme.themes.light.secondary = r.data.customization.secondary
+    if (r.data.customization.colors.secondary !== vuetify.framework.theme.themes.light.secondary) {
+        vuetify.framework.theme.themes.light.secondary = r.data.customization.colors.secondary
     }
 
-    if (r.data.customization.onSecondary !== vuetify.framework.theme.themes.light.onSecondary) {
-        vuetify.framework.theme.themes.light.onSecondary = r.data.customization.onSecondary
+    if (r.data.customization.colors.onSecondary !== vuetify.framework.theme.themes.light.onSecondary) {
+        vuetify.framework.theme.themes.light.onSecondary = r.data.customization.colors.onSecondary
     }
 
 })

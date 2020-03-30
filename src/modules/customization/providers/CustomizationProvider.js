@@ -26,6 +26,13 @@ class CustomizationProvider {
         })
     }
 
+    logoUpload(file) {
+        return graphqlClient.mutate({
+            mutation: require('./gql/logoUpload.graphql'),
+            variables: {file}
+        })
+    }
+
 }
 
 export default new CustomizationProvider()
