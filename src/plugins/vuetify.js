@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import CustomizationProvider from '../modules/customization/providers/CustomizationProvider'
+import store from './../store'
 
 const colors = {
     primary: '#000000',
@@ -40,6 +41,8 @@ const vuetify = new Vuetify({
 CustomizationProvider.customization().then(r => {
 
     localStorage.setItem('custom', JSON.stringify(r.data.customization))
+
+    store.dispatch('setLogo',r.data.customization.logo)
 
     if (r.data.customization.colors.primary !== vuetify.framework.theme.themes.light.primary) {
         vuetify.framework.theme.themes.light.primary = r.data.customization.colors.primary

@@ -2,7 +2,7 @@
     <v-btn v-if="mustShow"
            icon
            to="admin"
-           class="mr-3"
+           class="mr-3 onPrimary--text"
     >
         <v-icon>security</v-icon>
     </v-btn>

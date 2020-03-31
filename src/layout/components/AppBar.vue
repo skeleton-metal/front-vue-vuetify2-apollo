@@ -6,12 +6,10 @@
             dark
             :clipped-left="clipped"
     >
-        <v-app-bar-nav-icon @click.stop="$emit('drawer',!drawer)"/>
+        <v-app-bar-nav-icon class="onPrimary--text" @click.stop="$emit('drawer',!drawer)"/>
 
-        <v-toolbar-title>
-            <app-bar-logo v-if="logo"/>
-            <span v-else class="onPrimary--text">{{title}}</span>
-        </v-toolbar-title>
+        <app-bar-logo/>
+        <app-bar-title/>
 
         <v-spacer></v-spacer>
         <app-bar-user-admin></app-bar-user-admin>
@@ -26,13 +24,17 @@
     import AppBarLogo from './AppBarLogo'
     import AppBarUser from './../../modules/user/auth/components/AppBarUser'
     import AppBarUserAdmin from './../../modules/user/admin/components/AppBarUserAdmin'
+    import AppBarTitle from "./AppBarTitle";
+
     export default {
         name: "Toolbar",
         components: {
+            AppBarTitle,
             AppBarLogo,
             AppBarUser,
             AppBarUserAdmin
         },
+
         props: {
             drawer: Boolean,
             title: String,

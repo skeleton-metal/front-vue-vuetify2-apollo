@@ -10,9 +10,9 @@
             <v-card-text class="pb-0 ">
                 <v-form ref="colorsForm" autocomplete="off" @submit.prevent="saveColors">
 
-                    <v-row>
-                        <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="formColors.primary" label="Primary" color="primary"
+                    <v-row >
+                        <v-col cols="12" sm="6" md="3" class="pb-0">
+                            <color-input v-model="formColors.primary" :label="$t('customization.colors.primary')" color="primary"
                                          :get-message-errors="getMessageErrors('primary')"
                                          :has-errors="hasErrors('primary')"
                                          :rules="[rules.required]"
@@ -21,7 +21,7 @@
 
 
                         <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="formColors.onPrimary" label="OnPrimary" color="onPrimary"
+                            <color-input v-model="formColors.onPrimary" :label="$t('customization.colors.onPrimary')" color="onPrimary"
                                          :get-message-errors="getMessageErrors('onPrimary')"
                                          :has-errors="hasErrors('onPrimary')"
                                          :rules="[rules.required]"
@@ -29,7 +29,7 @@
                         </v-col>
 
                         <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="formColors.secondary" label="Secondary" color="secondary"
+                            <color-input v-model="formColors.secondary" :label="$t('customization.colors.secondary')" color="secondary"
                                          :get-message-errors="getMessageErrors('secondary')"
                                          :has-errors="hasErrors('secondary')"
                                          :rules="[rules.required]"
@@ -37,7 +37,7 @@
                         </v-col>
 
                         <v-col cols="12" sm="6" md="3">
-                            <color-input v-model="formColors.onSecondary" label="OnSecondary" color="onSecondary"
+                            <color-input v-model="formColors.onSecondary" :label="$t('customization.colors.onSecondary')" color="onSecondary"
                                          :get-message-errors="getMessageErrors('onSecondary')"
                                          :has-errors="hasErrors('onSecondary')"
                                          :rules="[rules.required]"
@@ -51,25 +51,36 @@
 
             <v-card-text class="pt-0 ">
                 <v-row justify="center" align-content="center">
-                    <div class="colorBox mr-1" style="display: inline-block"
-                         :style="getStyleColor('primary','onPrimary')">
-                        PRIMARY COLOR
-                    </div>
-                    <div class="colorBox ml-1" style="display: inline-block"
-                         :style="getStyleColor('secondary','onSecondary')">
-                        SECONDARY COLOR
-                    </div>
+                    <v-col cols="12" md="4" lg="4">
+                        <v-card>
+                            <v-card-title>
+                                <div v-t="'customization.preview'"></div>
+                            </v-card-title>
+                            <v-card-text class="text-center">
+                                <v-row>
+                                    <v-col cols="6" :style="getStyleColor('primary','onPrimary')">
+                                        PRIMARY COLOR
+                                    </v-col>
+                                    <v-col cols="6" :style="getStyleColor('secondary','onSecondary')">
+                                        SECONDARY COLOR
+                                    </v-col>
+                                </v-row>
+
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
                 </v-row>
             </v-card-text>
+
+
             <v-card-text class="pt-0 ">
-                <v-btn @click="saveColors">Apply</v-btn>
+                <v-btn @click="saveColors" v-t="'customization.applyButton'"></v-btn>
             </v-card-text>
         </v-card>
 
         <v-card shaped class="my-3">
             <v-card-title>
                 <div v-t="'customization.logo.title'"></div>
-                <br>
             </v-card-title>
             <v-card-subtitle v-t="'customization.logo.subtitle'">
             </v-card-subtitle>
@@ -86,21 +97,52 @@
                                     :item-text="'name'"
                                     :item-value="'id'"
                                     v-model="formLogo.mode"
-                                    label="Modo del Logo"
+                                    :label="$t('customization.logo.form.mode')"
                                     required
                             ></v-select>
                         </v-col>
 
+                        <v-col cols="12" sm="6" md="3" lg="3">
+                            <v-text-field
+                                    id="title"
+                                    prepend-icon="title"
+                                    name="title"
+                                    :label="$t('customization.logo.form.title')"
+                                    :placeholder="$t('customization.logo.form.title')"
+                                    type="text"
+                                    v-model="formLogo.title"
+                                    class="pa-3"
+                                    :rules="[rules.required]"
+                                    :error="hasErrors('name')"
+                                    :error-messages="getMessageErrors('name')"
+                            />
+                        </v-col>
+
                         <v-col cols="12" md="3" lg="3" class="text-center">
-                            <v-btn v-on:click="pickFile" class="mt-3">Subir Logo</v-btn>
+                            <v-btn v-on:click="pickFile" class="mt-3" v-t="'customization.logo.form.upload'"></v-btn>
                             <input type="file" style="display: none" ref="img" accept="image/*" @change="onFilePicked"/>
                         </v-col>
 
-                        <v-col cols="12" md="3" lg="3">
-                            <LogoView :mode="formLogo.mode" :src="formLogo.src"/>
-                        </v-col>
                     </v-row>
                 </v-form>
+            </v-card-text>
+
+            <v-card-text class="pt-0 ">
+                <v-row justify="center" align-content="center">
+                    <v-col cols="12" md="4" lg="4">
+                        <v-card>
+                            <v-card-title>
+                                <div v-t="'customization.preview'"></div>
+                            </v-card-title>
+
+                            <LogoView :mode="formLogo.mode" :src="formLogo.url" :title="formLogo.title"/>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-card-text>
+
+            <v-card-text class="pt-0 ">
+                <v-btn @click="saveLogo" v-t="'customization.applyButton'"></v-btn>
             </v-card-text>
 
         </v-card>
@@ -124,7 +166,7 @@
                                     :item-text="'lang'"
                                     :item-value="'lang'"
                                     v-model="formLang.lang"
-                                    :label="$t('customization.form.lang')"
+                                    :label="$t('customization.lang.form.lang')"
                                     required
                             ></v-select>
                         </v-col>
@@ -132,7 +174,7 @@
                 </v-form>
             </v-card-text>
             <v-card-text class="pt-0 ">
-                <v-btn @click="saveLang">Apply</v-btn>
+                <v-btn @click="saveLang" v-t="'customization.applyButton'"></v-btn>
             </v-card-text>
         </v-card>
 
@@ -140,8 +182,14 @@
 </template>
 
 <script>
+    import {mapMutations} from 'vuex'
     import CustomizationProvider from "../providers/CustomizationProvider";
-    import {LOGO_MODE_SQUARE, LOGO_MODE_ROUND, LOGO_MODE_RECTANGLE} from '../CustomizationConstants'
+    import {
+        LOGO_MODE_SQUARE,
+        LOGO_MODE_ROUND,
+        LOGO_MODE_RECTANGLE,
+        LOGO_MODE_ONLYTITLE
+    } from '../CustomizationConstants'
     import {ClientError} from 'front-module-commons';
     import ColorInput from "./ColorInput";
     import LogoView from "./LogoView";
@@ -156,6 +204,13 @@
                 this.formColors.onPrimary = r.data.customization.colors.onPrimary
                 this.formColors.secondary = r.data.customization.colors.secondary
                 this.formColors.onSecondary = r.data.customization.colors.onSecondary
+
+                this.formLogo.mode = r.data.customization.logo.mode
+                this.formLogo.title = r.data.customization.logo.title
+                this.formLogo.url = r.data.customization.logo.url
+
+                this.formLang.lang = r.data.customization.lang
+
             }).finally(() => this.loading = false)
         },
         data() {
@@ -171,18 +226,15 @@
                     secondary: false,
                     onSecondary: false,
                 },
-                langs: ['es','en','pt'],
-                modes: [
-                    {id: LOGO_MODE_ROUND, name: "Redondo"},
-                    {id: LOGO_MODE_SQUARE, name: "Cuadrado"},
-                    {id: LOGO_MODE_RECTANGLE, name: "Rectangular"}
-                ],
+                langs: ['es', 'en', 'pt'],
+
                 formLang: {
                     lang: 'es',
                 },
                 formLogo: {
                     mode: LOGO_MODE_ROUND,
-                    src: null
+                    title: '',
+                    url: null
                 },
                 formColors: {
                     primary: null,
@@ -197,6 +249,14 @@
             }
         },
         computed: {
+            modes(){
+              return  [
+                  {id: LOGO_MODE_ROUND, name: this.$t('customization.logo.options.round')},
+                  {id: LOGO_MODE_SQUARE, name: this.$t('customization.logo.options.square')},
+                  {id: LOGO_MODE_RECTANGLE, name: this.$t('customization.logo.options.rectangle')},
+                  {id: LOGO_MODE_ONLYTITLE, name: this.$t('customization.logo.options.onlytitle')}
+              ]
+            },
             getStyleColor() {
                 return (color, onColor) => "background-color: " + this.formColors[color] + "; color: " + this.formColors[onColor]
             },
@@ -214,13 +274,26 @@
             },
         },
         methods: {
-            saveLang(){
+            ...mapMutations([
+                'setLogo',
+            ]),
+            saveLang() {
                 this.$root.$i18n.locale = this.formLang.lang
+            },
+            saveLogo() {
+                CustomizationProvider.updateLogo(this.formLogo).then(r => {
+                    let logo = r.data.logoUpdate
+                    //STORAGE
+                    this.setLogo(logo)
+                }).catch(error => {
+                    let clientError = new ClientError(error)
+                    this.inputErrors = clientError.inputErrors
+                    this.errorMessage = clientError.showMessage
+                })
             },
             saveColors() {
                 if (this.$refs.colorsForm.validate()) {
                     CustomizationProvider.updateColors(this.formColors).then(r => {
-
                             this.$vuetify.theme.themes.light.primary = r.data.colorsUpdate.primary
                             this.$vuetify.theme.themes.light.onPrimary = r.data.colorsUpdate.onPrimary
                             this.$vuetify.theme.themes.light.secondary = r.data.colorsUpdate.secondary
@@ -240,7 +313,7 @@
                 let img = e.target.files[0]
                 if (this.$refs.logoForm.validate()) {
                     CustomizationProvider.logoUpload(img).then(r => {
-                        this.formLogo.src = r.data.logoUpload.url
+                        this.formLogo.url = r.data.logoUpload.url
                     }).catch(error => {
                         let clientError = new ClientError(error)
                         this.inputErrors = clientError.inputErrors

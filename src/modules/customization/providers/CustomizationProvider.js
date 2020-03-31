@@ -26,6 +26,13 @@ class CustomizationProvider {
         })
     }
 
+    updateLogo(form) {
+        return graphqlClient.mutate({
+            mutation: require('./gql/logoUpdate.graphql'),
+            variables: form
+        })
+    }
+
     logoUpload(file) {
         return graphqlClient.mutate({
             mutation: require('./gql/logoUpload.graphql'),
