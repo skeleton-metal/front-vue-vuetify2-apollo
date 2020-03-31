@@ -2,11 +2,10 @@
     <div v-if="!loading">
         <v-card shaped class="my-3">
             <v-card-title>
-                <div>Colores</div>
+                <div v-t="'customization.colors.title'"></div>
                 <br>
             </v-card-title>
-            <v-card-subtitle>
-                Configurar preferencia de colores
+            <v-card-subtitle v-t="'customization.colors.subtitle'">
             </v-card-subtitle>
             <v-card-text class="pb-0 ">
                 <v-form ref="colorsForm" autocomplete="off" @submit.prevent="saveColors">
@@ -69,10 +68,10 @@
 
         <v-card shaped class="my-3">
             <v-card-title>
-                Logo
+                <div v-t="'customization.logo.title'"></div>
+                <br>
             </v-card-title>
-            <v-card-subtitle>
-                Personalización del logo y titulo de la plataforma
+            <v-card-subtitle v-t="'customization.logo.subtitle'">
             </v-card-subtitle>
 
             <v-card-text>
@@ -83,7 +82,7 @@
                             <v-select
                                     prepend-icon="account_box"
                                     class="pa-3"
-                                    :items="logoModes"
+                                    :items="modes"
                                     :item-text="'name'"
                                     :item-value="'id'"
                                     v-model="formLogo.mode"
@@ -98,8 +97,7 @@
                         </v-col>
 
                         <v-col cols="12" md="3" lg="3">
-                            <LogoView :mode="formLogo.mode" :src="formLogo.src" />
-
+                            <LogoView :mode="formLogo.mode" :src="formLogo.src"/>
                         </v-col>
                     </v-row>
                 </v-form>
@@ -110,11 +108,32 @@
 
         <v-card shaped class="my-3">
             <v-card-title>
-                Idioma
+                <div v-t="'customization.lang.title'"></div>
+                <br>
             </v-card-title>
-            <v-card-subtitle>
-                Selecciona el idioma por defecto de la plataforma
+            <v-card-subtitle v-t="'customization.lang.subtitle'">
             </v-card-subtitle>
+            <v-card-text>
+                <v-form ref="langForm" autocomplete="off" @submit.prevent="saveLang">
+                    <v-row>
+                        <v-col cols="12" md="3" lg="3">
+                            <v-select
+                                    prepend-icon="account_box"
+                                    class="pa-3"
+                                    :items="langs"
+                                    :item-text="'lang'"
+                                    :item-value="'lang'"
+                                    v-model="formLang.lang"
+                                    :label="$t('customization.form.lang')"
+                                    required
+                            ></v-select>
+                        </v-col>
+                    </v-row>
+                </v-form>
+            </v-card-text>
+            <v-card-text class="pt-0 ">
+                <v-btn @click="saveLang">Apply</v-btn>
+            </v-card-text>
         </v-card>
 
     </div>
@@ -152,11 +171,15 @@
                     secondary: false,
                     onSecondary: false,
                 },
-                logoModes: [
+                langs: ['es','en','pt'],
+                modes: [
                     {id: LOGO_MODE_ROUND, name: "Redondo"},
                     {id: LOGO_MODE_SQUARE, name: "Cuadrado"},
                     {id: LOGO_MODE_RECTANGLE, name: "Rectangular"}
                 ],
+                formLang: {
+                    lang: 'es',
+                },
                 formLogo: {
                     mode: LOGO_MODE_ROUND,
                     src: null
@@ -166,10 +189,6 @@
                     onPrimary: null,
                     secondary: null,
                     onSecondary: null,
-                },
-                form: {
-                    logo: '',
-                    language: ''
                 },
                 rules: {
                     required: value => !!value || 'Requerido'
@@ -195,6 +214,9 @@
             },
         },
         methods: {
+            saveLang(){
+                this.$root.$i18n.locale = this.formLang.lang
+            },
             saveColors() {
                 if (this.$refs.colorsForm.validate()) {
                     CustomizationProvider.updateColors(this.formColors).then(r => {
