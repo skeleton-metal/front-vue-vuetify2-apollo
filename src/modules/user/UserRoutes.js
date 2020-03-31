@@ -42,7 +42,7 @@ export const userRoutes = [
     },
     {
         name: "usersAdmin",
-        path: '/admin',
+        path: '/admin/users',
         component: UserAdmin,
         meta: {
             requiresAuth: true,
