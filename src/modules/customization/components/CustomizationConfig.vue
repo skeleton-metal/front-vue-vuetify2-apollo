@@ -165,7 +165,7 @@
                                     :items="langs"
                                     :item-text="'lang'"
                                     :item-value="'lang'"
-                                    v-model="formLang.lang"
+                                    v-model="formLang.language"
                                     :label="$t('customization.lang.form.lang')"
                                     required
                             ></v-select>
@@ -209,7 +209,7 @@
                 this.formLogo.title = r.data.customization.logo.title
                 this.formLogo.url = r.data.customization.logo.url
 
-                this.formLang.lang = r.data.customization.lang
+                this.formLang.language = r.data.customization.language
 
             }).finally(() => this.loading = false)
         },
@@ -229,8 +229,9 @@
                 langs: ['es', 'en', 'pt'],
 
                 formLang: {
-                    lang: 'es',
+                    language: null,
                 },
+
                 formLogo: {
                     mode: LOGO_MODE_ROUND,
                     title: '',
@@ -275,10 +276,17 @@
         },
         methods: {
             ...mapMutations([
-                'setLogo',
+                'setLogo', 'setLanguage'
             ]),
             saveLang() {
-                this.$root.$i18n.locale = this.formLang.lang
+                CustomizationProvider.updateLanguage(this.formLang).then(r => {
+                    this.$root.$i18n.locale = r.data.langUpdate.language
+                    this.setLanguage(r.data.langUpdate.language)
+                }).catch(error => {
+                    let clientError = new ClientError(error)
+                    this.inputErrors = clientError.inputErrors
+                    this.errorMessage = clientError.showMessage
+                })
             },
             saveLogo() {
                 CustomizationProvider.updateLogo(this.formLogo).then(r => {

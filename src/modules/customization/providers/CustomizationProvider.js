@@ -33,6 +33,13 @@ class CustomizationProvider {
         })
     }
 
+    updateLanguage(form) {
+        return graphqlClient.mutate({
+            mutation: require('./gql/langUpdate.graphql'),
+            variables: form
+        })
+    }
+
     logoUpload(file) {
         return graphqlClient.mutate({
             mutation: require('./gql/logoUpload.graphql'),

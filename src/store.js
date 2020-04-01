@@ -51,6 +51,11 @@ export default new Vuex.Store({
                     auth: {
                         access_token: state.auth.access_token,
                         me: state.auth.me
+                    },
+                    customization: {
+                        colors: state.customization.colors,
+                        logo: state.customization.logo,
+                        language: state.customization.language
                     }
                 })
         })
