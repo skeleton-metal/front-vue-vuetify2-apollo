@@ -34,7 +34,7 @@
 
             <v-divider></v-divider>
 
-            <v-list-item to="me">
+            <v-list-item :to="{name: 'me'}">
                 <v-list-item-title>Perfil</v-list-item-title>
             </v-list-item>
 

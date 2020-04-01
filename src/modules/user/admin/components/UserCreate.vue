@@ -23,10 +23,10 @@
                         <v-text-field
                                 prepend-icon="account_box"
                                 name="name"
-                                label="Nombre y Apellido"
                                 type="text"
                                 v-model="form.name"
-                                placeholder="Nombre y Apellido"
+                                :label="$t('user.form.fullname')"
+                                :placeholder="$t('user.form.fullname')"
                                 class="pa-3"
                                 :error="hasFieldInUserErrors('name')"
                                 :error-messages="getMessagesInUserErrors('name')"
@@ -37,10 +37,10 @@
                     <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="person"
                                       name="username"
-                                      label="Usuario"
                                       type="text"
                                       v-model="form.username"
-                                      placeholder="Usuario"
+                                      :label="$t('user.form.username')"
+                                      :placeholder="$t('user.form.username')"
                                       class="pa-3"
                                       autocomplete="new-password"
                                       :rules="[rules.required]"
@@ -53,11 +53,11 @@
                     <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="email"
                                       name="email"
-                                      label="Email"
                                       type="text"
                                       class="pa-3"
                                       v-model="form.email"
-                                      placeholder="Email"
+                                      :label="$t('user.form.email')"
+                                      :placeholder="$t('user.form.email')"
                                       :rules="[rules.required]"
                                       :error="hasFieldInUserErrors('email')"
                                       :error-messages="getMessagesInUserErrors('email')"
@@ -68,11 +68,11 @@
                     <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="phone"
                                       name="phone"
-                                      label="Telefono"
                                       type="text"
                                       class="pa-3"
                                       v-model="form.phone"
-                                      placeholder="Telefono"
+                                      :label="$t('user.form.phone')"
+                                      :placeholder="$t('user.form.phone')"
                                       :error="hasFieldInUserErrors('phone')"
                                       :error-messages="getMessagesInUserErrors('phone')"
                                       required
@@ -86,11 +86,11 @@
                         <v-text-field id="password"
                                       prepend-icon="lock"
                                       name="password"
-                                      label="Contraseña"
                                       type="password"
                                       v-model="form.password"
                                       class="pa-3"
-                                      placeholder="Contraseña"
+                                      :label="$t('user.form.password')"
+                                      :placeholder="$t('user.form.password')"
                                       autocomplete="new-password"
                                       ref="password"
                                       :rules="[rules.required]"
@@ -105,10 +105,10 @@
                                 id="password_verify"
                                 prepend-icon="lock"
                                 name="password_verify"
-                                label="Repetir Contraseña"
                                 type="password"
                                 v-model="form.password_verify"
-                                placeholder="Repetir Contraseña"
+                                :label="$t('user.form.password')"
+                                :placeholder="$t('user.form.password')"
                                 autocomplete="new-password"
                                 class="pa-3"
                                 :rules="[rules.required]"
@@ -126,7 +126,7 @@
                                 :item-text="'name'"
                                 :item-value="'id'"
                                 v-model="form.role"
-                                label="Rol"
+                                :label="$t('user.form.role')"
                                 :loading="loadingRoles"
                                 :rules="[rules.required]"
                                 :error="hasFieldInUserErrors('groups')"
@@ -149,14 +149,12 @@
 
         <v-card-actions>
 
-            <v-btn tile outlined color="grey" @click="$emit('closeDialog')">
-                Cerrar
+            <v-btn tile outlined color="grey" @click="$emit('closeDialog')" v-t="'common.close'">
             </v-btn>
 
             <v-spacer></v-spacer>
 
-            <v-btn color="primary" @click="saveUser" :loading="loadingUsers">
-                Crear
+            <v-btn color="primary" @click="saveUser" :loading="loadingUsers" v-t="'common.create'">
             </v-btn>
 
         </v-card-actions>
@@ -171,7 +169,7 @@
         name: "UserCreate",
         data() {
             return {
-                title: "Creando Usuario",
+                title: this.$t('user.createTitle'),
                 form: {
                     username: '',
                     password: '',

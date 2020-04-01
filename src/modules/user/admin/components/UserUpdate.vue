@@ -24,10 +24,10 @@
                         <v-text-field
                                 prepend-icon="account_box"
                                 name="name"
-                                label="Nombre y Apellido"
+                                :label="$t('user.form.fullname')"
+                                :placeholder="$t('user.form.fullname')"
                                 type="text"
                                 v-model="form.name"
-                                placeholder="Nombre y Apellido"
                                 class="pa-3"
                                 :error="hasFieldInUserErrors('name')"
                                 :error-messages="getMessagesInUserErrors('name')"
@@ -38,10 +38,10 @@
                     <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="person"
                                       name="username"
-                                      label="Usuario"
+                                      :label="$t('user.form.username')"
+                                      :placeholder="$t('user.form.username')"
                                       type="text"
                                       v-model="form.username"
-                                      placeholder="Usuario"
                                       class="pa-3"
                                       autocomplete="new-password"
                                       :rules="[rules.required]"
@@ -54,11 +54,11 @@
                     <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="email"
                                       name="email"
-                                      label="Email"
+                                      :label="$t('user.form.email')"
+                                      :placeholder="$t('user.form.email')"
                                       type="text"
                                       class="pa-3"
                                       v-model="form.email"
-                                      placeholder="Email"
                                       :rules="[rules.required]"
                                       :error="hasFieldInUserErrors('email')"
                                       :error-messages="getMessagesInUserErrors('email')"
@@ -69,11 +69,11 @@
                     <v-col cols="12" sm="6">
                         <v-text-field prepend-icon="phone"
                                       name="phone"
-                                      label="Telefono"
+                                      :label="$t('user.form.phone')"
+                                      :placeholder="$t('user.form.phone')"
                                       type="text"
                                       class="pa-3"
                                       v-model="form.phone"
-                                      placeholder="Telefono"
                                       :error="hasFieldInUserErrors('phone')"
                                       :error-messages="getMessagesInUserErrors('phone')"
                                       required
@@ -91,7 +91,8 @@
                                 :item-text="'name'"
                                 :item-value="'id'"
                                 v-model="form.role"
-                                label="Rol"
+                                :label="$t('user.form.role')"
+                                :placeholder="$t('user.form.role')"
                                 :loading="loadingRoles"
                                 :rules="[rules.required]"
                                 :error="hasFieldInUserErrors('groups')"
@@ -114,14 +115,12 @@
 
         <v-card-actions>
 
-            <v-btn tile outlined color="grey" text @click="$emit('closeDialog')">
-                Cerrar
+            <v-btn tile outlined color="grey" text @click="$emit('closeDialog')" v-t="'common.close'">
             </v-btn>
 
             <v-spacer></v-spacer>
 
-            <v-btn color="primary" @click="saveUser" :loading="loadingUsers">
-                Actualizar
+            <v-btn color="primary" @click="saveUser" :loading="loadingUsers" v-t="'common.update'">
             </v-btn>
 
         </v-card-actions>
@@ -139,7 +138,7 @@
         },
         data() {
             return {
-                title: "Editando Usuario",
+                title: this.$t('user.updateTitle'),
                 form: {
                     id: null,
                     username: '',

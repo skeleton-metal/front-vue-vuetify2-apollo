@@ -4,7 +4,7 @@
 
             <v-card-title>
                 <v-row>
-                    <v-col class="text-xs-center"><h2>Administración de Usuarios</h2></v-col>
+                    <v-col class="text-xs-center"><h2 v-t="'user.adminTitle'"></h2></v-col>
                 </v-row>
             </v-card-title>
 
@@ -14,7 +14,7 @@
                         <v-text-field
                                 v-model="search"
                                 append-icon="search"
-                                label="Buscar"
+                                :label="$t('common.search')"
                                 single-line
                                 hide-details
                                 class="pa-0 px-2"
@@ -41,20 +41,11 @@
                 >
 
                     <template slot="no-data">
+                        <div  outline color="info" v-t="'common.noData'"></div>
+                    </template>
 
-                        <div
-                                color="info"
-                                outline
-                                class="text-xs-center">
-                            Cargando usuarios
-                        </div>
-
-                        <div v-if="false"
-                             outline
-                             color="info">
-                            Sin datos
-                        </div>
-
+                    <template slot="loading">
+                        <div color="info" outline class="text-xs-center" v-t="'common.loading'"></div>
                     </template>
 
                     <template v-slot:item.img="{ item }">
@@ -109,12 +100,6 @@
                         </v-icon>
                     </template>
 
-
-                    <template v-slot:expanded-item="props">
-                        <td :colspan="headers.length"><b>Telefono: </b>{{ props.item.phone }}</td>
-
-                    </template>
-
                 </v-data-table>
             </v-card-text>
         </v-card>
@@ -162,7 +147,7 @@
     import UserShow from "./UserShow";
 
     export default {
-        name: "UserCrud",
+        name: "UserDataTable",
         components: {
             UserShow,
             UserDelete,
@@ -179,13 +164,13 @@
                 src: './user.jpg',
                 headers: [
                     {text: '', value: 'img', sortable: false},
-                    {text: 'Nombre', value: 'name'},
-                    {text: 'Usuario', value: 'username'},
-                    {text: 'Email', value: 'email'},
-                    {text: 'Telefono', value: 'phone'},
-                    {text: 'Rol', value: 'role.name'},
-                    {text: 'Activo', value: 'active'},
-                    {text: 'Aciones', value: 'action', sortable: false},
+                    {text: this.$t('user.form.fullname'), value: 'name'},
+                    {text: this.$t('user.form.username'), value: 'username'},
+                    {text: this.$t('user.form.email'), value: 'email'},
+                    {text: this.$t('user.form.phone'), value: 'phone'},
+                    {text: this.$t('user.form.role'), value: 'role.name'},
+                    {text: this.$t('user.form.active'), value: 'active'},
+                    {text: this.$t('user.form.actions'), value: 'action', sortable: false},
                     {text: '', value: 'data-table-expand'},
 
                 ],

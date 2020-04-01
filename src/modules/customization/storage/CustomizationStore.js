@@ -15,7 +15,7 @@ const customizationStore =  {
             title: '',
             url: ''
         },
-        language: 'es'
+        language: null
     },
     getters: {
         getLogo: state => {

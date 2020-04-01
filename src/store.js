@@ -44,7 +44,7 @@ export default new Vuex.Store({
     },
     plugins: [
         createPersistedState({
-            key: 'skeleton',
+            key: process.env.VUE_APP_KEY,
             paths: ['auth'],
             reducer: state => (
                 {

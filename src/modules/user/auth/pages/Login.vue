@@ -9,7 +9,7 @@
                         <v-btn fab dark color="primary">
                             <v-icon>lock</v-icon>
                         </v-btn>
-                        <h2 class="mt-2">Iniciar Sesión</h2>
+                        <h2 class="mt-2" v-t="'user.signIn'" ></h2>
                     </v-card-text>
 
                     <v-card-text class="pt-5 pb-0 px-8">
@@ -25,18 +25,14 @@
 
                     <v-card-text class="pt-5 px-8 pb-0">
 
-
-
-
                         <v-form @keyup.enter.native="loginUser">
-
 
                             <v-text-field prepend-icon="person"
                                           name="username"
-                                          label="Usuario"
+                                          :label="$t('user.form.username')"
                                           type="text"
                                           v-model="loginForm.username"
-                                          placeholder="Usuario"
+                                          :placeholder="$t('user.form.username')"
                                           outlined
                             >
 
@@ -45,10 +41,10 @@
                             <v-text-field id="password"
                                           prepend-icon="vpn_key"
                                           name="password"
-                                          label="Contraseña"
+                                          :label="$t('user.form.password')"
                                           type="password"
                                           v-model="loginForm.password"
-                                          placeholder="Contraseña"
+                                          :placeholder="$t('user.form.password')"
                                           outlined
                             >
 
@@ -63,20 +59,19 @@
                                 color="primary"
                                 min-width="100%"
                                 dark
-                                @click="loginUser">
-                            Iniciar Sesión
+                                @click="loginUser" v-t="'user.signIn'">
                         </v-btn>
                     </v-card-actions>
 
                     <v-card-text class="text-xs-left pt-2 pl-8 mt-0">
-                        <router-link to="recovery">Olvido su contraseña?</router-link>
+                        <router-link to="recovery" v-t="'user.forgotPassword'"></router-link>
                     </v-card-text>
                 </v-card>
 
                 <v-card class="elevation-12 mt-2">
-                    <v-card-text class="text-xs-center">
-                        Aun no tienes cuenta?
-                        <router-link to="register" class="font-weight-black">CREAR CUENTA</router-link>
+                    <v-card-text class="text-xs-center" >
+                        <span v-t="'user.stillNotUser'"> </span>
+                        <router-link to="register" class="font-weight-black" v-t="'user.signUp'"> </router-link>
                     </v-card-text>
                 </v-card>
             </v-col>

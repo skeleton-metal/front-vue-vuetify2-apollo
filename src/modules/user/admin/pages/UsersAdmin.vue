@@ -2,19 +2,19 @@
     <v-container fluid>
         <v-row>
             <v-col cols="12" class="pa-3">
-                <user-list></user-list>
+                <user-data-table></user-data-table>
             </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-    import UserList from '../components/UserDataTable'
+    import UserDataTable from '../components/UserDataTable'
 
     export default {
         name: "Users",
         components: {
-            UserList
+            UserDataTable
         }
     }
 </script>
