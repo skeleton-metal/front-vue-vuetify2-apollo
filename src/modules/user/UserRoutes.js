@@ -8,6 +8,7 @@ import Logout from "./auth/pages/Logout";
 import Activation from "./register/pages/Activation";
 
 import GroupCrud from './groups/pages/GroupCrud.vue'
+import DashboardAdmin from "./dashboard/pages/DashboardAdmin";
 
 export const userRoutes = [
 
@@ -38,6 +39,15 @@ export const userRoutes = [
         component: Me,
         meta: {
             requiresAuth: true
+        }
+    },
+    {
+        name: "dashboardAdmin",
+        path: '/admin/dashboard',
+        component: DashboardAdmin,
+        meta: {
+            requiresAuth: true,
+            role: "admin"
         }
     },
     {

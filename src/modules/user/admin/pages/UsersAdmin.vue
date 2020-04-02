@@ -12,7 +12,7 @@
     import UserDataTable from '../components/UserDataTable'
 
     export default {
-        name: "Users",
+        name: "UsersAdmin",
         components: {
             UserDataTable
         }

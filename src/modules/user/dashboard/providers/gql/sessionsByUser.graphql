@@ -1,0 +1,11 @@
+query sessionsByUser{
+    sessionsByUser{
+        average
+        min
+        max
+        last
+        sum
+        count
+        username
+    }
+}
