@@ -14,9 +14,7 @@
                     </v-card-text>
 
                     <v-card-text class="text-center pt-0 pb-3">
-                        <v-btn rounded @click="openDialog">
-                            <v-icon left>lock</v-icon>
-                            Cambiar Contraseña
+                        <v-btn color="secondary" class="onPrimary--text" @click="openDialog" v-t="'user.changePassword'">
                         </v-btn>
                     </v-card-text>
                 </v-card>

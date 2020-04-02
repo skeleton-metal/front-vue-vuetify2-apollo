@@ -67,7 +67,7 @@
                     <template v-slot:item.action="{ item }">
                         <v-icon
                                 small
-                                color="primary"
+                                color="info"
                                 class="mr-2"
                                 @click="openShow(item)"
                         >
@@ -75,7 +75,7 @@
                         </v-icon>
                         <v-icon
                                 small
-                                color="primary"
+                                color="purple"
                                 class="mr-2"
                                 @click="openEdit(item)"
                         >
@@ -130,7 +130,7 @@
 
         <snackbar :message="flashMessage"/>
 
-        <v-btn class="elevation-8" color="primary" fab fixed bottom right dark @click="openCreate">
+        <v-btn class="elevation-8 onSecondary--text" color="secondary" fab fixed bottom right  @click="openCreate">
             <v-icon>add</v-icon>
         </v-btn>
     </div>

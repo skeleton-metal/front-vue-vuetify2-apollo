@@ -1,36 +1,38 @@
 <template>
 
     <v-card>
-        <v-card-title></v-card-title>
+        <v-card-title class="secondary--text" v-t="'user.changePassword'"></v-card-title>
 
         <v-card-text>
             <v-form ref="form" autocomplete="off" v-model="valid" @submit.prevent="submit">
                 <v-text-field id="password"
                               prepend-icon="lock"
                               name="password"
-                              label="Nueva Contraseña"
                               type="password"
                               v-model="form.password"
                               :rules="validations.password"
-                              placeholder="Nueva Contraseña"
+                              :label="$t('user.newPassword')"
+                              :placeholder="$t('user.newPassword')"
                               autocomplete="new-password"
                               :error="errors.password.length?true:false"
                               :error-messages="errors.password"
                               required
+                              color="secondary"
                 />
 
                 <v-text-field id="password_verify"
                               prepend-icon="lock"
                               name="password_verify"
-                              label="Repetir Nueva Contraseña"
                               type="password"
                               v-model="form.passwordVerify"
                               :rules="validations.password"
-                              placeholder="Repetir Nueva Contraseña"
+                              :label="$t('user.repeatNewPassword')"
+                              :placeholder="$t('user.repeatNewPassword')"
                               autocomplete="new-password"
                               :error="errors.passwordVerify.length?true:false"
                               :error-messages="passwordMatchError"
                               required
+                              color="secondary"
                 />
             </v-form>
         </v-card-text>
@@ -38,12 +40,10 @@
         <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn rounded color="grey darken-1" @click="$emit('close')">
-                Cancelar
+            <v-btn outlined  color="grey" @click="$emit('close')" v-t="'common.close'">
             </v-btn>
 
-            <v-btn rounded :loading="loading" color="primary" @click="submit" :disabled="!valid">
-                Cambiar Contraseña
+            <v-btn  :loading="loading" color="secondary" @click="submit" :disabled="!valid" v-t="'common.send'">
             </v-btn>
 
         </v-card-actions>

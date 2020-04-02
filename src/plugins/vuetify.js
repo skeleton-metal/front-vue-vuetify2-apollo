@@ -8,6 +8,7 @@ Vue.use(Vuetify);
 
 const vuetify = new Vuetify({
     theme: {
+        //dark: true,
         themes: {
             light: {
                 primary: store.getters.getColors.primary,

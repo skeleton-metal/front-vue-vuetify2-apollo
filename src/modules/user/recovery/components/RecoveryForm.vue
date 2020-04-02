@@ -3,24 +3,25 @@
     <v-card class="elevation-12 ">
 
         <v-card-text class="pt-4 px-8 my-0 pb-0 text-center">
-            <v-btn fab dark color="primary">
+            <v-btn fab class="onPrimary--text" color="primary">
                 <v-icon>lock</v-icon>
             </v-btn>
-            <h2 class="mt-3">Recuperar Contraseña</h2>
+            <h2 class="mt-3" v-t="'user.passwordRecovery'"></h2>
         </v-card-text>
 
         <v-card-text>
             <v-form ref="form" autocomplete="off" v-model="valid" @submit.prevent="submit">
                 <v-text-field prepend-icon="email"
                               name="email"
-                              label="Email"
                               type="text"
                               v-model="form.email"
                               :rules="validations.email"
-                              placeholder="Email"
+                              :label="$t('user.form.email')"
+                              :placeholder="$t('user.form.email')"
                               description="asd"
                               :error="status"
                               :error-messages="message"
+                              color="secondary"
                               required
                 />
             </v-form>
@@ -28,12 +29,11 @@
 
         <v-card-actions>
             <v-row justify="center">
-                <v-btn rounded
+                <v-btn
                        :loading="loading"
-                       color="primary darken-1"
-
-                       dark
-                       @click="submit">Enviar Solicitud
+                       color="secondary"
+                       class="onSecondary--text"
+                       @click="submit" v-t="'common.send'">
                 </v-btn>
             </v-row>
 

@@ -35,11 +35,11 @@
             <v-divider></v-divider>
 
             <v-list-item :to="{name: 'me'}">
-                <v-list-item-title>Perfil</v-list-item-title>
+                <v-list-item-title v-t="'user.profile'"></v-list-item-title>
             </v-list-item>
 
             <v-list-item @click="logout">
-                <v-list-item-title>Cerrar Sesión</v-list-item-title>
+                <v-list-item-title v-t="'user.logout'"></v-list-item-title>
             </v-list-item>
 
         </v-list>

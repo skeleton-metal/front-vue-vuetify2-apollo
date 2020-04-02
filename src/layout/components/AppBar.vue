@@ -3,7 +3,6 @@
     <v-app-bar
             app
             color="primary"
-            dark
             :clipped-left="clipped"
     >
         <v-app-bar-nav-icon class="onPrimary--text" @click.stop="$emit('drawer',!drawer)"/>

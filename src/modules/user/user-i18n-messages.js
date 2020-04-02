@@ -3,11 +3,18 @@ const messages = {
         user: {
             signIn: 'Sign in',
             signUp: 'Sign up',
+            createAccount: 'Create an account',
             stillNotUser: 'Still you do not have user? ',
             forgotPassword: 'Forgot your password?',
             adminTitle: 'Users management',
             createTitle: 'Creating user',
             updateTitle: 'Updating user',
+            profile: 'Profile',
+            logout: 'Logout',
+            passwordRecovery: 'Password Recovery',
+            changePassword: 'Change password',
+            newPassword: 'New password',
+            repeatNewPassword: 'Repeat new password',
             form: {
                 username: 'Username',
                 password: 'Password',
@@ -16,7 +23,9 @@ const messages = {
                 phone: 'Phone',
                 role: 'Role',
                 active: 'Active',
-                actions: 'Actions'
+                actions: 'Actions',
+                repeatEmail: 'Confirm email',
+                repeatPassword: 'Confirm password',
             }
         }
     },
@@ -24,11 +33,18 @@ const messages = {
         user: {
             signIn: 'Iniciar sesión',
             signUp: 'Registrarse',
+            createAccount: 'Crear una cuenta',
             stillNotUser: 'Aun no tienes usuario? ',
             forgotPassword: 'Olvido su contraseña?',
             adminTitle: 'Administración de Usuarios',
             createTitle: 'Creando usuario',
-            updateTitle: 'Actualizando user',
+            updateTitle: 'Actualizando usuario',
+            profile: 'Perfil',
+            logout: 'Cerrar sesión',
+            passwordRecovery: 'Recuperar contraseña',
+            changePassword: 'Cambiar contraseña',
+            newPassword: 'Nueva contraseña',
+            repeatNewPassword: 'Repetir nueva contraseña',
             form: {
                 username: 'Usuario',
                 password: 'Contraseña',
@@ -37,7 +53,9 @@ const messages = {
                 phone: 'Telefono',
                 role: 'Rol',
                 active: 'Activo',
-                actions: 'Acciones'
+                actions: 'Acciones',
+                repeatEmail: 'Confirmar email',
+                repeatPassword: 'Confirmar contraseña',
             }
         }
 
@@ -46,11 +64,18 @@ const messages = {
         user: {
             signIn: 'iniciar sessão',
             signUp: 'Registrar',
+            createAccount: 'Criar uma conta',
             stillNotUser: 'Você ainda não tem um usuário? ',
             forgotPassword: 'Esqueceu sua senha?',
             adminTitle: 'Administração de usuários',
             createTitle: 'Criando usuário',
             updateTitle: 'Atualizando usuário',
+            profile: 'Perfil',
+            logout: 'Sair',
+            passwordRecovery: 'Recuperar senha',
+            changePassword: 'Alterar senha',
+            newPassword: 'New password',
+            repeatNewPassword: 'Repeat new password',
             form: {
                 username: 'Usuário',
                 password: 'senha',
@@ -59,7 +84,9 @@ const messages = {
                 phone: 'Telefone',
                 role: 'Função',
                 active: 'Ativo',
-                actions: 'Ações'
+                actions: 'Ações',
+                repeatEmail: 'Confirmar o e-mail',
+                repeatPassword: 'Confirmar a senha',
             }
         }
     }

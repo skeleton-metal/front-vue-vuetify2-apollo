@@ -10,7 +10,8 @@ const baseMessages = {
             create: 'Create',
             update: 'Update',
             delete: 'Delete',
-            close: 'Close'
+            close: 'Close',
+            send: 'Send'
         }
     },
     es: {
@@ -21,7 +22,8 @@ const baseMessages = {
             create: 'Crear',
             update: 'Actualizar',
             delete: 'Borrar',
-            close: 'Cerrar'
+            close: 'Cerrar',
+            send: 'Enviar'
         }
     },
     pt: {
@@ -32,7 +34,8 @@ const baseMessages = {
             create: 'Criar',
             update: 'Atualizar',
             delete: 'Excluir',
-            close: 'Fechar'
+            close: 'Fechar',
+            send: 'Enviar'
         }
     }
 

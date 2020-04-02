@@ -17,10 +17,9 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn rounded
-                               color="grey"
-                               dark
-                               to="login">
-                            Iniciar Sesión
+                               color="primary"
+                               class="onPrimary--text"
+                               :to="{name: 'login'}" v-t="'user.signIn'">
                         </v-btn>
                     </v-card-actions>
 

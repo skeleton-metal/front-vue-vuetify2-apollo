@@ -1,12 +1,5 @@
 <template>
-    <v-btn
-            text
-            dark
-            to="/login"
-            rounded
-    >
-        Iniciar Sesión
-    </v-btn>
+    <v-btn text color="primary" class="onPrimary--text" :to="{name: 'login'}" rounded v-t="'user.signIn'"/>
 
 </template>
 

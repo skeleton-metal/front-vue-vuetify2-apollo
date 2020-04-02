@@ -6,7 +6,7 @@
                 <v-card class="elevation-12 ">
 
                     <v-card-text class="pt-4 px-8 my-0 pb-0 text-center">
-                        <v-btn fab dark color="primary">
+                        <v-btn fab class="onPrimary--text" color="primary">
                             <v-icon>lock</v-icon>
                         </v-btn>
                         <h2 class="mt-2" v-t="'user.signIn'" ></h2>
@@ -34,6 +34,7 @@
                                           v-model="loginForm.username"
                                           :placeholder="$t('user.form.username')"
                                           outlined
+                                          color="secondary"
                             >
 
                             </v-text-field>
@@ -46,6 +47,7 @@
                                           v-model="loginForm.password"
                                           :placeholder="$t('user.form.password')"
                                           outlined
+                                          color="secondary"
                             >
 
                             </v-text-field>
@@ -56,22 +58,22 @@
                     <v-card-actions class="px-8 pt-0">
                         <v-btn
                                 :loading="loading"
-                                color="primary"
+                                color="secondary"
                                 min-width="100%"
-                                dark
+                                class="onSecondary--text"
                                 @click="loginUser" v-t="'user.signIn'">
                         </v-btn>
                     </v-card-actions>
 
                     <v-card-text class="text-xs-left pt-2 pl-8 mt-0">
-                        <router-link to="recovery" v-t="'user.forgotPassword'"></router-link>
+                        <router-link class="secondary--text font-weight-bold" :to="{name: 'recovery'}" v-t="'user.forgotPassword'"></router-link>
                     </v-card-text>
                 </v-card>
 
                 <v-card class="elevation-12 mt-2">
                     <v-card-text class="text-xs-center" >
                         <span v-t="'user.stillNotUser'"> </span>
-                        <router-link to="register" class="font-weight-black" v-t="'user.signUp'"> </router-link>
+                        <router-link :to="{name: 'register'}" class="secondary--text font-weight-bold" v-t="'user.signUp'"> </router-link>
                     </v-card-text>
                 </v-card>
             </v-col>

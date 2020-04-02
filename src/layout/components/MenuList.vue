@@ -49,7 +49,7 @@
 </template>
 
 <script>
-
+    import {mapGetters} from 'vuex'
 
     export default {
         name: "LayoutMenuList",
@@ -58,14 +58,23 @@
         },
         methods: {
             isGranted: function (item) {
-                if (!item.groups) {
-                    return true
+
+                if (item.role) {
+                    if(this.isAuth && item.role == this.me.role.name){
+                        return true
+                    }
+                    return false
                 }
+
                 return true
             },
         },
         computed: {
-        }
+            ...mapGetters([
+                'isAuth',
+                'me'
+            ]),
+        },
 
     }
 </script>

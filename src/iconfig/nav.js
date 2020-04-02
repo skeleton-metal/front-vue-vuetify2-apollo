@@ -10,18 +10,21 @@ export default [
         text: 'Admin',
         link: {name: "contact"},
         panel: false,
+        role: 'admin',
         children: [
             {
                 icon: 'security',
                 text: 'Users',
                 link: {name: "usersAdmin"},
-                panel: false
+                panel: false,
+                role: 'admin',
             },
             {
                 icon: 'settings_applications',
                 text: 'Customization',
                 link: {name: "customization"},
-                panel: false
+                panel: false,
+                role: 'admin',
             },
         ]
     }

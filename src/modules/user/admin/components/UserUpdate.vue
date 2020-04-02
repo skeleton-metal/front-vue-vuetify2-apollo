@@ -1,8 +1,8 @@
 <template>
     <v-card>
 
-        <v-toolbar flat dark color="primary">
-            <v-toolbar-title>{{title}}</v-toolbar-title>
+        <v-toolbar flat color="primary">
+            <v-toolbar-title class="onPrimary--text">{{title}}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
                 <v-btn icon dark @click="$emit('closeDialog')">
@@ -32,6 +32,7 @@
                                 :error="hasFieldInUserErrors('name')"
                                 :error-messages="getMessagesInUserErrors('name')"
                                 required
+                                color="secondary"
                         ></v-text-field>
                     </v-col>
 
@@ -48,6 +49,7 @@
                                       :error="hasFieldInUserErrors('username')"
                                       :error-messages="getMessagesInUserErrors('username')"
                                       required
+                                      color="secondary"
                         ></v-text-field>
                     </v-col>
 
@@ -63,6 +65,7 @@
                                       :error="hasFieldInUserErrors('email')"
                                       :error-messages="getMessagesInUserErrors('email')"
                                       required
+                                      color="secondary"
                         ></v-text-field>
                     </v-col>
 
@@ -77,6 +80,7 @@
                                       :error="hasFieldInUserErrors('phone')"
                                       :error-messages="getMessagesInUserErrors('phone')"
                                       required
+                                      color="secondary"
                         >
 
                         </v-text-field>
@@ -98,12 +102,14 @@
                                 :error="hasFieldInUserErrors('groups')"
                                 :error-messages="getMessagesInUserErrors('groups')"
                                 required
+                                color="secondary"
+                                item-color="secondary"
                         ></v-select>
                     </v-col>
 
                     <v-col cols="12" sm="6" class="pl-4">
                         Activo
-                        <v-switch input-value="0" v-model="form.active"></v-switch>
+                        <v-switch color="success" input-value="0" v-model="form.active"></v-switch>
                     </v-col>
 
                 </v-row>
@@ -120,7 +126,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn color="primary" @click="saveUser" :loading="loadingUsers" v-t="'common.update'">
+            <v-btn color="secondary" class="onSecondary--text" @click="saveUser" :loading="loadingUsers" v-t="'common.update'">
             </v-btn>
 
         </v-card-actions>
