@@ -4,7 +4,7 @@ class SessionProvider {
 
 
     sessionsByUser() {
-        return graphqlClient.query({query: require('./gql/sessionsByUser.graphql')})
+        return graphqlClient.query({query: require('./gql/sessionsByUser.graphql'), fetchPolicy:"network-only"})
     }
     
 

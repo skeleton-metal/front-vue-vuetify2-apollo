@@ -3,17 +3,18 @@
         <v-card-title>Sessions</v-card-title>
         <v-card-subtitle>Statistics of sessions by user last 30 days</v-card-subtitle>
         <v-card-text>
-            <v-simple-table>
+            <v-simple-table dense>
                 <template v-slot:default>
                     <thead>
                     <tr>
                         <th class="text-left">Username</th>
-                        <th class="text-left">Qty</th>
+                        <th class="text-left">Sessions</th>
                         <th class="text-left">Max</th>
                         <th class="text-left">Min</th>
                         <th class="text-left">Avg</th>
                         <th class="text-left">Sum</th>
                         <th class="text-left">Last</th>
+                        <th class="text-left">Requests</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,6 +26,7 @@
                         <td>{{ getTime(item.average) }}</td>
                         <td>{{ getTime(item.sum) }}</td>
                         <td>{{ getTime(item.last) }}</td>
+                        <td>{{ item.request }}</td>
                     </tr>
                     </tbody>
                 </template>
