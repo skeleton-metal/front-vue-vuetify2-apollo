@@ -1,6 +1,21 @@
 <template>
     <v-container fluid>
         <v-row>
+
+
+
+            <v-col cols="12" md="8">
+                <sessions-by-user/>
+            </v-col>
+
+            <v-col cols="12" md="3">
+                <login-fail-by-username></login-fail-by-username>
+            </v-col>
+
+
+        </v-row>
+
+        <v-row>
             <v-col cols="12" md="3">
                 <v-card>
                     <v-card-title>Admin Users</v-card-title>
@@ -14,24 +29,9 @@
                     <v-card-subtitle>Ammount of users group by role</v-card-subtitle>
                 </v-card>
             </v-col>
-
-            <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Logins</v-card-title>
-                    <v-card-subtitle>Success and Failed last 24hs</v-card-subtitle>
-                </v-card>
-            </v-col>
-
-
         </v-row>
 
         <v-row>
-
-             <v-col cols="12" md="8">
-                <sessions-by-user/>
-            </v-col>
-
-
             <v-col cols="12" md="3">
                 <v-card>
                     <v-card-title>Sessions by OS</v-card-title>
@@ -82,10 +82,12 @@
 <script>
 
     import SessionsByUser from "../components/SessionsByUser";
+    import LoginFailByUsername from "../components/LoginFailByUsername";
 
     export default {
         name: "DashboardAdmin",
         components: {
+            LoginFailByUsername,
             SessionsByUser
         }
     }

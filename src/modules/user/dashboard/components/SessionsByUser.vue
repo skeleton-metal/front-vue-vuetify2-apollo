@@ -1,32 +1,33 @@
 <template>
-    <v-card>
-        <v-card-title>Sessions</v-card-title>
-        <v-card-subtitle>Statistics of sessions by user last 30 days</v-card-subtitle>
+    <v-card height="200">
+        <v-card-title>Sessions <span class="ml-2 subtitle-1"> (30 days)</span></v-card-title>
         <v-card-text>
-            <v-simple-table dense>
+            <v-simple-table dense class="text-center">
                 <template v-slot:default>
                     <thead>
-                    <tr>
-                        <th class="text-left">Username</th>
-                        <th class="text-left">Sessions</th>
-                        <th class="text-left">Max</th>
-                        <th class="text-left">Min</th>
-                        <th class="text-left">Avg</th>
-                        <th class="text-left">Sum</th>
-                        <th class="text-left">Last</th>
-                        <th class="text-left">Requests</th>
+                    <tr class="text-center">
+                        <th class="text-center">Username</th>
+                        <th class="text-center">Sessions Count</th>
+                        <th class="text-center">Duration Max</th>
+                        <th class="text-center">Duration Min</th>
+                        <th class="text-center">Duration Avg</th>
+                        <th class="text-center">Duration Sum</th>
+                        <th class="text-center">Duration Last</th>
+                        <th class="text-center">Requests Sum</th>
+                        <th class="text-center">Requests Avg</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="item in rows" :key="item.name">
                         <td>{{ item.username }}</td>
-                        <td>{{ item.count }}</td>
-                        <td>{{ getTime(item.max) }}</td>
-                        <td>{{ getTime(item.min) }}</td>
-                        <td>{{ getTime(item.average) }}</td>
-                        <td>{{ getTime(item.sum) }}</td>
-                        <td>{{ getTime(item.last) }}</td>
-                        <td>{{ item.request }}</td>
+                        <td>{{ item.sessionCount }}</td>
+                        <td>{{ getTime(item.durationMax) }}</td>
+                        <td>{{ getTime(item.durationMin) }}</td>
+                        <td>{{ getTime(item.durationAvg) }}</td>
+                        <td>{{ getTime(item.durationSum) }}</td>
+                        <td>{{ getTime(item.durationLast) }}</td>
+                        <td>{{ item.requestSum }}</td>
+                        <td>{{ Math.floor(item.requestAvg) }}</td>
                     </tr>
                     </tbody>
                 </template>
@@ -48,6 +49,11 @@
         computed: {
             getTime() {
                 return seconds => {
+
+                    if(seconds > 3600){
+                        return Math.round(seconds / 60 / 60) + ' h'
+                    }
+
                     if (seconds < 60) {
                         return seconds + ' s'
                     }

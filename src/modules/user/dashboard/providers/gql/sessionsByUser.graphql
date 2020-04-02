@@ -1,12 +1,13 @@
 query sessionsByUser{
     sessionsByUser{
-        average
-        min
-        max
-        last
-        sum
-        count
-        request
+        durationAvg
+        durationMin
+        durationMax
+        durationLast
+        durationSum
+        sessionCount
+        requestSum
+        requestAvg
         username
     }
 }

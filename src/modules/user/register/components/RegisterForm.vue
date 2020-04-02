@@ -127,6 +127,14 @@
                         <v-spacer></v-spacer>
                         <v-btn :loading="loading" color="secondary"   @click="submit" v-t="'user.signUp'"></v-btn>
                     </v-card-actions>
+
+                </v-card>
+
+                <v-card class="elevation-12 mt-2">
+                    <v-card-text class="text-xs-center" >
+                        <span v-t="'user.alreadyAccount'"> </span>
+                        <router-link :to="{name: 'login'}" class="secondary--text font-weight-bold" v-t="'user.signIn'"> </router-link>
+                    </v-card-text>
                 </v-card>
 
             </v-col>
