@@ -30,7 +30,7 @@
                             class="elevation-8"
                             prominent
                     >
-                        <h4>El token no es valido para activar tu contraseña</h4>
+                        <h4 v-t="'user.tokenActivationInvalid'"></h4>
                     </v-alert>
                 </div>
                 <div v-else>
@@ -40,8 +40,7 @@
                             class="elevation-8"
                             prominent
                     >
-                        <h4>El token ya expiro para activar tu contraseña</h4>
-                        Contactese con un administrador para activar su cuenta
+                        <h4 v-t="'user.tokenActivationExpired'"></h4>
                     </v-alert>
                 </div>
             </v-col>

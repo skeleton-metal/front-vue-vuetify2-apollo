@@ -15,6 +15,8 @@ const messages = {
             changePassword: 'Change password',
             newPassword: 'New password',
             repeatNewPassword: 'Repeat new password',
+            tokenActivationInvalid: 'Invalid Token',
+            tokenActivationExpired: 'Token Expired',
             form: {
                 username: 'Username',
                 password: 'Password',
@@ -45,6 +47,8 @@ const messages = {
             changePassword: 'Cambiar contraseña',
             newPassword: 'Nueva contraseña',
             repeatNewPassword: 'Repetir nueva contraseña',
+            tokenActivationInvalid: 'Token Invalido',
+            tokenActivationExpired: 'El Token Expiró',
             form: {
                 username: 'Usuario',
                 password: 'Contraseña',
@@ -76,6 +80,8 @@ const messages = {
             changePassword: 'Alterar senha',
             newPassword: 'New password',
             repeatNewPassword: 'Repeat new password',
+            tokenActivationInvalid: 'Invalid Token',
+            tokenActivationExpired: 'Token Expired',
             form: {
                 username: 'Usuário',
                 password: 'senha',
