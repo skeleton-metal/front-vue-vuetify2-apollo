@@ -1,7 +1,7 @@
 <template>
     <v-btn v-if="mustShow"
            icon
-           :to="{name:'usersAdmin'}"
+           :to="{name:'dashboardAdmin'}"
            class="mr-3 onPrimary--text"
     >
         <v-icon>security</v-icon>

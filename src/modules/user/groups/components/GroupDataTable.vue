@@ -36,11 +36,11 @@
         </v-card-text>
 
 
-        <v-dialog :value="showing" width="850" fullscreen persistent>
+        <v-dialog :value="showing" width="850"  persistent>
             <group-show :item="itemToShow" v-if="showing"  v-on:closeDialog="showing=false" />
         </v-dialog>
         
-        <v-dialog :value="deleting" width="850" fullscreen persistent>
+        <v-dialog :value="deleting" width="850"  persistent>
             <group-delete :item="itemToDelete" v-if="deleting" v-on:itemDelete="updatePage" v-on:closeDialog="deleting=false" />
         </v-dialog>
 

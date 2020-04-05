@@ -59,8 +59,24 @@
         methods: {
             isGranted: function (item) {
 
+
+                if (item.role && item.permission) {
+                    if(this.isAuth && item.role == this.me.role.name && this.me.role.permissions.includes(item.permission)){
+                        return true
+                    }
+                    return false
+                }
+
+
                 if (item.role) {
                     if(this.isAuth && item.role == this.me.role.name){
+                        return true
+                    }
+                    return false
+                }
+
+                if (item.permission) {
+                    if(this.isAuth && this.me.role.permissions.includes(item.permission)){
                         return true
                     }
                     return false

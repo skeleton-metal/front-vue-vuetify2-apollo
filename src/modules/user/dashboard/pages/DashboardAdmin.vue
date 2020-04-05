@@ -1,35 +1,35 @@
 <template>
     <v-container fluid>
         <v-row>
-
-
-
-            <v-col cols="12" md="8">
-                <sessions-by-user/>
+            <v-col cols="12" md="4">
+                <admin-users-card/>
             </v-col>
 
-            <v-col cols="12" md="3">
-                <login-fail-by-username></login-fail-by-username>
+            <v-col cols="12" md="4">
+                <admin-groups-card/>
+            </v-col>
+
+            <v-col cols="12" md="4">
+                <admin-roles-card/>
             </v-col>
 
 
         </v-row>
 
         <v-row>
-            <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Admin Users</v-card-title>
-                    <v-card-subtitle>Read, create, update and delete Users</v-card-subtitle>
-                </v-card>
+
+
+            <v-col cols="12" md="9">
+                <sessions-by-user-card/>
             </v-col>
 
             <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Users By Role</v-card-title>
-                    <v-card-subtitle>Ammount of users group by role</v-card-subtitle>
-                </v-card>
+                <login-fail-by-username-card/>
             </v-col>
+
+
         </v-row>
+
 
         <v-row>
             <v-col cols="12" md="3">
@@ -81,14 +81,20 @@
 
 <script>
 
-    import SessionsByUser from "../components/SessionsByUser";
-    import LoginFailByUsername from "../components/LoginFailByUsername";
+    import SessionsByUserCard from "../components/SessionsByUserCard";
+    import LoginFailByUsernameCard from "../components/LoginFailByUsernameCard";
+    import AdminUsersCard from "../components/AdminUsersCard";
+    import AdminGroupsCard from "../components/AdminGroupsCard";
+    import AdminRolesCard from "../components/AdminRolesCard";
 
     export default {
         name: "DashboardAdmin",
         components: {
-            LoginFailByUsername,
-            SessionsByUser
+            AdminRolesCard,
+            AdminGroupsCard,
+            AdminUsersCard,
+            LoginFailByUsernameCard,
+            SessionsByUserCard
         }
     }
 </script>

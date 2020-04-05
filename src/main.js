@@ -5,6 +5,7 @@ import router from './routes.js'
 import '@mdi/font/css/materialdesignicons.css'
 import store from './store.js'
 import i18n from './i18n'
+import '@/assets/css/utils.css'
 
 Vue.config.productionTip = false
 

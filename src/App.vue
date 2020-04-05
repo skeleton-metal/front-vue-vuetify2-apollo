@@ -10,7 +10,7 @@
 <script>
 
     import nav from './iconfig/nav'
-    import Layout from './layout/pages/Layout'
+    import Layout from './layout/Layout'
     import GeneralError from "./modules/error/components/GeneralError";
 
     export default {

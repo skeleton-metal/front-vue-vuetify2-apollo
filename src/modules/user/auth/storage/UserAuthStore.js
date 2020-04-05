@@ -45,6 +45,10 @@ export default {
             if (!state.me || !state.me.role) return false
             return state.me.role.name == role
         },
+        hasPermission: (state) => (permission) => {
+            if (!state.me) return false
+            return state.me.role.permissions.includes(permission)
+        },
     },
     actions: {
         login({commit}, login) {

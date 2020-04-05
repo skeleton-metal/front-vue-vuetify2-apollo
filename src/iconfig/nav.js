@@ -10,21 +10,35 @@ export default [
         text: 'Admin',
         link: {name: "contact"},
         panel: false,
-        role: 'admin',
+        permission: 'SECURITY_DASHBOARD_SHOW',
         children: [
             {
-                icon: 'security',
+                icon: 'assignment_ind',
                 text: 'Users',
                 link: {name: "usersAdmin"},
                 panel: false,
-                role: 'admin',
+                permission: 'SECURITY_USER_SHOW'
+            },
+            {
+                icon: 'group',
+                text: 'Groups',
+                link: {name: "groupsAdmin"},
+                panel: false,
+                permission: 'SECURITY_GROUP_SHOW'
+            },
+            {
+                icon: 'verified_user',
+                text: 'Roles',
+                link: {name: "rolesAdmin"},
+                panel: false,
+                permission: 'SECURITY_ROLE_SHOW'
             },
             {
                 icon: 'settings_applications',
                 text: 'Customization',
                 link: {name: "customization"},
                 panel: false,
-                role: 'admin',
+                permission: 'CUSTOMIZATION_SHOW'
             },
         ]
     }

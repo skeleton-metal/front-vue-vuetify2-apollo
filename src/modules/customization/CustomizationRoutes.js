@@ -7,7 +7,7 @@ export const customizationRoutes = [
         component: CustomizationPage,
         meta: {
             requiresAuth: true,
-            role: "admin"
+            permission: "CUSTOMIZATION_SHOW"
         }
     },
 

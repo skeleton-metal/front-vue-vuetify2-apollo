@@ -7,8 +7,9 @@ import PasswordChange from "./recovery/pages/PasswordChange";
 import Logout from "./auth/pages/Logout";
 import Activation from "./register/pages/Activation";
 
-import GroupCrud from './groups/pages/GroupCrud.vue'
+import GroupsPage from './groups/pages/GroupsPage.vue'
 import DashboardAdmin from "./dashboard/pages/DashboardAdmin";
+import RolesPage from "./roles/page/RolesPage";
 
 export const userRoutes = [
 
@@ -47,7 +48,7 @@ export const userRoutes = [
         component: DashboardAdmin,
         meta: {
             requiresAuth: true,
-            role: "admin"
+            permission: "SECURITY_DASHBOARD_SHOW"
         }
     },
     {
@@ -56,16 +57,25 @@ export const userRoutes = [
         component: UserAdmin,
         meta: {
             requiresAuth: true,
-            role: "admin"
+            permission: "SECURITY_USER_SHOW"
         }
     },
     {
-        name: "groupCrud",
-        path: '/groups',
-        component: GroupCrud,
+        name: "groupsAdmin",
+        path: '/admin/groups',
+        component: GroupsPage,
         meta: {
             requiresAuth: true,
-            role: "admin"
+            permission: "SECURITY_GROUP_SHOW"
+        }
+    },
+    {
+        name: "rolesAdmin",
+        path: '/admin/roles',
+        component: RolesPage,
+        meta: {
+            requiresAuth: true,
+            permission: "SECURITY_ROLE_SHOW"
         }
     },
     {

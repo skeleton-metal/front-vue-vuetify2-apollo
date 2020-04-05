@@ -2,17 +2,16 @@
     <v-container fluid>
         <v-row>
             <v-col cols="12" class="pa-3">
-               <group-data-table />
+                ROLES AND PERMISSIONS
             </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-    import GroupDataTable from "../components/GroupDataTable";
     export default {
-        name: "Group",
-        components: {GroupDataTable}
+        name: "RolePage",
+        components: {}
     }
 </script>
 
