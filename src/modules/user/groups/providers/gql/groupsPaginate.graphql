@@ -3,8 +3,9 @@ query groupsPaginate($limit:Int!, $pageNumber: Int, $search: String, $orderBy: S
         totalItems
         page
         items{
-          id
-          name
+            id
+            name
+            color
         }
     }
 }

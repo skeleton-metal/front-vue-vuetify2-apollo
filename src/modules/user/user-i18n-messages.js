@@ -1,5 +1,14 @@
 const messages = {
     en: {
+        group: {
+            createTitle: 'Creating group',
+            updateTitle: 'Updating group',
+            form: {
+                avatar: 'Avatar',
+                name: 'Name',
+                color: 'Color',
+            }
+        },
         user: {
             signIn: 'Sign in',
             signUp: 'Sign up',
@@ -46,6 +55,15 @@ const messages = {
         }
     },
     es: {
+        group: {
+            createTitle: 'Creando grupo',
+            updateTitle: 'Editando grupo',
+            form: {
+                avatar: 'Avatar',
+                name: 'Nombre',
+                color: 'Color',
+            }
+        },
         user: {
             signIn: 'Iniciar sesión',
             signUp: 'Registrarse',
@@ -93,6 +111,15 @@ const messages = {
 
     },
     pt: {
+        group: {
+            createTitle: 'Criando grupo',
+            updateTitle: 'Atualizando grupo',
+            form: {
+                avatar: 'Avatar',
+                name: 'Nome',
+                color: 'Cor',
+            }
+        },
         user: {
             signIn: 'iniciar sessão',
             signUp: 'Registrar',

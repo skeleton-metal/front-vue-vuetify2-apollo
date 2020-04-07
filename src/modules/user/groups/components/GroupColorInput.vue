@@ -37,7 +37,7 @@
 </template>
 <script>
     export default {
-        name: 'color-input',
+        name: 'groupColorInput',
         props: {
             value: String,
             color: String,

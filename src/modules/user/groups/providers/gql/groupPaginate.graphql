@@ -1,9 +1,0 @@
-query groupPaginate($limit:Int!, $pageNumber: Int, $search: String){
-    groupPaginate(limit: $limit, pageNumber: $pageNumber, search: $search){
-        totalItems
-        page
-        items{
-          name
-        }
-    }
-}

@@ -1,7 +1,8 @@
-mutation groupCreate($name:String!){
-    groupCreate(input: {name: $name }){
+mutation groupCreate($name:String!, $color:String){
+    groupCreate(input: {name: $name, color: $color }){
         id
         name
+        color
     }
 }
 

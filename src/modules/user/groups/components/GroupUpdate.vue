@@ -10,7 +10,7 @@
                 </v-btn>
             </v-toolbar-items>
         </v-toolbar>
-        
+
         <v-card-text class="pt-3">
             <v-alert v-if="errorMessage" type="error" dense text>{{errorMessage}}</v-alert>
         </v-card-text>
@@ -19,16 +19,16 @@
             <v-form ref="form" autocomplete="off" @submit.prevent="save">
 
                 <v-row>
-    
-                   
+
+
                     <v-col cols="12" sm="6">
                         <v-text-field
                                 prepend-icon="account_box"
                                 name="name"
-                                label="Nombre"
                                 type="text"
                                 v-model="form.name"
-                                placeholder="Nombre"
+                                :label="$t('group.form.name')"
+                                :placeholder="$t('group.form.name')"
                                 class="pa-3"
                                 :rules="[rules.required]"
                                 :error="hasErrors('name')"
@@ -36,8 +36,15 @@
                                 required
                         ></v-text-field>
                     </v-col>
-    
-                    
+
+                    <v-col cols="12" sm="6">
+                        <group-color-input v-model="form.color"
+                                           :label="$t('group.form.color')"
+                                           :get-message-errors="getMessageErrors('color')"
+                                           :has-errors="hasErrors('color')"
+                                           :rules="rules.hexcode"
+                        />
+                    </v-col>
                 </v-row>
 
 
@@ -47,13 +54,13 @@
 
         <v-card-actions>
 
-            <v-btn tile outlined color="grey"  @click="$emit('closeDialog')">
+            <v-btn tile outlined color="grey" @click="$emit('closeDialog')">
                 Cerrar
             </v-btn>
 
             <v-spacer></v-spacer>
 
-            <v-btn  color="primary" @click="save" :loading="loading">
+            <v-btn color="primary" @click="save" :loading="loading">
                 Modificar
             </v-btn>
 
@@ -65,37 +72,42 @@
 <script>
     import GroupProvider from "../providers/GroupProvider";
     import {ClientError} from 'front-module-commons';
-  
+    import GroupColorInput from "./GroupColorInput";
+
     //Relations
-    
-    
+
+
     //Handle Dates 
-    
+
 
     export default {
         name: "GroupUpdate",
+        components: {GroupColorInput},
         props: {
             item: Object
         },
         data() {
             return {
+                colormenu: false,
                 modal: false,
-                title: "Modificando Group",
+                title: this.$t('group.updateTitle'),
                 errorMessage: '',
                 inputErrors: {},
                 loading: false,
                 form: {
-                     id: this.item.id,
-                    name: this.item.name
+                    id: this.item.id,
+                    name: this.item.name,
+                    color: this.item.color ? this.item.color : '#37474F'
                 },
                 rules: {
-                    required: value => !!value || 'Requerido'
+                    required: value => !!value || 'Requerido',
+                    hexcode: [v => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v) || 'hexcode invalid ']
                 },
-                
+
             }
         },
         mounted() {
-         
+
         },
         computed: {
             hasErrors() {
@@ -117,19 +129,19 @@
                     this.form.amount = parseFloat(this.form.amount)
                     GroupProvider.updateGroup(this.form).then(r => {
                             if (r) {
-                                this.$emit('itemUpdate',r.data.groupUpdate)
+                                this.$emit('itemUpdate', r.data.groupUpdate)
                                 this.$emit('closeDialog')
                             }
                         }
                     ).catch(error => {
-                         let clientError = new ClientError(error)
-                         this.inputErrors = clientError.inputErrors
-                         this.errorMessage = clientError.showMessage
+                        let clientError = new ClientError(error)
+                        this.inputErrors = clientError.inputErrors
+                        this.errorMessage = clientError.showMessage
                     })
                 }
 
             },
-            
+
         },
     }
 </script>

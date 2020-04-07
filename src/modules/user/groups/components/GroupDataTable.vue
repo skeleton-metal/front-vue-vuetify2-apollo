@@ -8,48 +8,57 @@
         </v-card-title>
 
         <v-card-text>
-           
-           <v-col md6 xs12 class="offset-md6">
-            <v-text-field v-model="filter.search" v-on:keyup.native.enter="updatePage" append-icon="search" label="Buscar" hide-details />
-           </v-col>
 
-           <v-data-table dense class="mt-3" :headers="headers" :items="items"
-                         :search="filter.search" :single-expand="false" :loading="loading"
-                         :server-items-length="totalItems" 
-                         :items-per-page.sync="limit" :page.sync="pageNumber" 
-                         :sort-by.sync="orderBy" :sort-desc.sync="orderDesc"
-                         @update:page="updatePage" @update:items-per-page="updatePage"
-                         @update:sort-by="updatePage" @update:sort-desc="updatePage"
-                          >
+            <v-col md6 xs12 class="offset-md6">
+                <v-text-field v-model="filter.search" v-on:keyup.native.enter="updatePage" append-icon="search"
+                              label="Buscar" hide-details/>
+            </v-col>
 
-              <div slot="no-data" color="info" outline class="text-xs-center">Sin datos</div>
-               
-              <div slot="loading" outline color="info">Cargando</div>
+            <v-data-table dense class="mt-3" :headers="headers" :items="items"
+                          :search="filter.search" :single-expand="false" :loading="loading"
+                          :server-items-length="totalItems"
+                          :items-per-page.sync="limit" :page.sync="pageNumber"
+                          :sort-by.sync="orderBy" :sort-desc.sync="orderDesc"
+                          @update:page="updatePage" @update:items-per-page="updatePage"
+                          @update:sort-by="updatePage" @update:sort-desc="updatePage"
+            >
 
-              <template v-slot:item.action="{ item }">
-                  <v-icon color="info" small class="mr-2" @click="openShow(item)">search</v-icon>
-                  <v-icon color="primary" small class="mr-2" @click="openEdit(item)">edit</v-icon>
-                  <v-icon color="red" small class="mr-2" @click="openDelete(item)">delete</v-icon>
-              </template>
+                <div slot="no-data" color="info" outline class="text-xs-center">Sin datos</div>
+
+                <div slot="loading" outline color="info">Cargando</div>
+
+                <template v-slot:item.avatar="{ item }">
+                    <v-avatar size="36px" :color="item.color?item.color:'grey'">
+                        <span class="white--text headline">{{item.name.charAt(0)}}</span>
+                    </v-avatar>
+                </template>
+
+                <template v-slot:item.action="{ item }">
+                    <v-icon color="info" small class="mr-2" @click="openShow(item)">search</v-icon>
+                    <v-icon color="primary" small class="mr-2" @click="openEdit(item)">edit</v-icon>
+                    <v-icon color="red" small class="mr-2" @click="openDelete(item)">delete</v-icon>
+                </template>
 
             </v-data-table>
         </v-card-text>
 
 
-        <v-dialog :value="showing" width="850"  persistent>
-            <group-show :item="itemToShow" v-if="showing"  v-on:closeDialog="showing=false" />
+        <v-dialog :value="showing" width="850" persistent>
+            <group-show :item="itemToShow" v-if="showing" v-on:closeDialog="showing=false"/>
         </v-dialog>
-        
-        <v-dialog :value="deleting" width="850"  persistent>
-            <group-delete :item="itemToDelete" v-if="deleting" v-on:itemDelete="updatePage" v-on:closeDialog="deleting=false" />
+
+        <v-dialog :value="deleting" width="850" persistent>
+            <group-delete :item="itemToDelete" v-if="deleting" v-on:itemDelete="updatePage"
+                          v-on:closeDialog="deleting=false"/>
         </v-dialog>
 
         <v-dialog :value="creating" width="850" fullscreen persistent>
-            <group-create v-if="creating" v-on:itemCreate="itemCreate" v-on:closeDialog="creating=false" />
+            <group-create v-if="creating" v-on:itemCreate="itemCreate" v-on:closeDialog="creating=false"/>
         </v-dialog>
-        
-         <v-dialog :value="updating" width="850" persistent>
-            <group-update v-if="updating" :item="itemToEdit" v-on:itemUpdate="itemUpdate" v-on:closeDialog="updating=false" />
+
+        <v-dialog :value="updating" width="850" persistent>
+            <group-update v-if="updating" :item="itemToEdit" v-on:itemUpdate="itemUpdate"
+                          v-on:closeDialog="updating=false"/>
         </v-dialog>
 
 
@@ -62,12 +71,12 @@
 
 <script>
     import GroupProvider from '../providers/GroupProvider'
-    
+
     import GroupCreate from "./GroupCreate";
     import GroupUpdate from "./GroupUpdate";
     import GroupDelete from "./GroupDelete";
     import GroupShow from "./GroupShow";
-    
+
     export default {
         name: "GroupDataTable",
         components: {GroupCreate, GroupUpdate, GroupDelete, GroupShow},
@@ -111,12 +120,12 @@
             }
         },
         computed: {
-          getOrderBy(){
-              return  (Array.isArray(this.orderBy)) ? this.orderBy[0]: this.orderBy
-          },
-          getOrderDesc(){
-              return  (Array.isArray(this.orderDesc)) ? this.orderDesc[0]: this.orderDesc
-          } 
+            getOrderBy() {
+                return (Array.isArray(this.orderBy)) ? this.orderBy[0] : this.orderBy
+            },
+            getOrderDesc() {
+                return (Array.isArray(this.orderDesc)) ? this.orderDesc[0] : this.orderDesc
+            }
         },
         data() {
             return {
@@ -135,7 +144,9 @@
                 },
                 items: [],
                 headers: [
-                    {text: 'Name', value: 'name'},
+                    {text: this.$t('group.form.avatar'), value: 'avatar'},
+                    {text: this.$t('group.form.name'), value: 'name'},
+                    {text: this.$t('group.form.color'), value: 'color'},
                     {text: 'Aciones', value: 'action', sortable: false},
                 ],
                 totalItems: 0,

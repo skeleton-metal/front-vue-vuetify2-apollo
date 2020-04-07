@@ -25,10 +25,10 @@
                         <v-text-field
                                 prepend-icon="account_box"
                                 name="name"
-                                label="Nombre"
                                 type="text"
                                 v-model="form.name"
-                                placeholder="Nombre"
+                                :label="$t('group.form.name')"
+                                :placeholder="$t('group.form.name')"
                                 class="pa-3"
                                 :rules="[rules.required]"
                                 :error="hasErrors('name')"
@@ -36,7 +36,16 @@
                                 required
                         ></v-text-field>
                     </v-col>
-    
+
+                    <v-col cols="12" sm="6">
+                        <group-color-input
+                                v-model="form.color"
+                                           :label="$t('group.form.color')"
+                                           :get-message-errors="getMessageErrors('color')"
+                                           :has-errors="hasErrors('color')"
+                                           :rules="rules.hexcode"
+                        />
+                    </v-col>
                     
                 </v-row>
 
@@ -65,6 +74,7 @@
 <script>
     import GroupProvider from "../providers/GroupProvider";
     import {ClientError} from 'front-module-commons';
+    import GroupColorInput from "./GroupColorInput";
     
     //Relations
     
@@ -74,18 +84,21 @@
 
     export default {
         name: "GroupCreate",
+        components: {GroupColorInput},
         data() {
             return {
                 modal: false,
-                title: "Creando Group",
+                title: this.$t('group.createTitle'),
                 errorMessage: '',
                 inputErrors: {},
                 loading: false,
                 form: {
-                    name: ''
+                    name: '',
+                    color: '#37474F'
                 },
                 rules: {
-                    required: value => !!value || 'Requerido'
+                    required: value => !!value || 'Requerido',
+                    hexcode: [v => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v) || 'hexcode invalid ']
                 },
                 
             }

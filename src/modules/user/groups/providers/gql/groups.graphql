@@ -2,6 +2,7 @@ query groups{
     groups{
         id
         name
+        color
     }
 }
 
