@@ -14,6 +14,10 @@ query paginateUsers($limit:Int!, $pageNumber: Int, $search: String, $orderBy: St
                 id
                 name
             }
+            groups{
+                id
+                name
+            }
         }
 
     }

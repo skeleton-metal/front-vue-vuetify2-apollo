@@ -1,7 +1,7 @@
 mutation createUser($username: String!,$password: String!, $name:String!,
-    $email: String!, $phone: String, $role: String!, $active: Boolean!)
+    $email: String!, $phone: String, $role: String!, $groups: [String], $active: Boolean!)
 {
-    createUser( input: {username:$username ,password:$password, name:$name, email:$email, phone:$phone, role: $role, active: $active})
+    createUser( input: {username:$username ,password:$password, name:$name, email:$email, phone:$phone, role: $role, groups: $groups, active: $active})
     {
 
         id
@@ -12,6 +12,10 @@ mutation createUser($username: String!,$password: String!, $name:String!,
         avatarurl
         active
         role{
+            id
+            name
+        }
+        groups{
             id
             name
         }

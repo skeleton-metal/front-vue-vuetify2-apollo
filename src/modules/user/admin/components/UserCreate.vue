@@ -143,6 +143,21 @@
                         ></v-select>
                     </v-col>
 
+                    <v-col cols="12" sm="6">
+                        <v-select
+                                v-model="form.groups"
+                                :loading="loadingGroups"
+                                :items="groups"
+                                :item-text="'name'"
+                                :item-value="'id'"
+                                attach
+                                chips
+                                :label="$t('user.form.groups')"
+                                :placeholder="$t('user.form.groups')"
+                                multiple
+                        ></v-select>
+                    </v-col>
+
                     <v-col cols="12" sm="6" class="pl-8">
                         <v-switch color="success" :label="form.active?'Activo':'Inactivo'" input-value="0"
                                   v-model="form.active"></v-switch>
@@ -186,6 +201,7 @@
                     email: '',
                     phone: '',
                     role: null,
+                    groups: [],
                     active: true
                 },
                 rules: {
@@ -195,14 +211,17 @@
         },
         mounted() {
             this.fetchRoles()
+            this.fetchGroups()
             this.clearErrorMessageAdmin()
         },
         computed: {
             ...mapState({
                 errorMessage: state => state.admin.errorMessageAdmin,
                 roles: state => state.admin.roles,
+                groups: state => state.admin.groups,
                 loadingUsers: state => state.admin.loadingUsers,
                 loadingRoles: state => state.admin.loadingRoles,
+                loadingGroups: state => state.admin.loadingGroups,
             }),
             ...mapGetters(['hasFieldInUserErrors', 'getMessagesInUserErrors']),
             passwordMatchError() {
@@ -210,7 +229,7 @@
             },
         },
         methods: {
-            ...mapActions(['createUser', 'fetchRoles', 'clearErrorMessageAdmin']),
+            ...mapActions(['createUser', 'fetchRoles', 'fetchGroups', 'clearErrorMessageAdmin']),
             saveUser() {
                 if (this.$refs.form.validate()) {
                     this.createUser(this.form).then(result => {

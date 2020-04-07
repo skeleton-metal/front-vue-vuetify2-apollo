@@ -3,18 +3,24 @@ import Vue from 'vue'
 import {
     SET_USERS,
     SET_LOADING_USERS,
+
     SET_ROLES,
     SET_LOADING_ROLES,
+
+    SET_GROUPS,
+    SET_LOADING_GROUPS,
 
     SET_FLASH_MESSAGE,
     ADD_USER,
     UPDATE_USER,
+    DELETE_USER,
     SET_INPUT_ERROR_USER,
 
     SET_CHANGE_PASSWORD,
     SET_CHANGE_PASSWORD_MESSAGE,
 
-    SET_ERROR_MESSAGE_ADMIN, DELETE_USER, SET_TOTAL_ITEMS,
+    SET_ERROR_MESSAGE_ADMIN,
+    SET_TOTAL_ITEMS
 
 
 } from './user-mutations-type'
@@ -32,6 +38,9 @@ export default {
 
         roles: [],
         loadingRoles: false,
+
+        groups:[],
+        loadingGroups: false,
 
         flashMessage: null,
 
@@ -114,6 +123,18 @@ export default {
             })
         },
 
+        fetchGroups({commit}) {
+            commit(SET_LOADING_GROUPS, true)
+            UserAdminProvider.groups().then((response) => {
+                commit(SET_GROUPS, response.data.groups)
+                commit(SET_LOADING_GROUPS, false)
+            }).catch((error) => {
+                //@TODO Handle Errors
+                console.error(error)
+                commit(SET_LOADING_GROUPS, false)
+            })
+        },
+
         createUser({commit}, data) {
             commit(SET_LOADING_USERS, true)
             commit(SET_FLASH_MESSAGE, "")
@@ -128,6 +149,7 @@ export default {
                 data.email,
                 data.phone,
                 data.role,
+                data.groups,
                 data.active
             ).then((response) => {
                 if (response.data.createUser) {
@@ -162,6 +184,7 @@ export default {
                 data.email,
                 data.phone,
                 data.role,
+                data.groups,
                 data.active
             ).then((response) => {
                 if (response.data.updateUser) {
@@ -241,16 +264,22 @@ export default {
         [SET_TOTAL_ITEMS](state, data) {
             state.totalItems = data
         },
-
-        [SET_LOADING_USERS](state, data) {
-            state.loadingUsers = data
+        [SET_LOADING_USERS](state, value) {
+            state.loadingUsers = value
         },
 
         [SET_ROLES](state, data) {
             state.roles = data
         },
-        [SET_LOADING_ROLES](state, data) {
-            state.loadingRoles = data
+        [SET_LOADING_ROLES](state, value) {
+            state.loadingRoles = value
+        },
+
+        [SET_GROUPS](state, data) {
+            state.groups = data
+        },
+        [SET_LOADING_GROUPS](state, value) {
+            state.loadingGroups = value
         },
 
         [ADD_USER](state, data) {

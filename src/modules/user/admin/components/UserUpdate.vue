@@ -107,6 +107,21 @@
                         ></v-select>
                     </v-col>
 
+                    <v-col cols="12" sm="6">
+                        <v-select
+                                v-model="form.groups"
+                                :loading="loadingGroups"
+                                :items="groups"
+                                :item-text="'name'"
+                                :item-value="'id'"
+                                attach
+                                chips
+                                :label="$t('user.form.groups')"
+                                :placeholder="$t('user.form.groups')"
+                                multiple
+                        ></v-select>
+                    </v-col>
+
                     <v-col cols="12" sm="6" class="pl-4">
                         Activo
                         <v-switch color="success" input-value="0" v-model="form.active"></v-switch>
@@ -126,7 +141,8 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn color="secondary" class="onSecondary--text" @click="saveUser" :loading="loadingUsers" v-t="'common.update'">
+            <v-btn color="secondary" class="onSecondary--text" @click="saveUser" :loading="loadingUsers"
+                   v-t="'common.update'">
             </v-btn>
 
         </v-card-actions>
@@ -161,18 +177,17 @@
         },
         created() {
             this.clearErrorMessageAdmin()
-            let role = ""
             this.fetchRoles()
-            if (this.user.role) {
-                role = this.user.role.id
-            }
+            this.fetchGroups()
+
             this.form = {
                 id: this.user.id,
                 username: this.user.username,
                 name: this.user.name,
                 email: this.user.email,
                 phone: this.user.phone,
-                role,
+                role: this.user.role ? this.user.role.id : null,
+                groups: this.user.groups.map(group => group.id),
                 active: this.user.active
             };
 
@@ -181,13 +196,15 @@
             ...mapState({
                 errorMessage: state => state.admin.errorMessageAdmin,
                 roles: state => state.admin.roles,
+                groups: state => state.admin.groups,
                 loadingUsers: state => state.admin.loadingUsers,
                 loadingRoles: state => state.admin.loadingRoles,
+                loadingGroups: state => state.admin.loadingGroups,
             }),
             ...mapGetters(['hasFieldInUserErrors', 'getMessagesInUserErrors']),
         },
         methods: {
-            ...mapActions(['updateUser', 'fetchRoles', 'clearErrorMessageAdmin']),
+            ...mapActions(['updateUser', 'fetchRoles', 'fetchGroups', 'clearErrorMessageAdmin']),
             saveUser() {
                 if (this.$refs.form.validate()) {
                     this.updateUser(this.form).then((result) => {

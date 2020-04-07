@@ -11,5 +11,9 @@ query users{
             id
             name
         }
+        groups{
+            id
+            name
+        }
     }
 }

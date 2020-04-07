@@ -16,18 +16,22 @@ class UserAdminProvider {
     }
 
     users() {
-        return graphqlClient.query({query: require('./gql/getUsers.graphql')})
+        return graphqlClient.query({query: require('./gql/users.graphql')})
     }
 
     roles() {
-        return graphqlClient.query({query: require('./gql/getRoles.graphql')})
+        return graphqlClient.query({query: require('./gql/roles.graphql')})
     }
 
-    createUser(username, password, name, email, phone, role, active) {
+    groups() {
+        return graphqlClient.query({query: require('./gql/groups.graphql')})
+    }
+
+    createUser(username, password, name, email, phone, role, groups, active) {
         return new Promise((resolve, reject) => {
                 graphqlClient.mutate({
                     mutation: require('./gql/createUser.graphql'),
-                    variables: {username, password, name, email, phone, role, active}
+                    variables: {username, password, name, email, phone, role, groups, active}
                 }).then(data => {
                     resolve(data)
                 }).catch((apolloError) => {
@@ -40,11 +44,11 @@ class UserAdminProvider {
     }
 
 
-    updateUser(id, name, username, email, phone, role, active) {
+    updateUser(id, name, username, email, phone, role, groups, active) {
         return new Promise((resolve, reject) => {
                 graphqlClient.mutate({
                     mutation: require('./gql/updateUser.graphql'),
-                    variables: {id, name, username, email, phone, role, active}
+                    variables: {id, name, username, email, phone, role, groups, active}
                 }).then(data => {
                     resolve(data)
                 }).catch((apolloError) => {
