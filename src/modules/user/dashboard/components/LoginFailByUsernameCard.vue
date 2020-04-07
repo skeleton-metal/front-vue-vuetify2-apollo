@@ -1,6 +1,6 @@
 <template>
     <v-card height="200">
-        <v-card-title>Login Fails <span class="ml-2 subtitle-1"> (72 hs)</span></v-card-title>
+        <v-card-title v-t="'user.loginFailed'">Login Fails <span class="ml-2 subtitle-1"> (72 hs)</span></v-card-title>
         <v-card-text>
             <v-simple-table dense class="text-center">
                 <template v-slot:default>

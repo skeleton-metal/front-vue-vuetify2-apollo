@@ -20,7 +20,7 @@
 
 
             <v-col cols="12" md="9">
-                <sessions-by-user-card/>
+                <sessions-by-user-card :data="sessionsByUser"/>
             </v-col>
 
             <v-col cols="12" md="3">
@@ -32,41 +32,27 @@
 
 
         <v-row>
-            <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Sessions by OS</v-card-title>
-                    <v-card-subtitle>Sessions quantity by OS (30 days)</v-card-subtitle>
-                </v-card>
-            </v-col>
-
 
             <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Sessions by Client</v-card-title>
-                    <v-card-subtitle>Sessions quantity by client (30 days)</v-card-subtitle>
-                </v-card>
+                <device-chart :data="sessionsByDeviceType"></device-chart>
             </v-col>
 
             <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Sessions by Device</v-card-title>
-                    <v-card-subtitle>Sessions quantity by Device (30 days)</v-card-subtitle>
-                </v-card>
+                <os-chart :data="sessionsByOs"></os-chart>
+            </v-col>
+            <v-col cols="12" md="3">
+                <client-chart :data="sessionsByClient"></client-chart>
+            </v-col>
+            <v-col cols="12" md="3">
+                <city-chart :data="sessionsByCity"></city-chart>
             </v-col>
 
-            <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Sessions by Country</v-card-title>
-                    <v-card-subtitle>Sessions quantity by Country (30 days)</v-card-subtitle>
-                </v-card>
+            <v-col cols="12" md="6">
+                <country-map-chart :data="sessionsByCountry"></country-map-chart>
             </v-col>
 
-            <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Sessions by City</v-card-title>
-                    <v-card-subtitle>Sessions quantity by City (30 days)</v-card-subtitle>
-                </v-card>
-            </v-col>
+
+
 
             <v-col cols="12" md="3">
                 <v-card>
@@ -86,15 +72,47 @@
     import AdminUsersCard from "../components/AdminUsersCard";
     import AdminGroupsCard from "../components/AdminGroupsCard";
     import AdminRolesCard from "../components/AdminRolesCard";
+    import DeviceChart from "../components/DeviceTypeChart";
+    import CountryMapChart from "../components/CountryMapChart";
+    import SessionProvider from "../providers/SessionProvider";
+    import OsChart from "../components/OsChart";
+    import ClientChart from "../components/ClientChart";
+    import CityChart from "../components/CityChart";
 
     export default {
         name: "DashboardAdmin",
         components: {
+            CityChart,
+            ClientChart,
+            OsChart,
+            CountryMapChart,
+            DeviceChart,
             AdminRolesCard,
             AdminGroupsCard,
             AdminUsersCard,
             LoginFailByUsernameCard,
             SessionsByUserCard
+        },
+        data(){
+          return {
+              sessionsByUser: [],
+              sessionsByCountry: [],
+              sessionsByDeviceType: [],
+              sessionsByOs: [],
+              sessionsByClient: [],
+              sessionsByCity: [],
+          }
+        },
+        created() {
+            SessionProvider.sessionsBy().then(r => {
+                console.log(r)
+                this.sessionsByUser = r.data.sessionsByUser
+                this.sessionsByCountry = r.data.sessionsByCountry
+                this.sessionsByOs = r.data.sessionsByOs
+                this.sessionsByDeviceType = r.data.sessionsByDeviceType
+                this.sessionsByClient = r.data.sessionsByClient
+                this.sessionsByCity = r.data.sessionsByCity
+            })
         }
     }
 </script>

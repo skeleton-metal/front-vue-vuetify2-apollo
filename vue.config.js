@@ -2,6 +2,9 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
+  devServer: {
+    disableHostCheck: true
+  },
   chainWebpack: (config) => {
     // gql Loader
     config.module

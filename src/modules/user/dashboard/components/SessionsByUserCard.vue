@@ -1,6 +1,6 @@
 <template>
     <v-card height="200">
-        <v-card-title>Sessions <span class="ml-2 subtitle-1"> (30 days)</span></v-card-title>
+        <v-card-title v-t="'user.sessionsByUser'">Sessions <span class="ml-2 subtitle-1"> (30 days)</span></v-card-title>
         <v-card-text>
             <v-simple-table dense class="text-center">
                 <template v-slot:default>
@@ -18,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="item in rows" :key="item.name">
+                    <tr v-for="item in data" :key="item.name">
                         <td>{{ item.username }}</td>
                         <td>{{ item.sessionCount }}</td>
                         <td>{{ getTime(item.durationMax) }}</td>
@@ -37,14 +37,10 @@
 </template>
 <script>
 
-    import SessionProvider from "../providers/SessionProvider";
-
     export default {
         name: 'sessions-duration',
-        data() {
-            return {
-                rows: []
-            }
+        props: {
+          data: Array
         },
         computed: {
             getTime() {
@@ -60,12 +56,6 @@
                     return Math.round(seconds / 60) + ' m'
                 }
             }
-        },
-        created() {
-            SessionProvider.sessionsByUser().then(r => {
-                console.log(r)
-                this.rows = r.data.sessionsByUser
-            })
         }
     }
 </script>
