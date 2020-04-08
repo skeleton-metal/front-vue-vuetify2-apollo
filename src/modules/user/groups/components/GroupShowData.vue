@@ -23,7 +23,17 @@
             </v-list>
         </v-col>
 
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" class="py-0">
+            <v-row>
+                <v-col cols="12" md="12" class="py-0">{{$t('group.form.users')}}:</v-col>
+                <v-col cols="12" md="12" class="py-0">
+                    <v-chip-group class="text-left">
+                        <v-chip v-for="user in item.users" :key="user.id">
+                            {{ user.username }}
+                        </v-chip>
+                    </v-chip-group>
+                </v-col>
+            </v-row>
 
         </v-col>
 
