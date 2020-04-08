@@ -1,37 +1,31 @@
 <template>
     <v-row>
-        <v-col cols="9">
-            <v-text-field
-                    prepend-icon="palette"
-                    type="text"
-                    v-model="colorValue"
-                    :label="label"
-                    :placeholder="label"
-                    class="pa-3"
-                    :rules="rules"
-                    :error="hasErrors"
-                    :error-messages="getMessageErrors"
-                    required
-            ></v-text-field>
-        </v-col>
-
-        <v-col cols="3" >
+        <v-col cols="12" class="pr-0">
             <v-menu
                     v-model="menu"
                     :close-on-content-click="false"
                     offset-x
             >
                 <template v-slot:activator="{ on }">
-                    <v-btn class="mt-5" icon v-on="on"
-                           :style="getStyleColor('background-color')">
-                        <v-icon>colorize</v-icon>
-                    </v-btn>
+                    <v-text-field
+                            v-on="on"
+                            prepend-icon="palette"
+                            type="text"
+                            v-model="colorValue"
+                            :label="label"
+                            :placeholder="label"
+                            class="pa-3"
+                            :rules="rules"
+                            :error="hasErrors"
+                            :error-messages="getMessageErrors"
+                            required
+                    ></v-text-field>
                 </template>
-                <v-color-picker v-model="colorValue" class="ma-2"
-                                hide-mode-switch></v-color-picker>
+                <v-color-picker v-model="colorValue" class="ma-2" flat
+                                mode="hexa"></v-color-picker>
             </v-menu>
-
         </v-col>
+
 
     </v-row>
 </template>
@@ -46,18 +40,18 @@
             hasErrors: Boolean,
             rules: Array
         },
-        data(){
-            return{
+        data() {
+            return {
                 menu: false
             }
         },
         computed: {
             colorValue: {
-                get(){
+                get() {
                     return this.value
                 },
-                set(val){
-                  this.$emit('input',val.substring(0,7))
+                set(val) {
+                    this.$emit('input', val.substring(0, 7))
                 }
             },
             getStyleColor() {

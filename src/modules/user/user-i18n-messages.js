@@ -1,8 +1,34 @@
 const messages = {
     en: {
+        roles: {
+            createTitle: 'Creating role',
+            updateTitle: 'Updating role',
+            adminTitle: 'Roles management',
+            showTitle: 'Roles and Permissions',
+            permission: 'Permission',
+            permissions: {
+                SECURITY_USER_CREATE: 'User creation',
+                SECURITY_USER_EDIT: 'User edition',
+                SECURITY_USER_DELETE: 'User deletion',
+                SECURITY_USER_SHOW: 'User display',
+                SECURITY_GROUP_CREATE: 'Group creation',
+                SECURITY_GROUP_EDIT: 'Group Edition',
+                SECURITY_GROUP_DELETE: 'Group deletion',
+                SECURITY_GROUP_SHOW: 'Group display',
+                SECURITY_ROLE_SHOW: 'Role display',
+                SECURITY_ROLE_CREATE: 'Role creation',
+                SECURITY_ROLE_EDIT: 'Role edition',
+                SECURITY_DASHBOARD_SHOW: 'Security dashboard display',
+                CUSTOMIZATION_SHOW: 'Customization display',
+                CUSTOMIZATION_COLORS_UPDATE: 'Customization colors update',
+                CUSTOMIZATION_LOGO_UPDATE: 'Customization logo update',
+                CUSTOMIZATION_LANG_UPDATE: 'Customization language update'
+            }
+        },
         group: {
             createTitle: 'Creating group',
             updateTitle: 'Updating group',
+            adminTitle: 'Groups management',
             form: {
                 avatar: 'Avatar',
                 name: 'Name',
@@ -40,6 +66,7 @@ const messages = {
             sessionsByOs: 'OS sessions',
             sessionsByClient: 'Client sessions',
             sessionsByCity: 'City sessions',
+            sessionsByCountry: 'Country sessions',
             form: {
                 username: 'Username',
                 password: 'Password',
@@ -56,9 +83,35 @@ const messages = {
         }
     },
     es: {
+        roles: {
+            createTitle: 'Creando rol',
+            updateTitle: 'Editando rol',
+            adminTitle: 'Administración de roles',
+            showTitle: 'Roles y Permisos',
+            permission: 'Permiso',
+            permissions: {
+                SECURITY_USER_CREATE: 'Creación de usuarios',
+                SECURITY_USER_EDIT: 'Edición de usuarios',
+                SECURITY_USER_DELETE: 'Eliminación de usuarios',
+                SECURITY_USER_SHOW: 'Visualización de usuarios',
+                SECURITY_GROUP_CREATE: 'Creación de grupos',
+                SECURITY_GROUP_EDIT: 'Edición de grupos',
+                SECURITY_GROUP_DELETE: 'Eliminación de grupos',
+                SECURITY_GROUP_SHOW: 'Visualización de grupos',
+                SECURITY_ROLE_SHOW: 'Visualización de roles',
+                SECURITY_ROLE_CREATE: 'Creación de roles',
+                SECURITY_ROLE_EDIT: 'Edición de roles',
+                SECURITY_DASHBOARD_SHOW: 'Visualización de panel de seguridad',
+                CUSTOMIZATION_SHOW: 'Visualizacion de personalización',
+                CUSTOMIZATION_COLORS_UPDATE: 'Edición de colores',
+                CUSTOMIZATION_LOGO_UPDATE: 'Edición de logo',
+                CUSTOMIZATION_LANG_UPDATE: 'Edición de lenguage'
+            }
+        },
         group: {
             createTitle: 'Creando grupo',
             updateTitle: 'Editando grupo',
+            adminTitle: 'Administración de Grupos',
             form: {
                 avatar: 'Avatar',
                 name: 'Nombre',
@@ -96,6 +149,7 @@ const messages = {
             sessionsByOs: 'Sesiones por SO',
             sessionsByClient: 'Sesiones por Cliente',
             sessionsByCity: 'Sesiones por Ciudad',
+            sessionsByCountry: 'Sesiones por País',
             form: {
                 username: 'Usuario',
                 password: 'Contraseña',
@@ -113,9 +167,35 @@ const messages = {
 
     },
     pt: {
+        roles: {
+            createTitle: 'Criando função',
+            updateTitle: 'Atualizando função',
+            adminTitle: 'Administração de função',
+            showTitle: 'Funções e Permissões',
+            permission: 'Permissão',
+            permissions: {
+                SECURITY_USER_CREATE: 'Criação do usuário',
+                SECURITY_USER_EDIT: 'Edição do usuário',
+                SECURITY_USER_DELETE: 'exclusão do usuário',
+                SECURITY_USER_SHOW: 'Visualização do usuário',
+                SECURITY_GROUP_CREATE: 'Criação em grupos',
+                SECURITY_GROUP_EDIT: 'Edição em grupos',
+                SECURITY_GROUP_DELETE: 'exclusão em grupos',
+                SECURITY_GROUP_SHOW: 'Visualização em grupos',
+                SECURITY_ROLE_SHOW: 'Visualização de roles',
+                SECURITY_ROLE_CREATE: 'Criação de roles',
+                SECURITY_ROLE_EDIT: 'Edição de roles',
+                SECURITY_DASHBOARD_SHOW: 'Visor do painel de segurança',
+                CUSTOMIZATION_SHOW: 'Visualização do personalización',
+                CUSTOMIZATION_COLORS_UPDATE: 'Edição de cores',
+                CUSTOMIZATION_LOGO_UPDATE: 'Edição de logo',
+                CUSTOMIZATION_LANG_UPDATE: 'Edição de linguagem'
+            }
+        },
         group: {
             createTitle: 'Criando grupo',
             updateTitle: 'Atualizando grupo',
+            adminTitle: 'Administração de Grupos',
             form: {
                 avatar: 'Avatar',
                 name: 'Nome',
@@ -147,12 +227,13 @@ const messages = {
             adminGroupDescription: 'Ver, buscar, criar, editar e usar  grupos del sistema',
             adminRoleTitle: 'Administração Funções',
             adminRoleDescription: 'Veja as funções do sistema e suas permissões',
-            loginFailed: 'Logins fallidos',
-            sessionsByUser: 'Sesiones por usuario',
-            sessionsByDeviceType: 'Sesiones por Dispositivo',
-            sessionsByOs: 'Sesiones por SO',
-            sessionsByClient: 'Sesiones por Cliente',
-            sessionsByCity: 'Sesiones por Ciudad',
+            loginFailed: 'Falha no login',
+            sessionsByUser: 'Sessões por usuário',
+            sessionsByDeviceType: 'Sessões por Dispositivo',
+            sessionsByOs: 'Sessões por SO',
+            sessionsByClient: 'Sessões por cliente',
+            sessionsByCity: 'Sessões por cidade',
+            sessionsByCountry: 'Sessões por país',
             form: {
                 username: 'Usuário',
                 password: 'senha',

@@ -14,7 +14,7 @@
                               label="Buscar" hide-details/>
             </v-col>
 
-            <v-data-table dense class="mt-3" :headers="headers" :items="items"
+            <v-data-table  class="mt-3" :headers="headers" :items="items"
                           :search="filter.search" :single-expand="false" :loading="loading"
                           :server-items-length="totalItems"
                           :items-per-page.sync="limit" :page.sync="pageNumber"
@@ -31,6 +31,12 @@
                     <v-avatar size="36px" :color="item.color?item.color:'grey'">
                         <span class="white--text headline">{{item.name.charAt(0)}}</span>
                     </v-avatar>
+                </template>
+
+                <template v-slot:item.users="{ item }">
+                    <span >
+                        {{item.users.map(user => user.username).join(", ")}}
+                    </span>
                 </template>
 
                 <template v-slot:item.action="{ item }">
@@ -129,7 +135,7 @@
         },
         data() {
             return {
-                title: 'Listado de Group',
+                title: this.$t('group.adminTitle'),
                 creating: false,
                 updating: false,
                 deleting: false,
@@ -147,6 +153,7 @@
                     {text: this.$t('group.form.avatar'), value: 'avatar'},
                     {text: this.$t('group.form.name'), value: 'name'},
                     {text: this.$t('group.form.color'), value: 'color'},
+                    {text: this.$t('group.form.users'), value: 'users'},
                     {text: 'Aciones', value: 'action', sortable: false},
                 ],
                 totalItems: 0,

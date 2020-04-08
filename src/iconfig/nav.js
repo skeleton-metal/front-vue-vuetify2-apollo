@@ -13,6 +13,13 @@ export default [
         permission: 'SECURITY_DASHBOARD_SHOW',
         children: [
             {
+                icon: 'settings_applications',
+                text: 'Customization',
+                link: {name: "customization"},
+                panel: false,
+                permission: 'CUSTOMIZATION_SHOW'
+            },
+            {
                 icon: 'assignment_ind',
                 text: 'Users',
                 link: {name: "usersAdmin"},
@@ -33,13 +40,7 @@ export default [
                 panel: false,
                 permission: 'SECURITY_ROLE_SHOW'
             },
-            {
-                icon: 'settings_applications',
-                text: 'Customization',
-                link: {name: "customization"},
-                panel: false,
-                permission: 'CUSTOMIZATION_SHOW'
-            },
+
         ]
     }
 

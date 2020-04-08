@@ -1,6 +1,6 @@
 <template>
     <v-card >
-        <v-card-title>Sessions By Country</v-card-title>
+        <v-card-title v-t="'user.sessionsByCountry'"></v-card-title>
         <v-card-text>
         <map-chart
                 style="z-index: 2"

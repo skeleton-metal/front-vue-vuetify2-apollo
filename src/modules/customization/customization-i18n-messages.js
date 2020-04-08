@@ -1,6 +1,7 @@
 const messages = {
     en: {
         customization: {
+            title: 'Customization',
             preview: 'Preview',
             applyButton: 'Apply',
             colors: {
@@ -24,7 +25,7 @@ const messages = {
                 subtitle: 'Customization of the logo and title of the platform',
                 options: {
                     round: "Round",
-                    square: "Sqare",
+                    square: "Square",
                     rectangle: "Rectangle",
                     onlytitle: "Only Title"
                 },
@@ -39,6 +40,7 @@ const messages = {
     },
     es: {
         customization: {
+            title: 'Personalización',
             preview: 'Vista previa',
             applyButton: 'Aplicar',
             colors: {
@@ -75,6 +77,7 @@ const messages = {
     },
     pt: {
         customization: {
+            title: 'Costumização',
             preview: 'Vista prévia',
             applyButton: 'Aplicar',
             colors: {
@@ -97,7 +100,7 @@ const messages = {
                 subtitle: 'Personalização do logotipo e título da plataforma',
                 options: {
                     round: "Round",
-                    square: "Sqare",
+                    square: "Square",
                     rectangle: "Rectangle",
                     onlytitle: "Only Title"
                 },
