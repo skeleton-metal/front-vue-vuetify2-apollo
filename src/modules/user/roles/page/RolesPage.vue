@@ -9,9 +9,22 @@
 </template>
 
 <script>
+    import RoleProvider from "../provider/RoleProvider";
+
     export default {
         name: "RolePage",
-        components: {}
+        components: {},
+        data(){
+          return {
+              permissions: []
+          }
+        },
+        created() {
+            RoleProvider.permissions().then(r => {
+                console.log(r)
+                this.permissions = r.data.permissions
+            })
+        }
     }
 </script>
 
