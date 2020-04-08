@@ -46,7 +46,22 @@
                                            :rules="rules.hexcode"
                         />
                     </v-col>
-                    
+
+                    <v-col cols="12" sm="12">
+                        <v-select
+                                v-model="form.users"
+                                :loading="loadingUsers"
+                                :items="users"
+                                :item-text="'name'"
+                                :item-value="'id'"
+                                attach
+                                chips
+                                :label="$t('group.form.users')"
+                                :placeholder="$t('group.form.users')"
+                                multiple
+                        ></v-select>
+                    </v-col>
+
                 </v-row>
 
 
@@ -75,6 +90,7 @@
     import GroupProvider from "../providers/GroupProvider";
     import {ClientError} from 'front-module-commons';
     import GroupColorInput from "./GroupColorInput";
+    import UserAdminProvider from "../../admin/providers/UserAdminProvider";
     
     //Relations
     
@@ -92,9 +108,12 @@
                 errorMessage: '',
                 inputErrors: {},
                 loading: false,
+                loadingUsers: false,
+                users: [],
                 form: {
                     name: '',
-                    color: '#37474F'
+                    color: '#37474F',
+                    users: []
                 },
                 rules: {
                     required: value => !!value || 'Requerido',
@@ -103,8 +122,14 @@
                 
             }
         },
-        mounted() {
-         
+        created() {
+            this.loadingUsers = true
+            UserAdminProvider.users().then(r => {
+                    this.users = r.data.users
+                }
+            ).catch(err => {
+                console.error(err)
+            }).finally(() => this.loadingUsers = false)
         },
         computed: {
              hasErrors() {
@@ -123,7 +148,6 @@
         methods: {
             save() {
                 if (this.$refs.form.validate()) {
-                    this.form.amount = parseFloat(this.form.amount)
                     GroupProvider.createGroup(this.form).then(r => {
                             if (r) {
                                 this.$emit('itemCreate',r.data.groupCreate)

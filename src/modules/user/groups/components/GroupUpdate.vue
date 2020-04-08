@@ -45,6 +45,22 @@
                                            :rules="rules.hexcode"
                         />
                     </v-col>
+
+                    <v-col cols="12" sm="12">
+                        <v-select
+                                v-model="form.users"
+                                :loading="loadingUsers"
+                                :items="users"
+                                :item-text="'name'"
+                                :item-value="'id'"
+                                attach
+                                chips
+                                :label="$t('group.form.users')"
+                                :placeholder="$t('group.form.users')"
+                                multiple
+                        ></v-select>
+                    </v-col>
+
                 </v-row>
 
 
@@ -73,6 +89,7 @@
     import GroupProvider from "../providers/GroupProvider";
     import {ClientError} from 'front-module-commons';
     import GroupColorInput from "./GroupColorInput";
+    import UserAdminProvider from "../../admin/providers/UserAdminProvider";
 
     //Relations
 
@@ -94,10 +111,13 @@
                 errorMessage: '',
                 inputErrors: {},
                 loading: false,
+                loadingUsers: false,
+                users: [],
                 form: {
                     id: this.item.id,
                     name: this.item.name,
-                    color: this.item.color ? this.item.color : '#37474F'
+                    color: this.item.color ? this.item.color : '#37474F',
+                    users: this.item.users.map(user => user.id?user.id:user )
                 },
                 rules: {
                     required: value => !!value || 'Requerido',
@@ -106,8 +126,14 @@
 
             }
         },
-        mounted() {
-
+        created() {
+            this.loadingUsers = true
+            UserAdminProvider.users().then(r => {
+                    this.users = r.data.users
+                }
+            ).catch(err => {
+                console.error(err)
+            }).finally(() => this.loadingUsers = false)
         },
         computed: {
             hasErrors() {

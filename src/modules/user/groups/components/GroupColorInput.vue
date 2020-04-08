@@ -1,6 +1,6 @@
 <template>
-    <v-row>
-        <v-col cols="9">
+    <v-row >
+        <v-col cols="9" class="pa-0">
             <v-text-field
                     prepend-icon="palette"
                     type="text"
@@ -15,14 +15,14 @@
             ></v-text-field>
         </v-col>
 
-        <v-col cols="3" >
+        <v-col cols="3" class="pa-0">
             <v-menu
                     v-model="menu"
                     :close-on-content-click="false"
                     offset-x
             >
                 <template v-slot:activator="{ on }">
-                    <v-btn class="mt-5" icon v-on="on"
+                    <v-btn class="mt-4" icon v-on="on"
                            :style="getStyleColor('background-color')">
                         <v-icon>colorize</v-icon>
                     </v-btn>

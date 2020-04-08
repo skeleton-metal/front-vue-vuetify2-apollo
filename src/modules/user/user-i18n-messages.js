@@ -7,6 +7,7 @@ const messages = {
                 avatar: 'Avatar',
                 name: 'Name',
                 color: 'Color',
+                users: 'Users'
             }
         },
         user: {
@@ -62,6 +63,7 @@ const messages = {
                 avatar: 'Avatar',
                 name: 'Nombre',
                 color: 'Color',
+                users: 'Usuarios'
             }
         },
         user: {
@@ -118,6 +120,7 @@ const messages = {
                 avatar: 'Avatar',
                 name: 'Nome',
                 color: 'Cor',
+                users: 'Usuários'
             }
         },
         user: {

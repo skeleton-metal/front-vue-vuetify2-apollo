@@ -1,8 +1,12 @@
-mutation groupUpdate($id: ID!, $name:String!, $color:String){
-    groupUpdate(id: $id, input: {name: $name, color: $color }){
+mutation groupUpdate($id: ID!, $name:String!, $color:String, $users: [String]){
+    groupUpdate(id: $id, input: {name: $name, color: $color, users: $users }){
         id
         name
         color
+        users{
+            id
+            username
+        }
     }
 }
 

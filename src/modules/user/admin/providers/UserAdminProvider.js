@@ -3,15 +3,14 @@ import graphqlClient from "../../../../apollo";
 import {ClientError} from 'front-module-commons';
 
 
-
-
 class UserAdminProvider {
 
 
-    paginateUsers(limit, pageNumber, search = null, orderBy= null, orderDesc = false) {
+    paginateUsers(limit, pageNumber, search = null, orderBy = null, orderDesc = false) {
         return graphqlClient.query({
             query: require('./gql/paginateUsers.graphql'),
-            variables: {limit, pageNumber, search, orderBy, orderDesc}
+            variables: {limit, pageNumber, search, orderBy, orderDesc},
+            fetchPolicy: "network-only"
         })
     }
 
@@ -24,7 +23,11 @@ class UserAdminProvider {
     }
 
     groups() {
-        return graphqlClient.query({query: require('./gql/groups.graphql')})
+        return graphqlClient.query({
+                query: require('./gql/groups.graphql'),
+                fetchPolicy: "network-only"
+            }
+        )
     }
 
     createUser(username, password, name, email, phone, role, groups, active) {

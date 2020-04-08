@@ -6,6 +6,10 @@ query groupsPaginate($limit:Int!, $pageNumber: Int, $search: String, $orderBy: S
             id
             name
             color
+            users{
+                id
+                username
+            }
         }
     }
 }
