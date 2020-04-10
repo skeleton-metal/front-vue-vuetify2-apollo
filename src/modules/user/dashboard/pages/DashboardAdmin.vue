@@ -43,22 +43,14 @@
             <v-col cols="12" md="3">
                 <client-chart :data="sessionsByClient"></client-chart>
             </v-col>
-            <v-col cols="12" md="3">
-                <city-chart :data="sessionsByCity"></city-chart>
-            </v-col>
+
 
             <v-col cols="12" md="6">
                 <country-map-chart :data="sessionsByCountry"></country-map-chart>
             </v-col>
 
-
-
-
-            <v-col cols="12" md="3">
-                <v-card>
-                    <v-card-title>Sessions by IP</v-card-title>
-                    <v-card-subtitle>Sessions quantity by IP (30 days)</v-card-subtitle>
-                </v-card>
+            <v-col cols="12" md="6">
+                <city-chart :data="sessionsByCity"></city-chart>
             </v-col>
 
         </v-row>

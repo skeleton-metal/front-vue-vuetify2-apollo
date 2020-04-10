@@ -7,14 +7,14 @@
                     <thead>
                     <tr class="text-center">
                         <th class="text-center">Username</th>
-                        <th class="text-center">Sessions Count</th>
-                        <th class="text-center">Duration Max</th>
-                        <th class="text-center">Duration Min</th>
-                        <th class="text-center">Duration Avg</th>
-                        <th class="text-center">Duration Sum</th>
-                        <th class="text-center">Duration Last</th>
-                        <th class="text-center">Requests Sum</th>
-                        <th class="text-center">Requests Avg</th>
+                        <th class="text-center" >{{$t('user.metrics.sessions')}} {{$t('user.metrics.qty')}}</th>
+                        <th class="text-center">{{$t('user.metrics.duration')}} {{$t('user.metrics.max')}}</th>
+                        <th class="text-center">{{$t('user.metrics.duration')}} {{$t('user.metrics.min')}}</th>
+                        <th class="text-center">{{$t('user.metrics.duration')}} {{$t('user.metrics.avg')}}</th>
+                        <th class="text-center">{{$t('user.metrics.duration')}} {{$t('user.metrics.sum')}}</th>
+                        <th class="text-center">{{$t('user.metrics.duration')}} {{$t('user.metrics.last')}}</th>
+                        <th class="text-center">{{$t('user.metrics.request')}} {{$t('user.metrics.sum')}}</th>
+                        <th class="text-center">{{$t('user.metrics.request')}} {{$t('user.metrics.avg')}}</th>
                     </tr>
                     </thead>
                     <tbody>

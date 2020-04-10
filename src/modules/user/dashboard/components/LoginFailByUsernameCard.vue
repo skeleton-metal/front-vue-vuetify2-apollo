@@ -1,7 +1,9 @@
 <template>
     <v-card height="200">
         <v-card-title v-t="'user.loginFailed'">Login Fails <span class="ml-2 subtitle-1"> (72 hs)</span></v-card-title>
-        <v-card-text>
+
+
+        <v-card-text v-if="rows.length > 0">
             <v-simple-table dense class="text-center">
                 <template v-slot:default>
                     <thead>
@@ -19,6 +21,10 @@
                 </template>
             </v-simple-table>
         </v-card-text>
+
+        <v-card-text v-else v-t="'user.noLoginFail'">
+        </v-card-text>
+
     </v-card>
 </template>
 <script>

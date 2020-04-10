@@ -2,18 +2,18 @@
     <v-card>
         <v-card-title v-t="'user.sessionsByCity'">Sessions By City</v-card-title>
         <v-card-text>
-            <pie-chart :chart-data="getData"></pie-chart>
+            <bar-chart :chart-data="getData"></bar-chart>
         </v-card-text>
     </v-card>
 </template>
 
 <script>
-    import PieChart from "./charts/PieChart";
     import ChartsMixin from "../mixins/ChartsMixin";
+    import BarChart from "./charts/BarChart";
 
     export default {
         name: "CityChart",
-        components: {PieChart},
+        components: {BarChart},
         mixins: [ChartsMixin],
         props: {
             data: Array,
@@ -23,13 +23,13 @@
         },
         computed: {
             getData() {
-                let obj = {labels: [], datasets: [{data: [], backgroundColor: this.backgroundColor}]}
+                let obj = {labels: ['Sessions'], datasets: []}
+                this.data.forEach((i,index) => {
+                        obj.datasets[index] = {data: [], label: i.city, backgroundColor: this.backgroundColor[index]}
+                        obj.datasets[index].data.push(i.sum)
 
-                this.data.forEach(i => {
-                    obj.labels.push(i.city)
-                    obj.datasets[0].data.push(i.sum)
                 })
-
+                console.log(obj)
                 return obj
             }
         }
