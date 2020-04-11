@@ -39,6 +39,7 @@ const messages = {
         user: {
             signIn: 'Sign in',
             signUp: 'Sign up',
+            signUpOtherAccount: 'Register another account',
             createAccount: 'Create an account',
             stillNotUser: 'Still you do not have user? ',
             alreadyAccount: 'Do you already have an account? ',
@@ -68,6 +69,11 @@ const messages = {
             sessionsByClient: 'Client sessions',
             sessionsByCity: 'City sessions',
             sessionsByCountry: 'Country sessions',
+            userAudit: 'User Audit',
+            when: 'When',
+            actionBy: 'Action By',
+            actionFor: 'Action For',
+            action: 'Action',
             metrics: {
                 duration: 'Duration',
                 sessions: 'Sessions',
@@ -134,6 +140,7 @@ const messages = {
         user: {
             signIn: 'Iniciar sesión',
             signUp: 'Registrarse',
+            signUpOtherAccount: 'Registrar otra cuenta',
             createAccount: 'Crear una cuenta',
             stillNotUser: 'Aun no tienes usuario? ',
             alreadyAccount: 'Ya tienes una cuenta? ',
@@ -163,6 +170,11 @@ const messages = {
             sessionsByClient: 'Sesiones por Cliente',
             sessionsByCity: 'Sesiones por Ciudad',
             sessionsByCountry: 'Sesiones por País',
+            userAudit: 'Auditoria de usuario',
+            when: 'Cuando',
+            actionBy: 'Acción Por',
+            actionFor: 'Acción Para',
+            action: 'Acción',
             metrics: {
                 duration: 'Duración',
                 sessions: 'Sesión',
@@ -230,6 +242,7 @@ const messages = {
         user: {
             signIn: 'iniciar sessão',
             signUp: 'Registrar',
+            signUpOtherAccount: 'Registrar outra conta',
             createAccount: 'Criar uma conta',
             stillNotUser: 'Você ainda não tem um usuário? ',
             alreadyAccount: 'Você já tem uma conta? ',
@@ -259,6 +272,11 @@ const messages = {
             sessionsByClient: 'Sessões por cliente',
             sessionsByCity: 'Sessões por cidade',
             sessionsByCountry: 'Sessões por país',
+            userAudit: 'Auditoria de Usuário',
+            when: 'Quando',
+            actionBy: 'Ação por',
+            actionFor: 'Ação Para',
+            action: 'Ação',
             metrics: {
                 duration: 'Duração',
                 sessions: 'Sessão',

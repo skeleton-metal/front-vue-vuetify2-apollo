@@ -1,7 +1,8 @@
 <template>
 
     <v-card>
-        <v-card-title></v-card-title>
+        <v-card-title class="secondary--text" v-t="'user.changePassword'"></v-card-title>
+
 
         <v-card-text>
             <v-form ref="form" autocomplete="off" v-model="valid" @submit.prevent="submit">
@@ -38,11 +39,11 @@
         <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn rounded color="grey darken-1" text @click="$emit('closeDialog')">
+            <v-btn outlined color="grey" text @click="$emit('closeDialog')">
                 Cancelar
             </v-btn>
 
-            <v-btn rounded :loading="loading" color="primary" @click="submit" :disabled="!valid">
+            <v-btn  :loading="loading" color="secondary" @click="submit" :disabled="!valid">
                 Cambiar Contraseña
             </v-btn>
 

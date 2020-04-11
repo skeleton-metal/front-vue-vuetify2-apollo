@@ -7,8 +7,8 @@ class SessionProvider {
         return graphqlClient.query({query: require('./gql/sessionsByUser.graphql'), fetchPolicy:"network-only"})
     }
 
-    sessionsBy() {
-        return graphqlClient.query({query: require('./gql/sessionsBy.graphql'), fetchPolicy:"network-only"})
+    dashboardData() {
+        return graphqlClient.query({query: require('./gql/dashboardData.graphql'), fetchPolicy:"network-only"})
     }
     
 

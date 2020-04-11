@@ -29,5 +29,19 @@ query {
     sessionsByCity{
         city
         sum
+    },
+    loginFailByUsername{
+        username
+        attempts
+    }
+    userAuditsFrom{
+        date
+        actionBy{
+            username
+        }
+        actionFor{
+            username
+        }
+        action
     }
 }
