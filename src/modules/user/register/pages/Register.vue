@@ -13,6 +13,9 @@
             if (this.isAuth) {
                 this.$router.push({name: "home"})
             }
+            if(process.env.VUE_APP_REGISTER !== 'enable'){
+                this.$router.push({name: "home"})
+            }
         },
         computed: {
             ...mapGetters(['isAuth'])

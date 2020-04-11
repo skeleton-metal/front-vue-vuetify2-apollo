@@ -92,6 +92,7 @@
         methods: {
             itemCreate(item) {
                 this.items.push(item)
+                this.totalItems++
             },
             itemUpdate(item) {
                 let index = this.items.findIndex(i => i.id == item.id)

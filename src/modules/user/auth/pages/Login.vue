@@ -70,7 +70,7 @@
                     </v-card-text>
                 </v-card>
 
-                <v-card class="elevation-12 mt-2">
+                <v-card class="elevation-12 mt-2" v-if="registerEnable">
                     <v-card-text class="text-xs-center" >
                         <span v-t="'user.stillNotUser'"> </span>
                         <router-link :to="{name: 'register'}" class="secondary--text font-weight-bold" v-t="'user.signUp'"> </router-link>
@@ -105,7 +105,10 @@
                 userInvalid: state => state.auth.userInvalid,
                 generalError: state => state.auth.generalError
             }),
-            ...mapGetters(['isAuth'])
+            ...mapGetters(['isAuth']),
+            registerEnable(){
+                return process.env.VUE_APP_REGISTER === 'enable'
+            }
         },
         methods: {
             ...mapActions(['login', 'me']),

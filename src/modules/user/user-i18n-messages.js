@@ -84,7 +84,8 @@ const messages = {
                 userDeleted: 'user {username} has been deleted',
                 passwordRecovery: 'user {username} has requested to recover password',
                 userRegistered: 'user {username} has registered',
-                userActivated: 'user {username} has activated his account'
+                userActivated: 'user {username} has activated his account',
+                avatarChange: 'user {username} has modified his avatar'
 
             },
             metrics: {
@@ -199,7 +200,8 @@ const messages = {
                 userDeleted: 'usuario {username} ha sido borrado',
                 passwordRecovery: 'usuario {username} ha solicitado recuperar su contraseña',
                 userRegistered: 'usuario {username} se ha registrado',
-                userActivated: 'usuario {username} ha activado su cuenta'
+                userActivated: 'usuario {username} ha activado su cuenta',
+                avatarChange: 'usuario {username} ha modificado su avatar'
 
             },
             metrics: {
@@ -315,7 +317,8 @@ const messages = {
                 userDeleted: 'Usuário {username}  foi excluído',
                 passwordRecovery: 'Usuário {username} solicitou recuperar sua senha',
                 userRegistered: 'Usuário {username}  se cadastrou',
-                userActivated: 'Usuário {username} ativou sua conta'
+                userActivated: 'Usuário {username} ativou sua conta',
+                avatarChange: 'Usuário {username} mudou sua avatar'
 
             },
             metrics: {
