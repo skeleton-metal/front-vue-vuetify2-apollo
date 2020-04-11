@@ -1,5 +1,6 @@
 <template>
-    <v-card height="200">
+
+    <v-card height="100%">
         <v-card-title v-t="'user.loginFailed'">Login Fails <span class="ml-2 subtitle-1"> (72 hs)</span></v-card-title>
 
 
@@ -8,8 +9,8 @@
                 <template v-slot:default>
                     <thead>
                     <tr class="text-center">
-                        <th class="text-center">Username</th>
-                        <th class="text-center">Attemps</th>
+                        <th class="text-center" v-t="'user.form.username'"></th>
+                        <th class="text-center" v-t="'user.metrics.attempts'"></th>
                     </tr>
                     </thead>
                     <tbody>

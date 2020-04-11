@@ -74,6 +74,19 @@ const messages = {
             actionBy: 'Action By',
             actionFor: 'Action For',
             action: 'Action',
+            audit: {
+                today: 'Today',
+                yesterday: 'Yesterday',
+                userPasswordChange: 'user {username} has modified his password',
+                adminPasswordChange: 'user {username}\'s password was changed by administrator',
+                userCreated: 'user {username} has been created',
+                userModified: 'user {username} has been modified',
+                userDeleted: 'user {username} has been deleted',
+                passwordRecovery: 'user {username} has requested to recover password',
+                userRegistered: 'user {username} has registered',
+                userActivated: 'user {username} has activated his account'
+
+            },
             metrics: {
                 duration: 'Duration',
                 sessions: 'Sessions',
@@ -83,7 +96,8 @@ const messages = {
                 max: 'Max',
                 sum: 'Sum',
                 last: 'Last',
-                qty: 'Qty'
+                qty: 'Qty',
+                attempts: 'Attempts'
             },
             form: {
                 username: 'Username',
@@ -175,6 +189,19 @@ const messages = {
             actionBy: 'Acción Por',
             actionFor: 'Acción Para',
             action: 'Acción',
+            audit: {
+                today: 'Hoy',
+                yesterday: 'ayer',
+                userPasswordChange: 'usuario {username} ha modificado su contraseña',
+                adminPasswordChange: 'la contraseña de {username} fue modificada por administrator',
+                userCreated: 'usuario {username} ha sido creado',
+                userModified: 'usuario {username} ha sido modificado',
+                userDeleted: 'usuario {username} ha sido borrado',
+                passwordRecovery: 'usuario {username} ha solicitado recuperar su contraseña',
+                userRegistered: 'usuario {username} se ha registrado',
+                userActivated: 'usuario {username} ha activado su cuenta'
+
+            },
             metrics: {
                 duration: 'Duración',
                 sessions: 'Sesión',
@@ -184,7 +211,8 @@ const messages = {
                 max: 'Max',
                 sum: 'Sum',
                 last: 'Últ',
-                qty: 'Cant'
+                qty: 'Cant',
+                attempts: 'Intentos'
             },
             form: {
                 username: 'Usuario',
@@ -277,6 +305,19 @@ const messages = {
             actionBy: 'Ação por',
             actionFor: 'Ação Para',
             action: 'Ação',
+            audit: {
+                today: 'hoje',
+                yesterday: 'ontem',
+                userPasswordChange: 'Usuário {username} mudou sua senha',
+                adminPasswordChange: 'a senha de {username} foi alterada pelo administrador',
+                userCreated: 'Usuário {username} foi criado',
+                userModified: 'Usuário {username} foi modificado',
+                userDeleted: 'Usuário {username}  foi excluído',
+                passwordRecovery: 'Usuário {username} solicitou recuperar sua senha',
+                userRegistered: 'Usuário {username}  se cadastrou',
+                userActivated: 'Usuário {username} ativou sua conta'
+
+            },
             metrics: {
                 duration: 'Duração',
                 sessions: 'Sessão',
@@ -286,7 +327,8 @@ const messages = {
                 min: 'Min',
                 max: 'Max',
                 last: 'Últ',
-                qty: 'Quant'
+                qty: 'Quant',
+                attempts: 'Tentativas'
             },
             form: {
                 username: 'Usuário',

@@ -1,6 +1,6 @@
 <template>
     <v-container fluid>
-        <v-row>
+        <v-row dense>
             <v-col cols="12" md="4">
                 <admin-users-card/>
             </v-col>
@@ -12,41 +12,35 @@
             <v-col cols="12" md="4">
                 <admin-roles-card/>
             </v-col>
-
-
         </v-row>
 
-        <v-row >
-            <v-col cols="12" md="9">
-                <sessions-by-user-card :data="sessionsByUser"/>
+        <v-row>
+            <v-col cols="12" md="6" >
+                <sessions-by-user-card :height="160" :data="sessionsByUser"/>
             </v-col>
+
+
+            <v-col cols="12" md="6" >
+                <user-audits-card :height="160" :data="userAuditsFrom"></user-audits-card>
+            </v-col>
+
+
             <v-col cols="12" md="3">
+                <client-chart :data="sessionsByClient"></client-chart>
+            </v-col>
+
+            <v-col cols="12" md="3">
+                <os-chart :data="sessionsByOs"></os-chart>
+            </v-col>
+
+            <v-col cols="12" md="3">
+                <device-chart :data="sessionsByDeviceType"></device-chart>
+            </v-col>
+
+
+            <v-col cols="12" md="3" >
                 <login-fail-by-username-card :data="loginFailByUsername"/>
             </v-col>
-
-            <v-col cols="12" md="6" class="pt-0">
-                <v-row >
-                    <v-col cols="12" md="6">
-                        <client-chart :data="sessionsByClient"></client-chart>
-                    </v-col>
-
-                    <v-col cols="12" md="6">
-                        <os-chart :data="sessionsByOs"></os-chart>
-                    </v-col>
-
-                    <v-col cols="12" md="6">
-                        <device-chart :data="sessionsByDeviceType"></device-chart>
-                    </v-col>
-                </v-row>
-
-            </v-col>
-
-
-
-            <v-col  cols="12" md="6">
-                <user-audits-card :data="userAuditsFrom"></user-audits-card>
-            </v-col>
-
 
 
 
@@ -92,17 +86,17 @@
             LoginFailByUsernameCard,
             SessionsByUserCard
         },
-        data(){
-          return {
-              sessionsByUser: [],
-              sessionsByCountry: [],
-              sessionsByDeviceType: [],
-              sessionsByOs: [],
-              sessionsByClient: [],
-              sessionsByCity: [],
-              userAuditsFrom: [],
-              loginFailByUsername: []
-          }
+        data() {
+            return {
+                sessionsByUser: [],
+                sessionsByCountry: [],
+                sessionsByDeviceType: [],
+                sessionsByOs: [],
+                sessionsByClient: [],
+                sessionsByCity: [],
+                userAuditsFrom: [],
+                loginFailByUsername: []
+            }
         },
         created() {
             SessionProvider.dashboardData().then(r => {
