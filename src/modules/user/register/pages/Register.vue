@@ -14,7 +14,7 @@
                 this.$router.push({name: "home"})
             }
             if(process.env.VUE_APP_REGISTER !== 'enable'){
-                this.$router.push({name: "home"})
+                this.$router.push({name: "login"})
             }
         },
         computed: {
