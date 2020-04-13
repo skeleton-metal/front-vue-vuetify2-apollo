@@ -16,8 +16,7 @@
                             :placeholder="label"
                             class="pa-3"
                             :rules="rules"
-                            :error="hasErrors"
-                            :error-messages="getMessageErrors"
+                            :color="color"
                             required
                     ></v-text-field>
                 </template>
@@ -36,8 +35,6 @@
             value: String,
             color: String,
             label: String,
-            getMessageErrors: Array,
-            hasErrors: Boolean,
             rules: Array
         },
         data() {

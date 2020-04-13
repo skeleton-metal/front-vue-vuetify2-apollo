@@ -18,6 +18,8 @@
                                 :item-text="'name'"
                                 :item-value="'id'"
                                 v-model="formLogo.mode"
+                                color="secondary"
+                                item-color="secondary"
                                 :label="$t('customization.logo.form.mode')"
                                 required
                         ></v-select>
@@ -32,6 +34,7 @@
                                 :placeholder="$t('customization.logo.form.title')"
                                 type="text"
                                 v-model="formLogo.title"
+                                color="secondary"
                                 class="pa-3"
                                 :rules="[rules.required]"
                                 :error="hasErrors"
@@ -40,7 +43,7 @@
                     </v-col>
 
                     <v-col cols="12" md="3" lg="3" class="text-center">
-                        <v-btn v-on:click="pickFile" class="mt-3"><v-icon class="mr-2">cloud_upload</v-icon> {{$t('customization.logo.form.upload')}}</v-btn>
+                        <v-btn v-on:click="pickFile" color="secondary" class="mt-3"><v-icon class="mr-2">cloud_upload</v-icon> {{$t('customization.logo.form.upload')}}</v-btn>
                         <input type="file" style="display: none" ref="img" accept="image/*" @change="onFilePicked"/>
                     </v-col>
 
@@ -89,8 +92,6 @@
         components: {LogoView},
         props: {
             formLogo: {type:Object},
-            getMessageErrors: {},
-            hasErrors: {},
         },
         data(){
             return {

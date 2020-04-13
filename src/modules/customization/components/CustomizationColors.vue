@@ -13,9 +13,7 @@
                     <v-col cols="12" sm="6" md="3" class="pb-0">
                         <color-input v-model="formColors.primary"
                                      :label="$t('customization.colors.primary')"
-                                     color="primary"
-                                     :get-message-errors="getMessageErrors"
-                                     :has-errors="hasErrors"
+                                     color="secondary"
                                      :rules="[rules.required]"
                         />
                     </v-col>
@@ -24,9 +22,7 @@
                     <v-col cols="12" sm="6" md="3">
                         <color-input v-model="formColors.onPrimary"
                                      :label="$t('customization.colors.onPrimary')"
-                                     color="onPrimary"
-                                     :get-message-errors="getMessageErrors"
-                                     :has-errors="hasErrors"
+                                     color="secondary"
                                      :rules="[rules.required]"
                         />
                     </v-col>
@@ -35,8 +31,6 @@
                         <color-input v-model="formColors.secondary"
                                      :label="$t('customization.colors.secondary')"
                                      color="secondary"
-                                     :get-message-errors="getMessageErrors"
-                                     :has-errors="hasErrors"
                                      :rules="[rules.required]"
                         />
                     </v-col>
@@ -44,9 +38,7 @@
                     <v-col cols="12" sm="6" md="3">
                         <color-input v-model="formColors.onSecondary"
                                      :label="$t('customization.colors.onSecondary')"
-                                     color="onSecondary"
-                                     :get-message-errors="getMessageErrors"
-                                     :has-errors="hasErrors"
+                                     color="secondary"
                                      :rules="[rules.required]"
                         />
                     </v-col>

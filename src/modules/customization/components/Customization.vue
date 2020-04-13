@@ -11,13 +11,9 @@
 
             <customization-colors v-if="selected === 1"
                                   :form-colors="formColors"
-                                  :get-message-errors="getMessageErrors('primary')"
-                                  :has-errors="hasErrors('primary')"
             />
 
             <customization-logo v-if="selected === 2" :form-logo="formLogo"
-                                :get-message-errors="getMessageErrors('name')"
-                                :has-errors="hasErrors('name')"
             />
 
 
@@ -90,21 +86,7 @@
                 },
 
             }
-        },
-        computed: {
-            hasErrors() {
-                return field => this.inputErrors[field] != undefined
-            },
-            getMessageErrors() {
-                return field => {
-                    if (this.inputErrors[field] != undefined) {
-                        let message = this.inputErrors[field].message
-                        return [message]
-                    }
-                    return []
-                }
-            },
-        },
+        }
     }
 </script>
 

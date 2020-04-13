@@ -16,6 +16,8 @@
                                 :items="langs"
                                 :item-text="'lang'"
                                 :item-value="'lang'"
+                                color="secondary"
+                                item-color="secondary"
                                 v-model="formLang.language"
                                 :label="$t('customization.lang.form.lang')"
                                 required
