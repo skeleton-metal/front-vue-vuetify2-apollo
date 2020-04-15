@@ -2,14 +2,14 @@
     <v-list dense class="pt-3">
         <template v-for="item in nav">
 
-            <v-list-group
+            <v-list-group color="blue-grey lighten-5"
                     v-if="item.children && isGranted(item)"
                     :key="item.text"
             >
 
                 <v-list-item slot="activator">
                     <v-list-item-content>
-                        <v-list-item-title>
+                        <v-list-item-title class="blue-grey--text text--darken-4">
                             {{ item.text }}
                         </v-list-item-title>
                     </v-list-item-content>
@@ -22,10 +22,10 @@
                         @click="$emit('closeDrawer')"
                 >
                     <v-list-item-action v-if="child.icon">
-                        <v-icon>{{ child.icon }}</v-icon>
+                        <v-icon class="blue-grey--text text--darken-4">{{ child.icon }}</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                        <v-list-item-title>
+                        <v-list-item-title class="blue-grey--text text--darken-4">
                             {{ child.text }}
                         </v-list-item-title>
                     </v-list-item-content>
@@ -36,10 +36,10 @@
             <v-list-item v-else-if="isGranted(item)" :key="item.text" :to="item.link" exact
                          @click="$emit('closeDrawer')">
                 <v-list-item-action>
-                    <v-icon>{{ item.icon }}</v-icon>
+                    <v-icon class="blue-grey--text text--darken-4">{{ item.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
-                    <v-list-item-title>
+                    <v-list-item-title class="blue-grey--text text--darken-4">
                         {{ item.text }}
                     </v-list-item-title>
                 </v-list-item-content>
