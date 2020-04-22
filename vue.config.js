@@ -3,7 +3,8 @@ module.exports = {
     "vuetify"
   ],
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
+    port: 8000,
   },
   chainWebpack: (config) => {
     // gql Loader
