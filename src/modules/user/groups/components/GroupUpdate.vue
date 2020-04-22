@@ -76,7 +76,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn color="primary" @click="save" :loading="loading">
+            <v-btn color="secondary" class="onSecondary--text" @click="save" :loading="loading">
                 Modificar
             </v-btn>
 

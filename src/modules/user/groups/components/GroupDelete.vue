@@ -31,7 +31,7 @@
                 Cerrar
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="remove" :loading="loading">
+            <v-btn color="secondary" class="onSecondary--text" @click="remove" :loading="loading">
                 Confirmar
             </v-btn>
         </v-card-actions>

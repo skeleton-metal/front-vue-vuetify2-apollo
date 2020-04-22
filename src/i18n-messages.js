@@ -11,7 +11,8 @@ const baseMessages = {
             update: 'Update',
             delete: 'Delete',
             close: 'Close',
-            send: 'Send'
+            send: 'Send',
+            areYouSureDeleteRecord: 'Are you sure you want to blur this record?'
         }
     },
     es: {
@@ -23,7 +24,8 @@ const baseMessages = {
             update: 'Actualizar',
             delete: 'Borrar',
             close: 'Cerrar',
-            send: 'Enviar'
+            send: 'Enviar',
+            areYouSureDeleteRecord: '¿Esta seguro que desea borrar este registro?'
         }
     },
     pt: {
@@ -35,7 +37,8 @@ const baseMessages = {
             update: 'Atualizar',
             delete: 'Excluir',
             close: 'Fechar',
-            send: 'Enviar'
+            send: 'Enviar',
+            areYouSureDeleteRecord: 'Tem certeza de que deseja excluir este registro?'
         }
     }
 
