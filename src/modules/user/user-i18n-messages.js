@@ -37,6 +37,11 @@ const messages = {
             }
         },
         user: {
+            badCredentials: 'Bad credentials',
+            passwordChange: 'The password has been changed',
+            userCreated: 'The user has been created',
+            userModified: 'The user has been modified',
+            userDeleted: 'The user has been deleted',
             signIn: 'Sign in',
             signUp: 'Sign up',
             signUpOtherAccount: 'Register another account',
@@ -153,6 +158,11 @@ const messages = {
             }
         },
         user: {
+            badCredentials: 'Credenciales inválidas',
+            passwordChange: 'La contraseña ha sido modificada',
+            userCreated: 'El usuario ha sido creado',
+            userModified: 'El usuario ha sido modificado',
+            userDeleted: 'El usuario ha sido eliminado',
             signIn: 'Iniciar sesión',
             signUp: 'Registrarse',
             signUpOtherAccount: 'Registrar otra cuenta',
@@ -270,6 +280,11 @@ const messages = {
             }
         },
         user: {
+            badCredentials: 'Credenciais inválidas',
+            passwordChange: 'A senha foi alterada',
+            userCreated: 'O Usuário foi criado',
+            userModified: 'O usuáriofoi modificado',
+            userDeleted: 'O usuário foi excluído',
             signIn: 'iniciar sessão',
             signUp: 'Registrar',
             signUpOtherAccount: 'Registrar outra conta',

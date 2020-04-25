@@ -49,8 +49,7 @@ export default new Vuex.Store({
             reducer: state => (
                 {
                     auth: {
-                        access_token: state.auth.access_token,
-                        me: state.auth.me
+                        access_token: state.auth.access_token
                     },
                     customization: {
                         colors: state.customization.colors,

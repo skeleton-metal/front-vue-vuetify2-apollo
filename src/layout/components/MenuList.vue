@@ -76,7 +76,7 @@
                 }
 
                 if (item.permission) {
-                    if(this.isAuth && this.me.role.permissions.includes(item.permission)){
+                    if(this.isAuth &&  this.me.role && this.me.role.permissions.includes(item.permission)){
                         return true
                     }
                     return false

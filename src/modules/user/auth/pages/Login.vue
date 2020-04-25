@@ -111,7 +111,7 @@
             }
         },
         methods: {
-            ...mapActions(['login', 'me']),
+            ...mapActions(['login']),
 
             loginUser() {
                 this.login(this.loginForm)

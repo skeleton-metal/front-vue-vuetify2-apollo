@@ -1,6 +1,6 @@
 import UserProfileProvider from './../providers/UserProfileProvider'
 import {AVATAR_UPDATE} from "../../auth/storage/auth-mutations-type";
-
+import i18n from './../../../../i18n'
 
 export default {
     state: {
@@ -25,8 +25,8 @@ export default {
         changePassword({commit}, {password, passwordVerify}) {
             commit('LOADING_USER_PROFILE_ON')
             UserProfileProvider.changePassword(password, passwordVerify).then((response) => {
-                commit('SET_CHANGE_PASSWORD_STATUS', response.data.changePassword.status)
-                commit('SET_CHANGE_PASSWORD_MESSAGE', response.data.changePassword.message)
+                commit('SET_CHANGE_PASSWORD_STATUS', response.data.changePassword.success)
+                commit('SET_CHANGE_PASSWORD_MESSAGE', i18n.t('user.passwordChange'))
                 commit('LOADING_USER_PROFILE_OFF')
             }).catch((error) => {
                 //Todo handleErrors

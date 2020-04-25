@@ -24,7 +24,7 @@ class UserProfileProvider {
         return graphqlClient.mutate({
             mutation: gql`mutation ($password: String!, $passwordVerify: String!){
                 changePassword( password: $password, passwordVerify: $passwordVerify){
-                    status
+                    success
                     message
                 }
             }`,

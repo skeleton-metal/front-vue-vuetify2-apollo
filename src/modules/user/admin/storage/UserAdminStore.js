@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import i18n from './../../../../i18n'
 
 import {
     SET_USERS,
@@ -20,7 +21,7 @@ import {
     SET_CHANGE_PASSWORD_MESSAGE,
 
     SET_ERROR_MESSAGE_ADMIN,
-    SET_TOTAL_ITEMS
+    SET_TOTAL_ITEMS, INCREASE_TOTAL_ITEMS, DECREASE_TOTAL_ITEMS
 
 
 } from './user-mutations-type'
@@ -154,7 +155,8 @@ export default {
             ).then((response) => {
                 if (response.data.createUser) {
                     commit(ADD_USER, response.data.createUser)
-                    commit(SET_FLASH_MESSAGE, "Se creo el usuario con exito")
+                    commit(INCREASE_TOTAL_ITEMS)
+                    commit(SET_FLASH_MESSAGE, i18n.t('user.userCreated'))
                 }
                 commit(SET_LOADING_USERS, false)
                 return true
@@ -189,7 +191,7 @@ export default {
             ).then((response) => {
                 if (response.data.updateUser) {
                     commit(UPDATE_USER, response.data.updateUser)
-                    commit(SET_FLASH_MESSAGE, "Se modifico el usuario con exito")
+                    commit(SET_FLASH_MESSAGE, i18n.t('user.userModified'))
                 }
                 commit(SET_LOADING_USERS, false)
                 return true
@@ -214,10 +216,10 @@ export default {
             return UserAdminProvider.deleteUser(
                 id
             ).then((response) => {
-                console.log(response.data)
-                if (response.data.deleteUser) {
-                    commit(DELETE_USER, response.data.deleteUser)
-                    commit(SET_FLASH_MESSAGE, "Se elimino el usuario con exito")
+                if (response.data.deleteUser.success) {
+                    commit(DELETE_USER, id)
+                    commit(DECREASE_TOTAL_ITEMS)
+                    commit(SET_FLASH_MESSAGE,  i18n.t('user.userDeleted'))
                 }
                 commit(SET_LOADING_USERS, false)
                 return true
@@ -236,10 +238,10 @@ export default {
             commit(SET_LOADING_USERS, true)
             commit(SET_CHANGE_PASSWORD, false)
             return UserAdminProvider.adminChangePassword(data.id, data.password, data.passwordVerify).then((response) => {
-                if (response.data.adminChangePassword.status) {
+                if (response.data.adminChangePassword.success) {
                     commit(SET_LOADING_USERS, false)
                     commit(SET_CHANGE_PASSWORD, true)
-                    commit(SET_FLASH_MESSAGE, "Se modifico la password del usuario con exito")
+                    commit(SET_FLASH_MESSAGE, i18n.t('user.passwordChange'))
                 }
                 return true
             }).catch((clientError) => {
@@ -264,6 +266,15 @@ export default {
         [SET_TOTAL_ITEMS](state, data) {
             state.totalItems = data
         },
+
+        [INCREASE_TOTAL_ITEMS](state) {
+            state.totalItems = state.totalItems++
+        },
+
+        [DECREASE_TOTAL_ITEMS](state) {
+            state.totalItems = state.totalItems--
+        },
+
         [SET_LOADING_USERS](state, value) {
             state.loadingUsers = value
         },
@@ -289,9 +300,8 @@ export default {
             let index = state.users.findIndex(user => user.id == data.id)
             Vue.set(state.users, index, data)
         },
-        [DELETE_USER](state, data) {
-            console.log(data)
-            let index = state.users.findIndex(user => user.id == data.id)
+        [DELETE_USER](state, userId) {
+            let index = state.users.findIndex(user => user.id == userId)
             state.users.splice(index, 1)
         },
 

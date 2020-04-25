@@ -3,7 +3,7 @@ import graphqlClient from "../../../../apollo";
 import AuthProvider from '../providers/AuthProvider'
 import jwt_decode from 'jwt-decode'
 import Vue from 'vue'
-
+import i18n from './../../../../i18n'
 import {
     SET_TOKEN,
     SET_ME_USER,
@@ -14,19 +14,11 @@ import {
 } from './auth-mutations-type'
 
 
+
 export default {
     state: {
         access_token: null,
-        me: {
-            id: null,
-            username: null,
-            name: null,
-            email: null,
-            phone: null,
-            img: null,
-            roles: [],
-            avatar: null
-        },
+        me: null,
         loadingAuth: false,
         generalError: null,
         userInvalid: false,
@@ -71,7 +63,7 @@ export default {
                     commit(SET_GENERAL_ERROR, "Imposible conectar con el servidor")
                 //Autenticacion fallida
                 } else if(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED') {
-                    commit(SET_GENERAL_ERROR, error.graphQLErrors[0].message)
+                    commit(SET_GENERAL_ERROR, i18n.t('user.badCredentials'))
                 //Otros errores
                 }else{
                     commit(SET_GENERAL_ERROR, error.message)
@@ -85,7 +77,7 @@ export default {
 
         },
 
-        me({commit, dispatch}) {
+        getMe({commit, dispatch}) {
             commit(SET_AUTH_LOADING, true)
             commit(SET_GENERAL_ERROR, "")
             AuthProvider.me().then((response) => {
@@ -116,15 +108,16 @@ export default {
             router.push('/login')
         },
 
-        checkAuth: ({state, dispatch}) => {
+        checkAuth: ({state, dispatch,commit}) => {
             if (state.access_token) {
                 let payload = jwt_decode(state.access_token)
+                commit(SET_ME_USER, payload)
                 if (payload.exp) {
                     let dateNow = new Date();
                     let dateToken = new Date(payload.exp * 1000)
                     console.log(dateToken)
                     if (dateNow > dateToken) {
-                        console.log("Token expire. Logout.")
+                        console.log("Token expired. Logout.")
                         dispatch('logout')
                     }
                 }

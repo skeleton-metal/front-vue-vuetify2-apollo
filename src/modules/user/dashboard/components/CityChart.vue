@@ -29,7 +29,6 @@
                         obj.datasets[index].data.push(i.sum)
 
                 })
-                console.log(obj)
                 return obj
             }
         }
