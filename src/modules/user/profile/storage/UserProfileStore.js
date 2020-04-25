@@ -22,6 +22,9 @@ export default {
                 console.error(error)
             })
         },
+        resetPasswordStatus({commit}){
+            commit('SET_CHANGE_PASSWORD_STATUS', null)
+        },
         changePassword({commit}, {password, passwordVerify}) {
             commit('LOADING_USER_PROFILE_ON')
             UserProfileProvider.changePassword(password, passwordVerify).then((response) => {

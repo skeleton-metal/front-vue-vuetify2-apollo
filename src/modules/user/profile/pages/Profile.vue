@@ -14,7 +14,8 @@
                     </v-card-text>
 
                     <v-card-text class="text-center pt-0 pb-3">
-                        <v-btn color="secondary" class="onPrimary--text" @click="openDialog" v-t="'user.changePassword'">
+                        <v-btn color="secondary" class="onSecondary--text"
+                               @click="openDialog" v-t="'user.changePassword'">
                         </v-btn>
                     </v-card-text>
                 </v-card>
