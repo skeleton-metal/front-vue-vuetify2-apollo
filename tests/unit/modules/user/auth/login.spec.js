@@ -1,17 +1,16 @@
 import {mount} from '@vue/test-utils'
 
-//i18n, Vuetify, LocalValue
+//We need a instance of i18n, Vuetify, LocalValue, and router
 import {i18n, vuetify, localVue} from "../../../../setup";
-
-//Component
-import Login from "@/modules/user/auth/components/Login";
-
 import router from "@/routes";
 
-//Vuex
-import Vuex from 'vuex'
-import UserAuthStore from "../../../../../src/modules/user/auth/storage/UserAuthStore";
+//Component to Test. (@ is an alias of <rootdir>/src/)
+import Login from "@/modules/user/auth/components/Login";
 
+
+//Setup Vuex
+import Vuex from 'vuex'
+import UserAuthStore from "@/modules/user/auth/storage/UserAuthStore";
 localVue.use(Vuex)
 
 
@@ -29,7 +28,7 @@ const createStore = (actions, getters, state, mutations) => {
 
 describe('LoginPage.vue', () => {
 
-
+    //Sign in on start
 
     it('Render Sign in on start', () => {
         const wrapper = mount(Login, {
@@ -42,6 +41,8 @@ describe('LoginPage.vue', () => {
         expect(wrapper.text()).toMatch('Sign in')
     })
 
+
+    // Bad Credentials on login fail
 
     it('Render Bad Credentials on login fail', async () => {
 
@@ -67,6 +68,8 @@ describe('LoginPage.vue', () => {
     })
 
 
+    //Network Error on server fault
+
     it('Render Network Error on server fault', async () => {
 
         let actions = {
@@ -91,6 +94,8 @@ describe('LoginPage.vue', () => {
     })
 
 
+    //Go Home on Login ok
+
     it('Go Home on Login ok', async () => {
 
         let actions = {
@@ -113,4 +118,6 @@ describe('LoginPage.vue', () => {
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.$route.name).toBe('home')
     })
+
+
 })

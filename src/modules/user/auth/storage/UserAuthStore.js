@@ -62,7 +62,7 @@ export default {
 
                 //Backend no responde
                 if (error.networkError) {
-                    commit(SET_GENERAL_ERROR, "common.netoworkError")
+                    commit(SET_GENERAL_ERROR, "common.networkError")
                 //Autenticacion fallida
                 } else if(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED') {
                     commit(SET_GENERAL_ERROR, 'user.badCredentials')
