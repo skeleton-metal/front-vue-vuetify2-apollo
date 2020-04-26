@@ -1,73 +1,29 @@
-import { mount,createLocalVue } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 
-//LocalVue
-const localVue = createLocalVue()
-
-// Vuetify
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-Vue.use(Vuetify)
-
+//i18n, Vuetify, LocalValue
+import {i18n, vuetify, localVue} from "../setup";
 
 //Component
 import Login from "@/modules/user/auth/pages/Login";
 
+import router from "@/routes";
+
 //Vuex
 import Vuex from 'vuex'
 localVue.use(Vuex)
-
-//i18n
-import VueI18n from 'vue-i18n'
-import i18nMessages from '../../src/i18n-messages'
-localVue.use(VueI18n)
-
-//router
-import VueRouter from 'vue-router'
-import router from "../../src/routes";
-localVue.use(VueRouter)
-
 
 describe('Login.vue', () => {
   let actions
   let getters
   let state
   let store
-  let vuetify
-  let i18n
+
 
   beforeEach(() => {
-
-    //Before Vuetify
-    vuetify = new Vuetify({
-      mocks: {
-        $vuetify: {
-          lang: {
-            t: (val) => val,
-          },
-        },
-      }
-    })
-
-    //Before Vuex
     actions = { login: jest.fn() }
     getters = {isAuth: () => false}
     state = {loading: false, userInvalid: false, generalError: ''}
-
-    store = new Vuex.Store({
-      modules: {
-        auth: {
-          state,
-          actions,
-          getters: getters
-        }
-      }
-    })
-
-    i18n =  new VueI18n({
-      locale: 'es',
-      messages: i18nMessages.es
-    })
-
+    store = new Vuex.Store({modules: {auth: {state, actions, getters}}})
   })
 
 
@@ -79,6 +35,6 @@ describe('Login.vue', () => {
       i18n,
       router
     })
-    expect(wrapper.text()).toMatch('inicio')
+    expect(wrapper.text()).toMatch('Iniciar sesión')
   })
 })
