@@ -1,4 +1,4 @@
-import Login from './auth/pages/Login.vue'
+import Login from './auth/pages/LoginPage.vue'
 import Recovery from './recovery/pages/Recovery.vue'
 import Register from './register/pages/Register.vue'
 import Me from './profile/pages/Profile.vue'

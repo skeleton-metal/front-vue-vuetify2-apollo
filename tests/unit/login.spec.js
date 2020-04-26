@@ -4,7 +4,7 @@ import {mount} from '@vue/test-utils'
 import {i18n, vuetify, localVue} from "../setup";
 
 //Component
-import Login from "@/modules/user/auth/pages/Login";
+import Login from "@/modules/user/auth/components/Login";
 
 import router from "@/routes";
 
@@ -27,7 +27,7 @@ const createStore = (actions, getters, state, mutations) => {
     )
 }
 
-describe('Login.vue', () => {
+describe('LoginPage.vue', () => {
 
 
 
