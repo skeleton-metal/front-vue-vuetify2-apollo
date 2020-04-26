@@ -21,7 +21,7 @@ const errorLink = onError(({graphQLErrors, networkError}) => {
 });
 
 const uploadLink = createUploadLink({
-    uri: process.env.VUE_APP_APIHOST?process.env.VUE_APP_APIHOST:'http://localhost' + '/graphql/',
+    uri: (process.env.VUE_APP_APIHOST?process.env.VUE_APP_APIHOST:'http://localhost') + '/graphql/',
 })
 
 //Middleware for Authorization

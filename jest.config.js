@@ -17,7 +17,7 @@ module.exports = {
   },
 
    transformIgnorePatterns: [
-     "/node_modules/(?!vuetify)"
+     "/node_modules/(?!vuetify|vue-map-chart)"
    ],
 
   preset: '@vue/cli-plugin-unit-jest'
