@@ -18,8 +18,9 @@
                                 type="error"
 
                                 class="mb-3 pa-3"
+
                         >
-                            {{generalError}}
+                            {{$t(generalError)}}
                         </v-alert>
                     </v-card-text>
 
@@ -57,6 +58,7 @@
 
                     <v-card-actions class="px-8 pt-0">
                         <v-btn
+                                ref="loginBtn"
                                 :loading="loading"
                                 color="secondary"
                                 min-width="100%"

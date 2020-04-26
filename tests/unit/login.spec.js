@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import {mount} from '@vue/test-utils'
 
 //i18n, Vuetify, LocalValue
 import {i18n, vuetify, localVue} from "../setup";
@@ -10,31 +10,83 @@ import router from "@/routes";
 
 //Vuex
 import Vuex from 'vuex'
+import UserAuthStore from "../../src/modules/user/auth/storage/UserAuthStore";
+
 localVue.use(Vuex)
 
+
+const createStore = (actions, getters, state, mutations) => {
+
+    actions = actions ? actions : UserAuthStore.actions
+    getters = getters ? getters : UserAuthStore.getters
+    state = state ? state : UserAuthStore.state
+    mutations = mutations ? mutations : UserAuthStore.mutations
+
+    return new Vuex.Store(
+        {modules: {auth: {actions, state, getters, mutations}}}
+    )
+}
+
 describe('Login.vue', () => {
-  let actions
-  let getters
-  let state
-  let store
 
 
-  beforeEach(() => {
-    actions = { login: jest.fn() }
-    getters = {isAuth: () => false}
-    state = {loading: false, userInvalid: false, generalError: ''}
-    store = new Vuex.Store({modules: {auth: {state, actions, getters}}})
-  })
 
-
-  it('renders something', () => {
-    const wrapper = mount(Login, {
-      vuetify,
-      localVue,
-      store,
-      i18n,
-      router
+    it('Render Sign in on start', () => {
+        const wrapper = mount(Login, {
+            vuetify,
+            localVue,
+            store: createStore(),
+            i18n,
+            router
+        })
+        expect(wrapper.text()).toMatch('Sign in')
     })
-    expect(wrapper.text()).toMatch('Iniciar sesión')
-  })
+
+
+    it('Render Bad Credentials on login fail', async () => {
+
+        let actions = {
+            login: jest.fn(function() {
+                this.commit('SET_USER_INVALID', true);
+                this.commit('SET_GENERAL_ERROR', 'user.badCredentials')
+            })
+        }
+
+        const wrapper = mount(Login, {
+            vuetify,
+            localVue,
+            store: createStore(actions),
+            i18n,
+            router
+        })
+
+        let button = wrapper.find({ref: 'loginBtn'})
+        button.trigger('click')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.text()).toMatch('Bad credentials')
+    })
+
+
+    it('Render Network Error on server fault', async () => {
+
+        let actions = {
+            login: jest.fn(function() {
+                this.commit('SET_USER_INVALID', true);
+                this.commit('SET_GENERAL_ERROR', 'common.networkError')
+            })
+        }
+
+        const wrapper = mount(Login, {
+            vuetify,
+            localVue,
+            store: createStore(actions),
+            i18n,
+            router
+        })
+
+        let button = wrapper.find({ref: 'loginBtn'})
+        button.trigger('click')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.text()).toMatch('Network error. The server does not respond.')
+    })
 })

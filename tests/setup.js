@@ -27,7 +27,7 @@ import i18nMessages from '@/i18n-messages.js'
 localVue.use(VueI18n)
 
 export const i18n =  new VueI18n({
-    locale: 'es',
+    locale: 'en',
     messages: i18nMessages
 })
 

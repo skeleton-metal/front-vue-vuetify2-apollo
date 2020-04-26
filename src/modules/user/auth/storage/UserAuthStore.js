@@ -3,7 +3,7 @@ import graphqlClient from "../../../../apollo";
 import AuthProvider from '../providers/AuthProvider'
 import jwt_decode from 'jwt-decode'
 import Vue from 'vue'
-import i18n from './../../../../i18n'
+
 import {
     SET_TOKEN,
     SET_ME_USER,
@@ -20,7 +20,9 @@ export default {
         access_token: null,
         me: null,
         loadingAuth: false,
-        generalError: null,
+
+        //GeneralError
+        generalError: "",
         userInvalid: false,
     },
     getters: {
@@ -60,10 +62,10 @@ export default {
 
                 //Backend no responde
                 if (error.networkError) {
-                    commit(SET_GENERAL_ERROR, "Imposible conectar con el servidor")
+                    commit(SET_GENERAL_ERROR, "common.netoworkError")
                 //Autenticacion fallida
                 } else if(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED') {
-                    commit(SET_GENERAL_ERROR, i18n.t('user.badCredentials'))
+                    commit(SET_GENERAL_ERROR, 'user.badCredentials')
                 //Otros errores
                 }else{
                     commit(SET_GENERAL_ERROR, error.message)
