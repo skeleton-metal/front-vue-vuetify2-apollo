@@ -9,7 +9,7 @@
                         <v-btn fab class="onPrimary--text" color="primary">
                             <v-icon>lock</v-icon>
                         </v-btn>
-                        <h2 class="mt-2" v-t="'user.signIn'" ></h2>
+                        <h2 class="mt-2" v-t="'user.signIn'"></h2>
                     </v-card-text>
 
                     <v-card-text class="pt-5 pb-0 px-8">
@@ -68,14 +68,16 @@
                     </v-card-actions>
 
                     <v-card-text class="text-xs-left pt-2 pl-8 mt-0">
-                        <router-link class="secondary--text font-weight-bold" :to="{name: 'recovery'}" v-t="'user.forgotPassword'"></router-link>
+                        <router-link class="secondary--text font-weight-bold" :to="{name: 'recovery'}"
+                                     v-t="'user.forgotPassword'"></router-link>
                     </v-card-text>
                 </v-card>
 
                 <v-card class="elevation-12 mt-2" v-if="registerEnable">
-                    <v-card-text class="text-xs-center" >
+                    <v-card-text class="text-xs-center">
                         <span v-t="'user.stillNotUser'"> </span>
-                        <router-link :to="{name: 'register'}" class="secondary--text font-weight-bold" v-t="'user.signUp'"> </router-link>
+                        <router-link :to="{name: 'register'}" class="secondary--text font-weight-bold"
+                                     v-t="'user.signUp'"></router-link>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -101,14 +103,22 @@
                 this.$router.push({name: "home"})
             }
         },
+        watch: {
+            me: function(val){
+                if(val !== null){
+                    this.$router.push('/')
+                }
+            }
+        },
         computed: {
             ...mapState({
                 loading: state => state.auth.loadingAuth,
                 userInvalid: state => state.auth.userInvalid,
-                generalError: state => state.auth.generalError
+                generalError: state => state.auth.generalError,
+                me: state => state.auth.me
             }),
             ...mapGetters(['isAuth']),
-            registerEnable(){
+            registerEnable() {
                 return process.env.VUE_APP_REGISTER === 'enable'
             }
         },

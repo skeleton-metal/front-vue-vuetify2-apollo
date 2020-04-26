@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils'
 
 //i18n, Vuetify, LocalValue
-import {i18n, vuetify, localVue} from "../setup";
+import {i18n, vuetify, localVue} from "../../../../setup";
 
 //Component
 import Login from "@/modules/user/auth/components/Login";
@@ -10,7 +10,7 @@ import router from "@/routes";
 
 //Vuex
 import Vuex from 'vuex'
-import UserAuthStore from "../../src/modules/user/auth/storage/UserAuthStore";
+import UserAuthStore from "../../../../../src/modules/user/auth/storage/UserAuthStore";
 
 localVue.use(Vuex)
 
@@ -88,5 +88,29 @@ describe('LoginPage.vue', () => {
         button.trigger('click')
         await wrapper.vm.$nextTick()
         expect(wrapper.text()).toMatch('Network error. The server does not respond.')
+    })
+
+
+    it('Go Home on Login ok', async () => {
+
+        let actions = {
+            login: jest.fn(function() {
+                //Set user. This is watch by the component Login for push to home
+                this.commit('SET_ME_USER', {username: 'root'});
+            })
+        }
+
+        const wrapper = mount(Login, {
+            vuetify,
+            localVue,
+            store: createStore(actions),
+            i18n,
+            router
+        })
+
+        let button = wrapper.find({ref: 'loginBtn'})
+        button.trigger('click')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.$route.name).toBe('home')
     })
 })

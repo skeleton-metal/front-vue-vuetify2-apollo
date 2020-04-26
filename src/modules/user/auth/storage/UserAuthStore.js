@@ -56,7 +56,7 @@ export default {
                 commit(SET_TOKEN, response.data.auth.token)
                 commit(SET_ME_USER, jwt_decode(response.data.auth.token))
                 commit(SET_AUTH_LOADING, false)
-                router.push('/')
+
 
             }).catch((error) => {
 
