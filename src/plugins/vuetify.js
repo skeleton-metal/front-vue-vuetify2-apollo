@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
-//import CustomizationProvider from '../modules/customization/providers/CustomizationProvider'
 import store from './../store'
 
 

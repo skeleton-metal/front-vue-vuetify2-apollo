@@ -115,7 +115,6 @@ export default {
                 if (payload.exp) {
                     let dateNow = new Date();
                     let dateToken = new Date(payload.exp * 1000)
-                    console.log(dateToken)
                     if (dateNow > dateToken) {
                         console.log("Token expired. Logout.")
                         dispatch('logout')
