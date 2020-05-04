@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
-import messages from "./i18n-messages";
+import messages from "./i18n-merge-messages";
 
 const local = JSON.parse(localStorage.getItem(process.env.VUE_APP_KEY))
 let lang = null

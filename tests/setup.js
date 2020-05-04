@@ -21,7 +21,7 @@ export const vuetify = new Vuetify({
 
 //Setup i18n
 import VueI18n from 'vue-i18n'
-import i18nMessages from '@/i18n-messages.js'
+import i18nMessages from '@/i18n-merge-messages.js'
 localVue.use(VueI18n)
 
 export const i18n =  new VueI18n({
